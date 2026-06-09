@@ -14,11 +14,11 @@ export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Hungry Worms — Canterbury's Full-Circle Food Waste Recycling",
   description:
-    "Effortless food waste recycling with real ESG impact. Trusted by Sudima, Mitre 10, Ryman Healthcare, and Willowbank. Start your free trial today.",
+    "Effortless food waste recycling with real ESG impact. Trusted by Sudima, Mitre 10, Ballantynes, and Willowbank. Start your free trial today.",
   openGraph: {
     title: "Hungry Worms — Canterbury's Full-Circle Food Waste Recycling",
     description:
-      "Effortless food waste recycling with real ESG impact. Trusted by Sudima, Mitre 10, Ryman Healthcare, and Willowbank. Start your free trial today.",
+      "Effortless food waste recycling with real ESG impact. Trusted by Sudima, Mitre 10, Ballantynes, and Willowbank. Start your free trial today.",
     url: "/",
     type: "website",
   },
@@ -109,9 +109,13 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-green-deep text-white bg-grain">
         {/* optional photo background — see lib/media.ts (missing file → gradient only) */}
         {MEDIA.heroImage && (
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${MEDIA.heroImage})` }}
+          <Image
+            src={MEDIA.heroImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
             aria-hidden="true"
           />
         )}
@@ -194,15 +198,18 @@ export default async function HomePage() {
       </section>
 
       {/* ── 2. TRUSTED-BY LOGO STRIP ───────────────────────────────────────── */}
-      <section className="bg-white border-b border-soil/10 py-12">
+      <section className="bg-white border-b border-soil/10 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-center font-display text-lg font-bold text-green-deep sm:text-xl">
-            Trusted by New Zealand&apos;s leading organisations
-          </p>
-          <p className="mt-1.5 text-center text-sm text-soil/55">
-            Hotels, retailers, rest homes and visitor attractions across Canterbury.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+          <Reveal className="text-center max-w-2xl mx-auto">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-primary">Our partners</span>
+            <h2 className="mt-3 font-display text-3xl font-extrabold text-soil sm:text-4xl">
+              Trusted by New Zealand&apos;s leading organisations
+            </h2>
+            <p className="mt-3 text-soil/55">
+              Hotels, retailers, rest homes and visitor attractions across Canterbury.
+            </p>
+          </Reveal>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
             {PARTNERS.map(({ name, logo }) =>
               logo ? (
                 <div
@@ -419,6 +426,17 @@ export default async function HomePage() {
               <p className="text-xs font-bold uppercase tracking-widest text-green-leaf mb-3">
                 From waste to resource
               </p>
+              {MEDIA.uncleBobsLogo && (
+                <div className="mb-5 inline-flex rounded-2xl bg-white p-2.5 shadow-lg">
+                  <Image
+                    src={MEDIA.uncleBobsLogo}
+                    alt="Uncle Bob's"
+                    width={56}
+                    height={56}
+                    className="size-14 object-contain"
+                  />
+                </div>
+              )}
               <h2 className="font-display text-3xl font-extrabold sm:text-4xl leading-tight">
                 Your waste becomes premium NZ-made plant food.
               </h2>

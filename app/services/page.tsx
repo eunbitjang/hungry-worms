@@ -239,19 +239,21 @@ export default function ServicesPage() {
               and we&apos;d love for you to be part of it.
             </p>
           </Reveal>
-          <Reveal delay={120} className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-6">
+          <Reveal delay={120} className="mt-12 flex flex-wrap items-center justify-center gap-5">
             {PARTNERS.map(({ name, logo }) =>
               logo ? (
                 <div
                   key={name}
-                  className="relative h-10 w-32 opacity-80 brightness-0 invert transition hover:opacity-100"
+                  className="card-lift flex h-16 w-40 items-center justify-center rounded-2xl bg-white px-5 shadow-lg"
                 >
-                  <Image src={logo} alt={name} fill sizes="128px" style={{ objectFit: "contain" }} />
+                  <div className="relative h-9 w-full">
+                    <Image src={logo} alt={name} fill sizes="160px" style={{ objectFit: "contain" }} />
+                  </div>
                 </div>
               ) : (
                 <div
                   key={name}
-                  className="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-bold text-white/85 backdrop-blur-sm transition-colors hover:border-green-leaf/40 hover:text-white"
+                  className="flex h-16 w-40 items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-5 text-center text-sm font-bold text-white/85 backdrop-blur-sm"
                   title={name}
                 >
                   {name}

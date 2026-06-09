@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Hungry Worms",
   },
   description:
-    "Canterbury's full-circle commercial food & green-waste recycling. Measurable ESG impact, zero-hassle onboarding, free trial. Trusted by Sudima, Mitre 10, Ryman Healthcare and more.",
+    "Canterbury's full-circle commercial food & green-waste recycling. Measurable ESG impact, zero-hassle onboarding, free trial. Trusted by Sudima, Mitre 10, Ballantynes and more.",
   openGraph: {
     siteName: "Hungry Worms",
     locale: "en_NZ",

@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# print/vector logo source files (kept locally, not served or committed)
+/brand-source
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

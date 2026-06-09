@@ -9,11 +9,10 @@
 export type Partner = { name: string; logo?: string };
 
 export const PARTNERS: Partner[] = [
-  { name: "Sudima Hotels" },
-  { name: "Mitre 10" },
-  { name: "Ryman Healthcare" },
-  { name: "Willowbank Wildlife Reserve" },
-  { name: "Ballantynes" },
-  { name: "Cotswold Scenic Circle" },
-  { name: "The Russley Village" },
+  { name: "Sudima Hotels", logo: "/logos/sudima.png" },
+  { name: "Mitre 10", logo: "/logos/mitre10.jpg" },
+  { name: "Willowbank Wildlife Reserve", logo: "/logos/willowbank.jpg" },
+  { name: "Ballantynes", logo: "/logos/ballantynes.png" },
+  { name: "Cotswold Scenic Circle", logo: "/logos/cotswold.svg" },
+  { name: "The Russley Village", logo: "/logos/russley.jpeg" },
 ];

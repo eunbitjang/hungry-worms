@@ -18,14 +18,17 @@
  */
 export const MEDIA = {
   // Home hero — shown beneath the gradient/overlay. Missing file → gradient only.
-  heroImage: "/images/hero.jpg" as string | null,
+  heroImage: "/images/hero.png" as string | null,
 
   // Willowbank case study (Home)
   willowbankVideo: "/videos/willowbank.mp4" as string | null,
-  willowbankPoster: "/images/willowbank-poster.jpg" as string | null,
-  willowbankLogo: "/logos/willowbank.svg" as string | null,
+  willowbankPoster: null as string | null, // add /images/willowbank-poster.jpg when ready
+  willowbankLogo: "/logos/willowbank.jpg" as string | null,
+
+  // Uncle Bob's sister-brand logo (Home "from waste to resource" section)
+  uncleBobsLogo: "/logos/uncle-bobs.png" as string | null,
 
   // Our Process — Mark + composting machine
   processVideo: "/videos/process.mp4" as string | null,
-  processPoster: "/images/process-poster.jpg" as string | null,
+  processPoster: null as string | null,     // add /images/process-poster.jpg when ready
 };
