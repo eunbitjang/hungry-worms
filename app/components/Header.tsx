@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon from "./Icon";
+import BrandLogo from "./BrandLogo";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -12,22 +13,6 @@ const NAV_LINKS = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
-
-function Logo() {
-  return (
-    <span className="flex items-center gap-2.5">
-      <span
-        className="relative flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-green-primary to-green-deep text-white shadow-sm"
-        aria-hidden="true"
-      >
-        <Icon name="worm" className="size-5 text-green-leaf" />
-      </span>
-      <span className="font-display font-extrabold text-[1.05rem] leading-tight tracking-tight">
-        Hungry Worms
-      </span>
-    </span>
-  );
-}
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -57,7 +42,7 @@ export default function Header() {
             href="/"
             className="shrink-0 text-green-deep hover:text-green-primary transition-colors"
           >
-            <Logo />
+            <BrandLogo variant="light" priority />
           </Link>
 
           {/* Desktop nav */}

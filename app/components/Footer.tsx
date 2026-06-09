@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Icon from "./Icon";
+import BrandLogo from "./BrandLogo";
 
 const COMPANY_LINKS = [
   { href: "/services", label: "Services" },
@@ -24,11 +25,8 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group">
-              <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-green-primary to-green-deep" aria-hidden="true">
-                <Icon name="worm" className="size-5 text-green-leaf" />
-              </span>
-              <span className="font-display font-extrabold text-offwhite text-lg tracking-tight">Hungry Worms</span>
+            <Link href="/" className="inline-flex mb-4 text-offwhite">
+              <BrandLogo variant="dark" />
             </Link>
             <p className="text-sm leading-relaxed max-w-xs">
               Canterbury&apos;s full-circle commercial food &amp; green-waste recycling.

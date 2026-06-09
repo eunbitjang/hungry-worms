@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { getHeroStats, formatNumber } from "@/lib/data/hero";
 import Icon, { type IconName } from "./components/Icon";
@@ -21,15 +22,19 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-/* ─── Partner logos — placeholder until brand assets supplied ───────────── */
-const PARTNERS = [
-  "Sudima Hotels",
-  "Mitre 10",
-  "Ryman Healthcare",
-  "Willowbank Wildlife Reserve",
-  "Ballantynes",
-  "Cotswold Scenic Circle",
-  "The Russley Village",
+/* ─── Partner logos ─────────────────────────────────────────────────────────
+ * To show a real logo: drop the file into /public/logos/ and set `logo` to its
+ * path (e.g. "/logos/sudima.svg"). Entries without a `logo` render as a text
+ * chip, so you can add logos one at a time without breaking the strip.
+ * SVG or transparent PNG works best. */
+const PARTNERS: { name: string; logo?: string }[] = [
+  { name: "Sudima Hotels" },
+  { name: "Mitre 10" },
+  { name: "Ryman Healthcare" },
+  { name: "Willowbank Wildlife Reserve" },
+  { name: "Ballantynes" },
+  { name: "Cotswold Scenic Circle" },
+  { name: "The Russley Village" },
 ];
 
 /* ─── Three-step solution ───────────────────────────────────────────────── */
@@ -189,16 +194,25 @@ export default async function HomePage() {
           <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-soil/40 mb-7">
             Trusted by New Zealand&apos;s leading organisations
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            {PARTNERS.map((name) => (
-              <div
-                key={name}
-                className="rounded-lg px-4 py-2 text-sm font-semibold text-soil/45 transition-colors hover:text-green-primary"
-                title={name}
-              >
-                {name}
-              </div>
-            ))}
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+            {PARTNERS.map(({ name, logo }) =>
+              logo ? (
+                <div
+                  key={name}
+                  className="relative h-9 w-28 opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
+                >
+                  <Image src={logo} alt={name} fill sizes="112px" style={{ objectFit: "contain" }} />
+                </div>
+              ) : (
+                <div
+                  key={name}
+                  className="rounded-lg px-4 py-2 text-sm font-semibold text-soil/45 transition-colors hover:text-green-primary"
+                  title={name}
+                >
+                  {name}
+                </div>
+              )
+            )}
           </div>
         </div>
       </section>
