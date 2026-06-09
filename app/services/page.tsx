@@ -255,10 +255,14 @@ export default function ServicesPage() {
             </p>
           </Reveal>
           <Reveal delay={120} className="mt-12 flex flex-wrap items-center justify-center gap-5">
-            {PARTNERS.map(({ name, logo, scale }) =>
+            {PARTNERS.map(({ name, logo, scale, url }) =>
               logo ? (
-                <div
+                <a
                   key={name}
+                  href={url ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${name} — visit website`}
                   className="card-lift flex h-16 w-40 items-center justify-center overflow-hidden rounded-2xl bg-white px-5 shadow-lg"
                 >
                   <div className="relative h-9 w-full">
@@ -270,7 +274,7 @@ export default function ServicesPage() {
                       style={{ objectFit: "contain", transform: scale ? `scale(${scale})` : undefined }}
                     />
                   </div>
-                </div>
+                </a>
               ) : (
                 <div
                   key={name}

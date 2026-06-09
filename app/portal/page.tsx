@@ -1,12 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function PortalLoginPage() {
+  const router = useRouter();
+  const [mode, setMode] = useState<"magic" | "password">("magic");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -16,6 +20,19 @@ export default function PortalLoginPage() {
     setErrorMsg("");
 
     const supabase = createClient();
+
+    if (mode === "password") {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        setErrorMsg(error.message);
+        setStatus("error");
+      } else {
+        router.push("/portal/dashboard");
+        router.refresh();
+      }
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
@@ -93,6 +110,23 @@ export default function PortalLoginPage() {
                   />
                 </div>
 
+                {mode === "password" && (
+                  <div>
+                    <label htmlFor="password" className="block text-xs font-semibold text-soil/70 mb-1.5">
+                      Password
+                    </label>
+                    <input
+                      id="password"
+                      type="password"
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className="w-full rounded-lg border border-soil/20 bg-offwhite px-3.5 py-2.5 text-sm text-soil placeholder:text-soil/30 focus:border-green-primary focus:outline-none focus:ring-2 focus:ring-green-primary/20"
+                    />
+                  </div>
+                )}
+
                 {status === "error" && (
                   <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">{errorMsg}</p>
                 )}
@@ -102,11 +136,32 @@ export default function PortalLoginPage() {
                   disabled={status === "sending"}
                   className="w-full rounded-full bg-green-primary py-3 text-sm font-bold text-white hover:bg-green-deep disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                 >
-                  {status === "sending" ? "Sending link…" : "Send Magic Link"}
+                  {status === "sending"
+                    ? mode === "password" ? "Signing in…" : "Sending link…"
+                    : mode === "password" ? "Sign In" : "Send Magic Link"}
                 </button>
 
                 <p className="text-xs text-center text-soil/40">
-                  We&apos;ll email you a secure sign-in link — no password needed.
+                  {mode === "password" ? (
+                    <button
+                      type="button"
+                      onClick={() => { setMode("magic"); setStatus("idle"); setErrorMsg(""); }}
+                      className="text-green-primary hover:underline"
+                    >
+                      ← Use a magic link instead
+                    </button>
+                  ) : (
+                    <>
+                      We&apos;ll email you a secure sign-in link — no password needed.{" "}
+                      <button
+                        type="button"
+                        onClick={() => { setMode("password"); setStatus("idle"); setErrorMsg(""); }}
+                        className="text-green-primary hover:underline"
+                      >
+                        Sign in with a password
+                      </button>
+                    </>
+                  )}
                 </p>
               </form>
             )}

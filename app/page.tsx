@@ -210,11 +210,15 @@ export default async function HomePage() {
             </p>
           </Reveal>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
-            {PARTNERS.map(({ name, logo, scale }) =>
+            {PARTNERS.map(({ name, logo, scale, url }) =>
               logo ? (
-                <div
+                <a
                   key={name}
-                  className="relative h-12 w-36 transition hover:scale-105"
+                  href={url ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${name} — visit website`}
+                  className="relative block h-12 w-36 transition hover:scale-105"
                 >
                   <Image
                     src={logo}
@@ -223,7 +227,7 @@ export default async function HomePage() {
                     sizes="144px"
                     style={{ objectFit: "contain", transform: scale ? `scale(${scale})` : undefined }}
                   />
-                </div>
+                </a>
               ) : (
                 <div
                   key={name}
@@ -307,16 +311,6 @@ export default async function HomePage() {
 
       {/* ── 4. WILLOWBANK CLOSED-LOOP CASE STUDY ───────────────────────────── */}
       <section className="relative overflow-hidden bg-green-deep text-white py-20 lg:py-24 bg-grain">
-        {MEDIA.landscapeDawn && (
-          <Image
-            src={MEDIA.landscapeDawn}
-            alt=""
-            fill
-            sizes="100vw"
-            aria-hidden="true"
-            className="object-cover opacity-25"
-          />
-        )}
         <div className="absolute inset-0 bg-mesh opacity-60" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

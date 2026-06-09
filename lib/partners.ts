@@ -8,13 +8,14 @@
  */
 // `scale` enlarges a logo within its box — use it for marks that ship with a lot
 // of built-in whitespace (e.g. stacked emblems) so they read at a comparable size.
-export type Partner = { name: string; logo?: string; scale?: number };
+// `url` links the logo out to the partner's site (sustainability page where available).
+export type Partner = { name: string; logo?: string; scale?: number; url?: string };
 
 export const PARTNERS: Partner[] = [
-  { name: "Sudima Hotels", logo: "/logos/sudima.png" },
-  { name: "Mitre 10", logo: "/logos/mitre10.jpg" },
-  { name: "Willowbank Wildlife Reserve", logo: "/logos/willowbank.jpg" },
-  { name: "Ballantynes", logo: "/logos/ballantynes.png" },
-  { name: "Cotswold Scenic Circle", logo: "/logos/cotswold.svg" },
-  { name: "The Russley Village", logo: "/logos/russley.jpeg", scale: 1.7 },
+  { name: "Sudima Hotels", logo: "/logos/sudima.png", url: "https://www.sudimahotels.com/en/about-us/environment-social-governance/" },
+  { name: "Mitre 10", logo: "/logos/mitre10.jpg", url: "https://www.mitre10.co.nz/sustainability" },
+  { name: "Willowbank Wildlife Reserve", logo: "/logos/willowbank.jpg", url: "https://www.willowbank.co.nz/" },
+  { name: "Ballantynes", logo: "/logos/ballantynes.png", url: "https://www.ballantynes.co.nz/" },
+  { name: "Cotswold Scenic Circle", logo: "/logos/cotswold.svg", url: "https://www.scenichotelgroup.co.nz/christchurch/scenic-hotel-cotswold/" },
+  { name: "The Russley Village", logo: "/logos/russley.jpeg", scale: 1.7, url: "https://www.russleyvillage.co.nz/about/sustainability" },
 ];
