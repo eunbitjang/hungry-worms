@@ -227,10 +227,10 @@ export default function PortalDashboard({ data }: { data: PortalData }) {
           ))}
           {period === "custom" && (
             <div className="flex items-center gap-2 ml-2">
-              <input type="date" value={customFrom} onChange={(e) => setCustomFrom(e.target.value)}
+              <input type="date" lang="en-NZ" value={customFrom} onChange={(e) => setCustomFrom(e.target.value)}
                 className="rounded-lg border border-soil/20 px-3 py-1.5 text-xs text-soil bg-white focus:border-green-primary focus:outline-none" />
               <span className="text-soil/40 text-xs">to</span>
-              <input type="date" value={customTo} onChange={(e) => setCustomTo(e.target.value)}
+              <input type="date" lang="en-NZ" value={customTo} onChange={(e) => setCustomTo(e.target.value)}
                 className="rounded-lg border border-soil/20 px-3 py-1.5 text-xs text-soil bg-white focus:border-green-primary focus:outline-none" />
             </div>
           )}
