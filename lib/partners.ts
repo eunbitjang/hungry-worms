@@ -6,7 +6,9 @@
  * path. Entries without a `logo` render as a text chip, so you can add logos
  * one at a time without breaking the layout. SVG or transparent PNG works best.
  */
-export type Partner = { name: string; logo?: string };
+// `scale` enlarges a logo within its box — use it for marks that ship with a lot
+// of built-in whitespace (e.g. stacked emblems) so they read at a comparable size.
+export type Partner = { name: string; logo?: string; scale?: number };
 
 export const PARTNERS: Partner[] = [
   { name: "Sudima Hotels", logo: "/logos/sudima.png" },
@@ -14,5 +16,5 @@ export const PARTNERS: Partner[] = [
   { name: "Willowbank Wildlife Reserve", logo: "/logos/willowbank.jpg" },
   { name: "Ballantynes", logo: "/logos/ballantynes.png" },
   { name: "Cotswold Scenic Circle", logo: "/logos/cotswold.svg" },
-  { name: "The Russley Village", logo: "/logos/russley.jpeg" },
+  { name: "The Russley Village", logo: "/logos/russley.jpeg", scale: 1.7 },
 ];

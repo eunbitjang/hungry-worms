@@ -25,6 +25,7 @@ export default function VideoFrame({
             src={src}
             poster={poster ?? undefined}
             controls
+            autoPlay
             muted
             loop
             playsInline

@@ -209,14 +209,20 @@ export default async function HomePage() {
               Hotels, retailers, rest homes and visitor attractions across Canterbury.
             </p>
           </Reveal>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-            {PARTNERS.map(({ name, logo }) =>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+            {PARTNERS.map(({ name, logo, scale }) =>
               logo ? (
                 <div
                   key={name}
-                  className="relative h-10 w-32 opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"
+                  className="relative h-12 w-36 transition hover:scale-105"
                 >
-                  <Image src={logo} alt={name} fill sizes="128px" style={{ objectFit: "contain" }} />
+                  <Image
+                    src={logo}
+                    alt={name}
+                    fill
+                    sizes="144px"
+                    style={{ objectFit: "contain", transform: scale ? `scale(${scale})` : undefined }}
+                  />
                 </div>
               ) : (
                 <div
@@ -278,35 +284,57 @@ export default async function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-green-leaf/30 bg-green-leaf/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-green-leaf">
-                Flagship case study
-              </span>
-              {MEDIA.willowbankLogo && (
-                <div className="mt-5 inline-flex items-center rounded-xl bg-white px-4 py-2.5 shadow-lg">
-                  <div className="relative h-7 w-32">
-                    <Image
-                      src={MEDIA.willowbankLogo}
-                      alt="Willowbank Wildlife Reserve"
-                      fill
-                      sizes="128px"
-                      style={{ objectFit: "contain" }}
-                    />
-                  </div>
-                </div>
-              )}
-              <h2 className="mt-4 font-display text-3xl font-extrabold sm:text-4xl leading-tight">
+              {/* Header lockup: partner logo chip + label, side by side */}
+              <div className="flex flex-wrap items-center gap-3">
+                {MEDIA.willowbankLogo && (
+                  <span className="inline-flex items-center rounded-xl bg-white px-4 py-2.5 shadow-lg">
+                    <span className="relative block h-9 w-32">
+                      <Image
+                        src={MEDIA.willowbankLogo}
+                        alt="Willowbank Wildlife Reserve"
+                        fill
+                        sizes="128px"
+                        style={{ objectFit: "contain" }}
+                      />
+                    </span>
+                  </span>
+                )}
+                <span className="inline-flex items-center gap-2 rounded-full border border-green-leaf/30 bg-green-leaf/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-green-leaf">
+                  Flagship case study
+                </span>
+              </div>
+
+              <h2 className="mt-6 font-display text-3xl font-extrabold sm:text-4xl leading-tight">
                 Willowbank&apos;s full-circle story
               </h2>
               <p className="mt-5 text-white/75 leading-relaxed">
                 Willowbank Wildlife Reserve generates food &amp; green waste every day. We collect it,
                 recycle it through our compost worms into premium vermicast, and it becomes{" "}
                 <strong className="text-white">Uncle Bob&apos;s plant food</strong> — sold back in
-                Willowbank&apos;s own souvenir shop.
+                Willowbank&apos;s own souvenir shop. Their waste literally returns to them as a premium
+                retail product. That&apos;s not just recycling — that&apos;s regeneration.
               </p>
-              <p className="mt-4 text-white/75 leading-relaxed">
-                Their waste literally returns to them as a premium retail product. That&apos;s not
-                just recycling — that&apos;s regeneration.
-              </p>
+
+              {/* The closed loop, visualised */}
+              <ul className="mt-7 flex flex-wrap items-center gap-x-2 gap-y-2.5">
+                {[
+                  "Food waste",
+                  "Compost worms",
+                  "Premium vermicast",
+                  "Uncle Bob's plant food",
+                  "Back on Willowbank's shelves",
+                ].map((step, i, arr) => (
+                  <li key={step} className="flex items-center gap-2">
+                    <span className="rounded-full border border-green-leaf/25 bg-green-leaf/10 px-3 py-1 text-xs font-semibold text-green-leaf">
+                      {step}
+                    </span>
+                    {i < arr.length - 1 && (
+                      <Icon name="arrow-right" className="size-3 text-green-leaf/40" />
+                    )}
+                  </li>
+                ))}
+              </ul>
+
               <Link
                 href="/contact"
                 className="group mt-8 inline-flex items-center gap-2 rounded-full bg-green-leaf px-6 py-3 text-sm font-bold text-soil hover:bg-white transition-all hover:gap-3"
@@ -335,9 +363,17 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Stat card */}
             <Reveal className="rounded-3xl bg-gradient-to-br from-green-primary/8 to-green-leaf/5 border border-green-primary/15 p-8 sm:p-10">
-              <p className="text-xs font-bold uppercase tracking-widest text-green-primary mb-4">
-                Proven impact · Sudima Hotels
-              </p>
+              {/* Sudima logo + eyebrow lockup */}
+              <div className="mb-6 flex items-center gap-4">
+                <span className="inline-flex items-center rounded-xl bg-white px-4 py-2.5 shadow-sm ring-1 ring-green-primary/10">
+                  <span className="relative block h-7 w-28">
+                    <Image src="/logos/sudima.png" alt="Sudima Hotels" fill sizes="112px" style={{ objectFit: "contain" }} />
+                  </span>
+                </span>
+                <span className="text-xs font-bold uppercase tracking-widest text-green-primary">
+                  Proven impact
+                </span>
+              </div>
               <p className="font-display text-3xl font-extrabold text-green-deep leading-snug">
                 Offsetting an entire South Island vehicle fleet.
               </p>
@@ -347,12 +383,9 @@ export default async function HomePage() {
                 <strong>Sudima&apos;s entire South Island vehicle fleet</strong> through food-waste
                 recycling alone.
               </p>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="size-11 rounded-full bg-green-primary/15 flex items-center justify-center text-green-deep font-bold text-sm ring-2 ring-green-primary/10">RP</div>
-                <div>
-                  <div className="text-sm font-semibold text-soil">Rajas Patil</div>
-                  <div className="text-xs text-soil/55">Hotel General Manager, Sudima Christchurch Airport</div>
-                </div>
+              <div className="mt-6 border-l-2 border-green-primary/30 pl-4">
+                <div className="text-sm font-semibold text-soil">Rajas Patil</div>
+                <div className="text-xs text-soil/55">Hotel General Manager, Sudima Christchurch Airport</div>
               </div>
             </Reveal>
 

@@ -80,10 +80,10 @@ export default function Footer() {
             {/* Social */}
             <div className="mt-5 flex gap-3">
               <a
-                href="https://www.instagram.com/unclebobsgardennz"
+                href="https://www.instagram.com/hungrywormsnz/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram @unclebobsgardennz"
+                aria-label="Instagram @hungrywormsnz"
                 className="text-offwhite/50 hover:text-offwhite transition-colors"
               >
                 <svg className="size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -91,10 +91,10 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.facebook.com/unclebobsgardencare"
+                href="https://www.facebook.com/hungrywormsnz"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook /unclebobsgardencare"
+                aria-label="Facebook /hungrywormsnz"
                 className="text-offwhite/50 hover:text-offwhite transition-colors"
               >
                 <svg className="size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

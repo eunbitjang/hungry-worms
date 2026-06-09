@@ -240,14 +240,20 @@ export default function ServicesPage() {
             </p>
           </Reveal>
           <Reveal delay={120} className="mt-12 flex flex-wrap items-center justify-center gap-5">
-            {PARTNERS.map(({ name, logo }) =>
+            {PARTNERS.map(({ name, logo, scale }) =>
               logo ? (
                 <div
                   key={name}
-                  className="card-lift flex h-16 w-40 items-center justify-center rounded-2xl bg-white px-5 shadow-lg"
+                  className="card-lift flex h-16 w-40 items-center justify-center overflow-hidden rounded-2xl bg-white px-5 shadow-lg"
                 >
                   <div className="relative h-9 w-full">
-                    <Image src={logo} alt={name} fill sizes="160px" style={{ objectFit: "contain" }} />
+                    <Image
+                      src={logo}
+                      alt={name}
+                      fill
+                      sizes="160px"
+                      style={{ objectFit: "contain", transform: scale ? `scale(${scale})` : undefined }}
+                    />
                   </div>
                 </div>
               ) : (
