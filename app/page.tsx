@@ -2,8 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getHeroStats, formatNumber } from "@/lib/data/hero";
+import { PARTNERS } from "@/lib/partners";
+import { MEDIA } from "@/lib/media";
 import Icon, { type IconName } from "./components/Icon";
 import Reveal from "./components/Reveal";
+import VideoFrame from "./components/VideoFrame";
 
 // ISR: cache the page for 10 minutes, then revalidate in the background
 export const revalidate = 600;
@@ -21,21 +24,6 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: "/" },
 };
-
-/* ─── Partner logos ─────────────────────────────────────────────────────────
- * To show a real logo: drop the file into /public/logos/ and set `logo` to its
- * path (e.g. "/logos/sudima.svg"). Entries without a `logo` render as a text
- * chip, so you can add logos one at a time without breaking the strip.
- * SVG or transparent PNG works best. */
-const PARTNERS: { name: string; logo?: string }[] = [
-  { name: "Sudima Hotels" },
-  { name: "Mitre 10" },
-  { name: "Ryman Healthcare" },
-  { name: "Willowbank Wildlife Reserve" },
-  { name: "Ballantynes" },
-  { name: "Cotswold Scenic Circle" },
-  { name: "The Russley Village" },
-];
 
 /* ─── Three-step solution ───────────────────────────────────────────────── */
 const STEPS: { step: string; icon: IconName; title: string; body: string }[] = [
@@ -98,20 +86,20 @@ export default async function HomePage() {
     {
       value: formatNumber(stats.total_waste_kg),
       unit: "kg",
-      label: "Waste diverted from landfill",
-      icon: "bin",
+      label: "Food waste diverted from landfill",
+      icon: "apple",
     },
     {
       value: formatNumber(stats.total_co2e_kg),
       unit: "kg CO₂e",
       label: "Greenhouse gas avoided",
-      icon: "leaf",
+      icon: "co2",
     },
     {
       value: formatNumber(stats.total_cars_year, 1),
       unit: "cars",
       label: "Off the road for a year",
-      icon: "truck",
+      icon: "car",
     },
   ];
 
@@ -119,7 +107,24 @@ export default async function HomePage() {
     <>
       {/* ── 1. HERO ────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-green-deep text-white bg-grain">
-        <div className="absolute inset-0 bg-mesh" aria-hidden="true" />
+        {/* optional photo background — see lib/media.ts (missing file → gradient only) */}
+        {MEDIA.heroImage && (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${MEDIA.heroImage})` }}
+            aria-hidden="true"
+          />
+        )}
+        {/* legibility overlay: opaque toward the headline (left), translucent on the right */}
+        <div
+          className={`absolute inset-0 ${
+            MEDIA.heroImage
+              ? "bg-gradient-to-r from-green-deep/95 via-green-deep/85 to-green-deep/55"
+              : ""
+          }`}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-mesh opacity-90" aria-hidden="true" />
         {/* drifting decorative glow */}
         <div className="absolute -top-32 -right-32 size-96 rounded-full bg-green-leaf/10 blur-3xl animate-drift" aria-hidden="true" />
 
@@ -189,24 +194,27 @@ export default async function HomePage() {
       </section>
 
       {/* ── 2. TRUSTED-BY LOGO STRIP ───────────────────────────────────────── */}
-      <section className="bg-white border-b border-soil/5 py-10">
+      <section className="bg-white border-b border-soil/10 py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-soil/40 mb-7">
+          <p className="text-center font-display text-lg font-bold text-green-deep sm:text-xl">
             Trusted by New Zealand&apos;s leading organisations
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+          <p className="mt-1.5 text-center text-sm text-soil/55">
+            Hotels, retailers, rest homes and visitor attractions across Canterbury.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
             {PARTNERS.map(({ name, logo }) =>
               logo ? (
                 <div
                   key={name}
-                  className="relative h-9 w-28 opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
+                  className="relative h-10 w-32 opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"
                 >
-                  <Image src={logo} alt={name} fill sizes="112px" style={{ objectFit: "contain" }} />
+                  <Image src={logo} alt={name} fill sizes="128px" style={{ objectFit: "contain" }} />
                 </div>
               ) : (
                 <div
                   key={name}
-                  className="rounded-lg px-4 py-2 text-sm font-semibold text-soil/45 transition-colors hover:text-green-primary"
+                  className="rounded-xl border border-soil/10 bg-offwhite px-5 py-2.5 text-sm font-bold text-soil/70 transition-colors hover:border-green-primary/30 hover:text-green-primary"
                   title={name}
                 >
                   {name}
@@ -266,6 +274,19 @@ export default async function HomePage() {
               <span className="inline-flex items-center gap-2 rounded-full border border-green-leaf/30 bg-green-leaf/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-green-leaf">
                 Flagship case study
               </span>
+              {MEDIA.willowbankLogo && (
+                <div className="mt-5 inline-flex items-center rounded-xl bg-white px-4 py-2.5 shadow-lg">
+                  <div className="relative h-7 w-32">
+                    <Image
+                      src={MEDIA.willowbankLogo}
+                      alt="Willowbank Wildlife Reserve"
+                      fill
+                      sizes="128px"
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                </div>
+              )}
               <h2 className="mt-4 font-display text-3xl font-extrabold sm:text-4xl leading-tight">
                 Willowbank&apos;s full-circle story
               </h2>
@@ -288,39 +309,14 @@ export default async function HomePage() {
               </Link>
             </Reveal>
 
-            {/* Closed-loop visual */}
-            <Reveal delay={150} className="flex justify-center">
-              <div className="relative w-72 h-72 sm:w-80 sm:h-80">
-                <div className="absolute inset-0 rounded-full border-2 border-dashed border-green-leaf/25 animate-drift" />
-                <div className="absolute inset-6 rounded-full border border-white/5" />
-                {[
-                  { label: "Food Waste", sublabel: "Willowbank generates", angle: 0, color: "bg-white/10" },
-                  { label: "Collect & Recycle", sublabel: "Hungry Worms picks up", angle: 90, color: "bg-green-primary/40" },
-                  { label: "Worm Castings", sublabel: "Premium plant food", angle: 180, color: "bg-green-leaf/20" },
-                  { label: "In-store Product", sublabel: "Sold at Willowbank shop", angle: 270, color: "bg-cta/25" },
-                ].map(({ label, sublabel, angle, color }) => {
-                  const rad = ((angle - 90) * Math.PI) / 180;
-                  const r = 112;
-                  const x = 50 + (r / 160) * 50 * Math.cos(rad);
-                  const y = 50 + (r / 160) * 50 * Math.sin(rad);
-                  return (
-                    <div
-                      key={label}
-                      className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-xl ${color} border border-white/20 px-3 py-2 text-center backdrop-blur-md shadow-lg`}
-                      style={{ left: `${x}%`, top: `${y}%`, width: "120px" }}
-                    >
-                      <div className="text-xs font-bold text-white">{label}</div>
-                      <div className="text-[10px] text-white/60 mt-0.5">{sublabel}</div>
-                    </div>
-                  );
-                })}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="flex flex-col items-center gap-1 rounded-full bg-green-deep/80 size-20 justify-center border border-green-leaf/20">
-                    <Icon name="cycle" className="size-7 text-green-leaf" />
-                    <div className="text-[10px] font-bold text-green-leaf">Full Circle</div>
-                  </div>
-                </div>
-              </div>
+            {/* Willowbank in-store video (portrait 9:16) */}
+            <Reveal delay={150}>
+              <VideoFrame
+                src={MEDIA.willowbankVideo}
+                poster={MEDIA.willowbankPoster}
+                caption="Our plant food on the shelves at Willowbank's gift shop — the loop, closed."
+                fallbackIcon="cycle"
+              />
             </Reveal>
           </div>
         </div>

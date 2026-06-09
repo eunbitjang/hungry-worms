@@ -27,7 +27,10 @@ export type IconName =
   | "arrow-right"
   | "phone"
   | "mail"
-  | "map-pin";
+  | "map-pin"
+  | "apple"
+  | "co2"
+  | "car";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   truck: (
@@ -181,6 +184,31 @@ const PATHS: Record<IconName, React.ReactNode> = {
     <>
       <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
       <circle cx="12" cy="10" r="3" />
+    </>
+  ),
+  // Apple core — reads as food / food waste
+  apple: (
+    <>
+      <path d="M12 6c-1-1.6-3-2.2-4.6-1.2C5.8 5.8 5.6 8 7 9.6c.8.9 1.4 1.4 1.4 3.4S7.8 15.5 7 16.4c-1.4 1.6-1.2 3.8.4 4.8C9 22 11 21.4 12 19.8c1 1.6 3 2.2 4.6 1.4 1.6-1 1.8-3.2.4-4.8-.8-.9-1.4-1.4-1.4-3.4s.6-2.5 1.4-3.4c1.4-1.6 1.2-3.8-.4-4.8C15 3.8 13 4.4 12 6Z" />
+      <path d="M12 6V3" />
+      <path d="M12 3.5c.8-1 2-1.3 3-1" />
+    </>
+  ),
+  // Cloud with a downward arrow — greenhouse gas avoided / reduced
+  co2: (
+    <>
+      <path d="M6.5 13a3.2 3.2 0 1 1 .6-6.35A4.3 4.3 0 0 1 15.5 7a2.8 2.8 0 0 1 .2 6H6.5Z" />
+      <path d="M12 14.5v5.5" />
+      <path d="m9.5 17.5 2.5 2.5 2.5-2.5" />
+    </>
+  ),
+  // Sedan — car equivalents
+  car: (
+    <>
+      <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+      <circle cx="7" cy="17" r="2" />
+      <path d="M9 17h6" />
+      <circle cx="17" cy="17" r="2" />
     </>
   ),
 };

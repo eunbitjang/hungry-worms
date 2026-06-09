@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
+import { PARTNERS } from "@/lib/partners";
 import Icon, { type IconName } from "../components/Icon";
 import Reveal from "../components/Reveal";
 
@@ -218,6 +220,54 @@ export default function ServicesPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* In good company — partner logos + inspirational invite */}
+      <section className="relative overflow-hidden bg-green-deep text-white py-20 lg:py-24 bg-grain">
+        <div className="absolute inset-0 bg-mesh opacity-70" aria-hidden="true" />
+        <div className="absolute -top-24 -right-20 size-80 rounded-full bg-green-leaf/10 blur-3xl animate-drift" aria-hidden="true" />
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+          <Reveal>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-leaf">In good company</span>
+            <h2 className="mt-3 font-display text-3xl font-extrabold sm:text-4xl leading-tight">
+              Join our sustainability circle.
+            </h2>
+            <p className="mt-4 text-white/75 leading-relaxed max-w-2xl mx-auto text-lg">
+              Some of New Zealand&apos;s most respected organisations already turn their food waste
+              into measurable impact with us. There&apos;s a place for your business in the circle —
+              and we&apos;d love for you to be part of it.
+            </p>
+          </Reveal>
+          <Reveal delay={120} className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-6">
+            {PARTNERS.map(({ name, logo }) =>
+              logo ? (
+                <div
+                  key={name}
+                  className="relative h-10 w-32 opacity-80 brightness-0 invert transition hover:opacity-100"
+                >
+                  <Image src={logo} alt={name} fill sizes="128px" style={{ objectFit: "contain" }} />
+                </div>
+              ) : (
+                <div
+                  key={name}
+                  className="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-bold text-white/85 backdrop-blur-sm transition-colors hover:border-green-leaf/40 hover:text-white"
+                  title={name}
+                >
+                  {name}
+                </div>
+              )
+            )}
+          </Reveal>
+          <Reveal delay={200} className="mt-12">
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 rounded-full bg-cta px-8 py-3.5 text-sm font-bold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-all hover:gap-3"
+            >
+              Join the circle — start free
+              <Icon name="arrow-right" className="size-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
 

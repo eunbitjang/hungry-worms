@@ -1,7 +1,9 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { MEDIA } from "@/lib/media";
 import Icon, { type IconName } from "../components/Icon";
 import Reveal from "../components/Reveal";
+import VideoFrame from "../components/VideoFrame";
 
 export const metadata: Metadata = {
   title: "Our Process — Food Waste to Plant Food",
@@ -140,6 +142,48 @@ export default function ProcessPage() {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Behind the scenes — Mark + composting machine video */}
+      <section className="relative overflow-hidden bg-green-deep text-white py-20 lg:py-24 bg-grain">
+        <div className="absolute inset-0 bg-mesh opacity-70" aria-hidden="true" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <Reveal>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-leaf">Behind the scenes</span>
+              <h2 className="mt-3 font-display text-3xl font-extrabold sm:text-4xl leading-tight">
+                See the process in action.
+              </h2>
+              <p className="mt-5 text-white/75 leading-relaxed">
+                Watch our co-founder Mark walk through the composting machine and show what fully
+                processed food waste actually looks like — rich, clean, nutrient-dense compost ready
+                to begin its second life as premium plant food.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {[
+                  "Industrial composting, up close",
+                  "From raw food scraps to finished vermicast",
+                  "No landfill, no methane, no waste",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-sm text-white/80">
+                    <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-green-leaf/20 text-green-leaf">
+                      <Icon name="check" className="size-3.5" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal delay={150}>
+              <VideoFrame
+                src={MEDIA.processVideo}
+                poster={MEDIA.processPoster}
+                caption="Mark at the composting machine — processed food waste, ready to regenerate."
+                fallbackIcon="factory"
+              />
+            </Reveal>
           </div>
         </div>
       </section>
