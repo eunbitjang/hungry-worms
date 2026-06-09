@@ -279,7 +279,7 @@ export default function PortalDashboard({ data }: { data: PortalData }) {
                   <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                   <XAxis dataKey="month" tick={{ fontSize: 11, fill: SOIL }} />
                   <YAxis tick={{ fontSize: 11, fill: SOIL }} />
-                  <Tooltip formatter={(v: number) => [`${fmt(v)} kg`, "Waste"]} />
+                  <Tooltip formatter={(v) => [`${fmt(Number(v))} kg`, "Waste"]} />
                   <Bar dataKey="kg" fill={GREEN} radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -301,7 +301,7 @@ export default function PortalDashboard({ data }: { data: PortalData }) {
                         <Cell key={i} fill={WASTE_COLORS[i % WASTE_COLORS.length]} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(v: number) => [`${fmt(v)} kg`]} />
+                    <Tooltip formatter={(v) => [`${fmt(Number(v))} kg`]} />
                   </PieChart>
                 </ResponsiveContainer>
                 <ul className="space-y-1.5 mt-2">
@@ -337,7 +337,7 @@ export default function PortalDashboard({ data }: { data: PortalData }) {
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis dataKey="date" tick={{ fontSize: 11, fill: SOIL }} />
                 <YAxis tick={{ fontSize: 11, fill: SOIL }} />
-                <Tooltip formatter={(v: number) => [`${fmt(v)} kg CO₂e`, "Cumulative"]} />
+                <Tooltip formatter={(v) => [`${fmt(Number(v))} kg CO₂e`, "Cumulative"]} />
                 <Area type="monotone" dataKey="co2e" stroke={GREEN} strokeWidth={2} fill="url(#co2grad)" />
               </AreaChart>
             </ResponsiveContainer>
