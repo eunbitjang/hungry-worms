@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import Icon, { type IconName } from "../components/Icon";
 import Reveal from "../components/Reveal";
+import { MEDIA } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "About Us — Our Mission, Vision & Team",
@@ -17,12 +19,12 @@ export const metadata: Metadata = {
 };
 
 const TEAM = [
-  { name: "Mark Groufsky", role: "Co-Founder", initials: "MG" },
-  { name: "Juline Grassam", role: "Co-Founder", initials: "JG" },
-  { name: "David Lim", role: "Business Development Manager", initials: "DL" },
-  { name: "Ian Lamb", role: "Head of Regenerative Farming", initials: "IL" },
-  { name: "Mido Jang", role: "Strategic Communications Lead", initials: "MJ" },
-  { name: "Tim Lamb", role: "Digital Marketing Lead", initials: "TL" },
+  { name: "Mark Groufsky", role: "Co-Founder" },
+  { name: "Juline Grassam", role: "Co-Founder" },
+  { name: "David Lim", role: "Business Development Manager" },
+  { name: "Ian Lamb", role: "Head of Regenerative Farming" },
+  { name: "Mido Jang", role: "Strategic Communications Lead" },
+  { name: "Tim Lamb", role: "Digital Marketing Lead" },
 ];
 
 const VALUES: { icon: IconName; title: string; body: string }[] = [
@@ -155,12 +157,25 @@ export default function AboutPage() {
               Canterbury locals, sustainability advocates, and worm enthusiasts.
             </p>
           </Reveal>
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
-            {TEAM.map(({ name, role, initials }, i) => (
-              <Reveal key={name} delay={i * 70} className="text-center">
-                <div className="group mx-auto mb-3 size-20 rounded-2xl bg-gradient-to-br from-green-primary to-green-deep flex items-center justify-center text-white font-display font-bold text-lg shadow-md transition-transform hover:scale-105">
-                  {initials}
-                </div>
+          {/* Group photo */}
+          <Reveal className="overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
+            <div className="relative aspect-[16/9]">
+              <Image
+                src={MEDIA.team.group}
+                alt="The Hungry Worms team"
+                fill
+                priority
+                sizes="(max-width: 1280px) 100vw, 1152px"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+
+          {/* Roster */}
+          <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-6">
+            {TEAM.map(({ name, role }, i) => (
+              <Reveal key={name} delay={i * 60} className="text-center">
+                <div className="mx-auto mb-2 h-0.5 w-8 rounded-full bg-green-leaf" aria-hidden="true" />
                 <div className="font-semibold text-soil text-sm">{name}</div>
                 <div className="text-xs text-soil/55 mt-0.5 leading-snug">{role}</div>
               </Reveal>

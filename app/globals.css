@@ -58,6 +58,19 @@ html {
     radial-gradient(ellipse 90% 80% at 50% 110%, rgba(15,81,50,0.6) 0%, transparent 60%);
 }
 
+/* ── Light-section textures — add depth to flat offwhite/white areas ─────── */
+/* Subtle dot grid. Keep faint; it should read as texture, not pattern. */
+.bg-dots {
+  background-image: radial-gradient(rgba(31, 138, 76, 0.08) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+}
+/* Soft leaf-toned wash, brightest at the top of a section. */
+.bg-leaf-wash {
+  background-image:
+    radial-gradient(ellipse 55% 45% at 50% -5%, rgba(127, 184, 0, 0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 100% 100%, rgba(31, 138, 76, 0.06) 0%, transparent 60%);
+}
+
 /* Fine grain texture overlay for richness on dark sections */
 .bg-grain::before {
   content: "";

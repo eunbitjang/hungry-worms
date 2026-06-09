@@ -72,11 +72,11 @@ const WHY_US: { icon: IconName; title: string; body: string }[] = [
 ];
 
 /* ─── Uncle Bob's product teasers ───────────────────────────────────────── */
-const UNCLEBOBS_PRODUCTS = [
-  "Premium Composting Worms",
-  "All-Purpose Plant Food",
-  "Premium Worm Castings",
-  "Regenerative Solid Fertiliser",
+const UNCLEBOBS_PRODUCTS: { name: string; image: string }[] = [
+  { name: "Premium Composting Worms", image: MEDIA.products.worms },
+  { name: "All-Purpose Plant Food", image: MEDIA.products.plantFood },
+  { name: "Premium Worm Castings", image: MEDIA.products.vermicast },
+  { name: "Regenerative Solid Fertiliser", image: MEDIA.products.fertiliser },
 ];
 
 export default async function HomePage() {
@@ -239,8 +239,9 @@ export default async function HomePage() {
       </section>
 
       {/* ── 3. OUR SIMPLE-AS SOLUTION ──────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-offwhite bg-dots py-20 lg:py-24">
+        <div className="pointer-events-none absolute -top-24 right-0 size-80 rounded-full bg-green-leaf/10 blur-3xl" aria-hidden="true" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-primary">How it works</span>
             <h2 className="mt-3 font-display text-3xl font-extrabold text-soil sm:text-4xl">
@@ -278,8 +279,44 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── 3b. SERVICE IN ACTION — full-bleed photo band ──────────────────── */}
+      {MEDIA.collectInAction && (
+        <section className="relative h-[42vh] min-h-80 w-full overflow-hidden">
+          <Image
+            src={MEDIA.collectInAction}
+            alt="A Hungry Worms collection at a Canterbury café"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-green-deep/85 via-green-deep/45 to-transparent" aria-hidden="true" />
+          <div className="relative mx-auto flex h-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+            <Reveal className="max-w-md text-white">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-leaf">On the ground</span>
+              <h2 className="mt-3 font-display text-2xl font-extrabold leading-tight sm:text-3xl">
+                Reliable, scheduled pickups across Canterbury.
+              </h2>
+              <p className="mt-3 text-white/80 leading-relaxed">
+                Clean, branded bins. Sanitised every visit. Zero disruption to your kitchen — from
+                cafés and restaurants to hotels and rest homes.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
       {/* ── 4. WILLOWBANK CLOSED-LOOP CASE STUDY ───────────────────────────── */}
       <section className="relative overflow-hidden bg-green-deep text-white py-20 lg:py-24 bg-grain">
+        {MEDIA.landscapeDawn && (
+          <Image
+            src={MEDIA.landscapeDawn}
+            alt=""
+            fill
+            sizes="100vw"
+            aria-hidden="true"
+            className="object-cover opacity-25"
+          />
+        )}
         <div className="absolute inset-0 bg-mesh opacity-60" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -389,21 +426,38 @@ export default async function HomePage() {
               </div>
             </Reveal>
 
-            {/* Testimonial */}
+            {/* Testimonial — laid over a photo of the Sudima hotel */}
             <Reveal delay={150}>
-              <svg className="size-12 text-green-primary/20 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <blockquote className="text-xl leading-relaxed text-soil font-medium">
-                &ldquo;Hungry Worms is making food waste recycling effortless, seamlessly integrating
-                it into our operations. They are playing a key role in helping us achieve our ESG
-                goals, including offsetting emissions from our vehicle fleet. More than a service
-                provider, they are a true sustainability partner.&rdquo;
-              </blockquote>
-              <p className="mt-5 text-sm font-semibold text-green-primary">— Rajas Patil, Sudima Christchurch Airport</p>
+              <div className="relative min-h-112 overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
+                {MEDIA.sudimaHotel ? (
+                  <Image
+                    src={MEDIA.sudimaHotel}
+                    alt="Sudima Christchurch hotel"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-green-deep" aria-hidden="true" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-green-deep/95 via-green-deep/45 to-green-deep/10" aria-hidden="true" />
+                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 text-white">
+                  <svg className="size-10 text-green-leaf/70 mb-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                  <blockquote className="text-base sm:text-lg leading-relaxed font-medium">
+                    &ldquo;Hungry Worms is making food waste recycling effortless, seamlessly
+                    integrating it into our operations — a key role in helping us achieve our ESG
+                    goals. More than a service provider, they are a true sustainability partner.&rdquo;
+                  </blockquote>
+                  <p className="mt-4 text-sm font-semibold text-green-leaf">
+                    — Rajas Patil, Hotel General Manager, Sudima Christchurch Airport
+                  </p>
+                </div>
+              </div>
               <Link
                 href="/contact"
-                className="group mt-8 inline-flex items-center gap-2 rounded-full bg-green-primary px-6 py-3 text-sm font-semibold text-white hover:bg-green-deep transition-all hover:gap-3"
+                className="group mt-6 inline-flex items-center gap-2 rounded-full bg-green-primary px-6 py-3 text-sm font-semibold text-white hover:bg-green-deep transition-all hover:gap-3"
               >
                 Get your impact report
                 <Icon name="arrow-right" className="size-4" />
@@ -414,8 +468,9 @@ export default async function HomePage() {
       </section>
 
       {/* ── 6. WHY BUSINESSES CHOOSE US ────────────────────────────────────── */}
-      <section className="bg-offwhite py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-offwhite bg-leaf-wash py-20 lg:py-24">
+        <div className="pointer-events-none absolute -bottom-24 -left-20 size-80 rounded-full bg-green-primary/8 blur-3xl" aria-hidden="true" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center max-w-2xl mx-auto mb-14">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-primary">Why us</span>
             <h2 className="mt-3 font-display text-3xl font-extrabold text-soil sm:text-4xl">
@@ -489,13 +544,22 @@ export default async function HomePage() {
               </a>
             </Reveal>
             <div className="grid grid-cols-2 gap-4">
-              {UNCLEBOBS_PRODUCTS.map((product, i) => (
-                <Reveal key={product} delay={i * 90}>
-                  <div className="card-lift h-full rounded-2xl bg-white/10 border border-white/15 p-5 backdrop-blur-sm">
-                    <div className="flex size-10 items-center justify-center rounded-lg bg-green-leaf/20 text-green-leaf">
-                      <Icon name="sprout" className="size-6" />
+              {UNCLEBOBS_PRODUCTS.map(({ name, image }, i) => (
+                <Reveal key={name} delay={i * 90}>
+                  <div className="card-lift group h-full overflow-hidden rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm">
+                    <div className="relative aspect-square overflow-hidden bg-white">
+                      <Image
+                        src={image}
+                        alt={name}
+                        fill
+                        sizes="(max-width: 1024px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
                     </div>
-                    <div className="mt-3 text-sm font-semibold text-white">{product}</div>
+                    <div className="flex items-center gap-2 p-4">
+                      <Icon name="sprout" className="size-4 shrink-0 text-green-leaf" />
+                      <span className="text-sm font-semibold text-white leading-snug">{name}</span>
+                    </div>
                   </div>
                 </Reveal>
               ))}
@@ -506,7 +570,18 @@ export default async function HomePage() {
 
       {/* ── 8. FINAL CTA BAND ──────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-soil text-white py-20 lg:py-24 bg-grain">
+        {MEDIA.landscapeHills && (
+          <Image
+            src={MEDIA.landscapeHills}
+            alt=""
+            fill
+            sizes="100vw"
+            aria-hidden="true"
+            className="object-cover opacity-30"
+          />
+        )}
         <div className="absolute inset-0 opacity-40 bg-mesh" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-t from-soil via-soil/70 to-soil/40" aria-hidden="true" />
         <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <Reveal>
             <h2 className="font-display text-3xl font-extrabold sm:text-4xl leading-tight">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { PARTNERS } from "@/lib/partners";
+import { MEDIA } from "@/lib/media";
 import Icon, { type IconName } from "../components/Icon";
 import Reveal from "../components/Reveal";
 
@@ -84,7 +85,19 @@ export default function ServicesPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-green-deep text-white py-20 lg:py-24 bg-grain">
-        <div className="absolute inset-0 bg-mesh" aria-hidden="true" />
+        {MEDIA.kitchenOverhead && (
+          <Image
+            src={MEDIA.kitchenOverhead}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            aria-hidden="true"
+            className="object-cover opacity-25"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-r from-green-deep/95 via-green-deep/85 to-green-deep/55" aria-hidden="true" />
+        <div className="absolute inset-0 bg-mesh opacity-80" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-leaf backdrop-blur-sm">
@@ -117,8 +130,9 @@ export default function ServicesPage() {
       </section>
 
       {/* How it works */}
-      <section className="bg-offwhite py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-offwhite bg-dots py-20 lg:py-24">
+        <div className="pointer-events-none absolute -top-20 right-0 size-72 rounded-full bg-green-leaf/10 blur-3xl" aria-hidden="true" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center max-w-xl mx-auto mb-14">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-primary">The process</span>
             <h2 className="mt-3 font-display text-3xl font-extrabold text-soil sm:text-4xl">How it works</h2>
@@ -196,8 +210,9 @@ export default function ServicesPage() {
       </section>
 
       {/* Additional services */}
-      <section className="bg-offwhite py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-offwhite bg-leaf-wash py-20 lg:py-24">
+        <div className="pointer-events-none absolute -bottom-24 -left-20 size-80 rounded-full bg-green-primary/8 blur-3xl" aria-hidden="true" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center max-w-xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-primary">Go further</span>
             <h2 className="mt-3 font-display text-3xl font-extrabold text-soil sm:text-4xl">

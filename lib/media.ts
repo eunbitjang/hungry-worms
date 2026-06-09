@@ -31,4 +31,39 @@ export const MEDIA = {
   // Our Process — Mark + composting machine
   processVideo: "/videos/process.mp4" as string | null,
   processPoster: null as string | null,     // add /images/process-poster.jpg when ready
+
+  // ── Photography (curated from the team's asset library) ─────────────────
+  collectInAction: "/images/collect-bin-cafe.png" as string | null,   // worker collecting a bin at a Canterbury café
+  wormsInHands: "/images/worms-soil-hands.jpg" as string | null,      // compost worms in soil — the core of the business
+  sudimaHotel: "/images/sudima-hotel.png" as string | null,           // Sudima hotel exterior
+  forestMist: "/images/forest-mist.jpg" as string | null,             // misty native forest — atmospheric dark bg
+  christchurchHarbour: "/images/christchurch-harbour.jpg" as string | null, // Lyttelton / Canterbury panorama
+  handsTogether: "/images/hands-together.jpg" as string | null,       // many hands — partnership / community
+  chefKitchen: "/images/chef-kitchen.jpg" as string | null,           // chef in a commercial kitchen
+  kitchenOverhead: "/images/kitchen-overhead.jpg" as string | null,   // overhead of chefs in a restaurant kitchen
+  foodScraps: "/images/food-scraps.jpg" as string | null,             // food peelings — the waste we divert
+  compostingMachine: "/images/composting-machine.png" as string | null, // industrial composter
+
+  // Cinematic landscapes (golden-hour NZ pastoral — compost → growth story). Great as section backdrops.
+  landscapeHills: "/images/landscape-hills-bins.png" as string | null,   // hills, bins, seedling on compost
+  landscapeDawn: "/images/landscape-dawn.png" as string | null,          // misty dawn mountains + seedlings
+  landscapeTruck: "/images/landscape-truck.png" as string | null,        // hills, farm truck, compost beds
+
+  // Uncle Bob's product range
+  products: {
+    worms: "/images/product-worms.png",
+    plantFood: "/images/product-plant-food.png",
+    vermicast: "/images/product-vermicast.png",
+    fertiliser: "/images/product-fertiliser.png",
+  },
+
+  // Team
+  team: {
+    group: "/images/team-group.png",
+    coFounders: "/images/team-mark-juline.jpg",
+    david: "/images/team-david.png",
+    ian: "/images/team-ian.png",
+    mido: "/images/team-mido.png",
+    tim: "/images/team-tim.png",
+  },
 };
