@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icon, { type IconName } from "./Icon";
 
 /**
@@ -8,9 +8,12 @@ import Icon, { type IconName } from "./Icon";
  * Renders a native <video> when `src` is set, otherwise a styled placeholder
  * so the layout looks intentional while the clip is still being produced.
  *
- * Videos autoplay muted (required by browsers). A clear "Tap for sound" button
- * unmutes reliably via a ref — and we keep our muted state in sync with the
- * element's own volume changes so the native controls work too.
+ * We deliberately do NOT use the JSX `muted`/`autoPlay` attributes: React
+ * re-applies the `muted` prop on every render, which silently re-mutes the
+ * video the instant the user unmutes it (the state change triggers a re-render).
+ * Instead we drive muting and autoplay imperatively through the ref, so once a
+ * visitor turns the sound on it stays on. Autoplay still works because we start
+ * playback muted on mount.
  */
 export default function VideoFrame({
   src,
@@ -25,6 +28,14 @@ export default function VideoFrame({
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+
+  // Start muted autoplay once mounted (allowed without a user gesture).
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    void v.play().catch(() => {});
+  }, [src]);
 
   function unmute() {
     const v = videoRef.current;
@@ -45,8 +56,6 @@ export default function VideoFrame({
               src={src}
               poster={poster ?? undefined}
               controls
-              autoPlay
-              muted
               loop
               playsInline
               preload="metadata"
