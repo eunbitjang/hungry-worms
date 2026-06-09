@@ -18,7 +18,7 @@ const FAQ: Section[] = [
     items: [
       {
         q: "What does Hungry Worms do?",
-        a: "We provide full-circle commercial food & green-waste recycling across Canterbury. We collect your organic waste, recycle it through compost worms and industrial composting, and give you measurable impact reports — keeping your waste out of landfill and turning it into premium plant food.",
+        a: "We provide full-circle commercial food & green-waste recycling across Canterbury. We collect your organic waste, recycle it through compost worms and industrial composting, and give you measurable impact reports — keeping your waste out of landfill and turning it into premium, 100% natural fertiliser.",
       },
       {
         q: "Who is your service for?",
@@ -106,7 +106,7 @@ const FAQ: Section[] = [
       },
       {
         q: "What is Uncle Bob's?",
-        a: "Uncle Bob's is our sister brand of regenerative garden products — 100% natural, NZ-made plant food created from the waste we recycle. It's the final step in the full circle, and the products are available nationwide at unclebobs.co.nz.",
+        a: "Uncle Bob's is our sister brand of regenerative garden products — 100% natural, NZ-made fertiliser created from the waste we recycle. It's the final step in the full circle, and the products are available nationwide at unclebobs.co.nz.",
       },
     ],
   },

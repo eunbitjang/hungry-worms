@@ -46,7 +46,7 @@ const VALUES: { icon: IconName; title: string; body: string }[] = [
   {
     icon: "cycle",
     title: "Closed-loop by design",
-    body: "We don't just remove waste — we complete the loop. Your food waste returns as premium soil and plant food.",
+    body: "We don't just remove waste — we complete the loop. Your food waste returns as premium soil and 100% natural fertiliser.",
   },
 ];
 
@@ -192,7 +192,7 @@ export default function AboutPage() {
           </h2>
           <p className="mt-4 text-white/75 leading-relaxed">
             The finished output of our recycling process becomes Uncle Bob&apos;s premium, 100% natural,
-            NZ-made plant food. Available online and in selected retailers nationwide.
+            NZ-made, 100% natural fertiliser. Available online and in selected retailers nationwide.
           </p>
           <a
             href="https://www.unclebobs.co.nz/"

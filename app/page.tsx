@@ -62,7 +62,7 @@ const WHY_US: { icon: IconName; title: string; body: string }[] = [
   {
     icon: "cycle",
     title: "Closed-loop",
-    body: "Your waste becomes premium NZ-made plant food through Uncle Bob's. Local soil, local story — full circle.",
+    body: "Your waste becomes premium NZ-made, 100% natural fertiliser through Uncle Bob's. Local soil, local story — full circle.",
   },
   {
     icon: "gift",
@@ -342,7 +342,7 @@ export default async function HomePage() {
               <p className="mt-5 text-white/75 leading-relaxed">
                 Willowbank Wildlife Reserve generates food &amp; green waste every day. We collect it,
                 recycle it through our compost worms into premium vermicast, and it becomes{" "}
-                <strong className="text-white">Uncle Bob&apos;s plant food</strong> — sold back in
+                <strong className="text-white">Uncle Bob&apos;s 100% natural fertiliser</strong> — sold back in
                 Willowbank&apos;s own souvenir shop. Their waste literally returns to them as a premium
                 retail product. That&apos;s not just recycling — that&apos;s regeneration.
               </p>
@@ -353,7 +353,7 @@ export default async function HomePage() {
                   "Food waste",
                   "Compost worms",
                   "Premium vermicast",
-                  "Uncle Bob's plant food",
+                  "100% natural fertiliser",
                   "Back on Willowbank's shelves",
                 ].map((step, i, arr) => (
                   <li key={step} className="flex items-center gap-2">
@@ -381,7 +381,7 @@ export default async function HomePage() {
               <VideoFrame
                 src={MEDIA.willowbankVideo}
                 poster={MEDIA.willowbankPoster}
-                caption="Our plant food on the shelves at Willowbank's gift shop — the loop, closed."
+                caption="Our 100% natural fertiliser on the shelves at Willowbank's gift shop — the loop, closed."
                 fallbackIcon="cycle"
               />
             </Reveal>
@@ -521,7 +521,7 @@ export default async function HomePage() {
                 </div>
               )}
               <h2 className="font-display text-3xl font-extrabold sm:text-4xl leading-tight">
-                Your waste becomes premium NZ-made plant food.
+                Your waste becomes premium NZ-made, 100% natural fertiliser.
               </h2>
               <p className="mt-5 text-white/80 leading-relaxed">
                 Nothing we collect goes to waste. After recycling, the worm castings and compost

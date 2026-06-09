@@ -7,13 +7,13 @@ import Reveal from "../components/Reveal";
 import VideoFrame from "../components/VideoFrame";
 
 export const metadata: Metadata = {
-  title: "Our Process — Food Waste to Plant Food",
+  title: "Our Process — Food Waste to Natural Fertiliser",
   description:
-    "Discover how Hungry Worms turns food waste into premium plant food through composting worms. Full-circle recycling, real sustainability science.",
+    "Discover how Hungry Worms turns food waste into premium, 100% natural fertiliser through composting worms. Full-circle recycling, real sustainability science.",
   openGraph: {
-    title: "Our Process — Food Waste to Plant Food | Hungry Worms",
+    title: "Our Process — Food Waste to Natural Fertiliser | Hungry Worms",
     description:
-      "Discover how Hungry Worms turns food waste into premium plant food through composting worms. Full-circle recycling, real sustainability science.",
+      "Discover how Hungry Worms turns food waste into premium, 100% natural fertiliser through composting worms. Full-circle recycling, real sustainability science.",
     url: "/process",
   },
   alternates: { canonical: "/process" },
@@ -119,7 +119,7 @@ export default function ProcessPage() {
               Our Process
             </span>
             <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl">
-              Food waste to plant food.<br />
+              Food waste to natural fertiliser.<br />
               Saving the environment one bite at a time.
             </h1>
             <p className="mt-5 text-white/75 text-lg leading-relaxed">
@@ -173,7 +173,7 @@ export default function ProcessPage() {
               <p className="mt-5 text-white/75 leading-relaxed">
                 Watch our co-founder Mark walk through the composting machine and show what fully
                 processed food waste actually looks like — rich, clean, nutrient-dense compost ready
-                to begin its second life as premium plant food.
+                to begin its second life as premium, 100% natural fertiliser.
               </p>
               <ul className="mt-6 space-y-3">
                 {[

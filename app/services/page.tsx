@@ -66,7 +66,7 @@ const ADDITIONAL_SERVICES: { icon: IconName; title: string; body: string }[] = [
   {
     icon: "leaf",
     title: "All-Natural Fertiliser Supply",
-    body: "Buy back the finished product — Uncle Bob's premium worm castings and plant food, made from recycled food waste. Close your own loop.",
+    body: "Buy back the finished product — Uncle Bob's premium worm castings and 100% natural fertiliser, made from recycled food waste. Close your own loop.",
   },
 ];
 

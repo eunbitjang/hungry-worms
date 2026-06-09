@@ -38,6 +38,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Stop stray full-bleed images / decorative blobs from causing a horizontal
+   drag on mobile. `clip` (unlike `hidden`) doesn't create a scroll container,
+   so the sticky header keeps working. */
+html,
+body {
+  overflow-x: clip;
+}
+
 /* Tighter, more confident display headings */
 .font-display {
   letter-spacing: -0.02em;
