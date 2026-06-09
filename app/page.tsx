@@ -203,10 +203,11 @@ export default async function HomePage() {
           <Reveal className="text-center max-w-2xl mx-auto">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-primary">Our partners</span>
             <h2 className="mt-3 font-display text-3xl font-extrabold text-soil sm:text-4xl">
-              Trusted by New Zealand&apos;s leading organisations
+              Proud to partner with New Zealand&apos;s sustainability leaders
             </h2>
             <p className="mt-3 text-soil/55">
-              Hotels, retailers, rest homes and visitor attractions across Canterbury.
+              From hotels and retailers to rest homes and visitor attractions — these Canterbury
+              organisations are leading the way, and we&apos;re proud to help power their impact.
             </p>
           </Reveal>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
@@ -422,7 +423,7 @@ export default async function HomePage() {
 
             {/* Testimonial — laid over a photo of the Sudima hotel */}
             <Reveal delay={150}>
-              <div className="relative min-h-112 overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
+              <div className="relative min-h-[28rem] overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
                 {MEDIA.sudimaHotel ? (
                   <Image
                     src={MEDIA.sudimaHotel}

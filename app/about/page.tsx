@@ -157,15 +157,14 @@ export default function AboutPage() {
               Canterbury locals, sustainability advocates, and worm enthusiasts.
             </p>
           </Reveal>
-          {/* Group photo */}
-          <Reveal className="overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
+          {/* Group photo — kept modest in size */}
+          <Reveal className="mx-auto max-w-2xl overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
             <div className="relative aspect-[16/9]">
               <Image
                 src={MEDIA.team.group}
                 alt="The Hungry Worms team"
                 fill
-                priority
-                sizes="(max-width: 1280px) 100vw, 1152px"
+                sizes="(max-width: 768px) 100vw, 672px"
                 className="object-cover"
               />
             </div>
