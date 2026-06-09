@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   BarChart, Bar, AreaChart, Area, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
@@ -179,8 +180,8 @@ export default function PortalDashboard({ data }: { data: PortalData }) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
             <Link href="/" className="flex items-center gap-2 shrink-0">
-              <span className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-green-primary to-green-leaf">
-                <Icon name="worm" className="size-4.5 text-white" />
+              <span className="flex size-9 items-center justify-center rounded-lg bg-white shadow-sm">
+                <Image src="/logos/hungry-worms.png" alt="Hungry Worms" width={28} height={28} className="size-7 object-contain" />
               </span>
               <span className="font-display font-bold text-sm hidden sm:block">Hungry Worms</span>
             </Link>
