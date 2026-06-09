@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Icon from "./Icon";
 
 const COMPANY_LINKS = [
   { href: "/services", label: "Services" },
@@ -23,9 +24,11 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <span className="flex size-9 items-center justify-center rounded-full bg-green-primary text-white text-lg font-bold" aria-hidden="true">W</span>
-              <span className="font-display font-bold text-offwhite text-lg">Hungry Worms</span>
+            <Link href="/" className="flex items-center gap-2.5 mb-4 group">
+              <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-green-primary to-green-deep" aria-hidden="true">
+                <Icon name="worm" className="size-5 text-green-leaf" />
+              </span>
+              <span className="font-display font-extrabold text-offwhite text-lg tracking-tight">Hungry Worms</span>
             </Link>
             <p className="text-sm leading-relaxed max-w-xs">
               Canterbury&apos;s full-circle commercial food &amp; green-waste recycling.
@@ -53,10 +56,16 @@ export default function Footer() {
             <h2 className="text-offwhite font-semibold text-xs uppercase tracking-widest mb-4">Get in Touch</h2>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <a href="tel:02041841840" className="hover:text-offwhite transition-colors">020 4184 1840</a>
+                <a href="tel:02041841840" className="inline-flex items-center gap-2.5 hover:text-offwhite transition-colors">
+                  <Icon name="phone" className="size-4 text-green-leaf/80 shrink-0" />
+                  020 4184 1840
+                </a>
               </li>
               <li>
-                <a href="mailto:info@hungryworms.nz" className="hover:text-offwhite transition-colors">info@hungryworms.nz</a>
+                <a href="mailto:info@hungryworms.nz" className="inline-flex items-center gap-2.5 hover:text-offwhite transition-colors">
+                  <Icon name="mail" className="size-4 text-green-leaf/80 shrink-0" />
+                  info@hungryworms.nz
+                </a>
               </li>
               <li className="pt-2">
                 <a

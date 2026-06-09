@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Icon from "./Icon";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -12,39 +13,60 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
+function Logo() {
+  return (
+    <span className="flex items-center gap-2.5">
+      <span
+        className="relative flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-green-primary to-green-deep text-white shadow-sm"
+        aria-hidden="true"
+      >
+        <Icon name="worm" className="size-5 text-green-leaf" />
+      </span>
+      <span className="font-display font-extrabold text-[1.05rem] leading-tight tracking-tight">
+        Hungry Worms
+      </span>
+    </span>
+  );
+}
+
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-green-primary/10 shadow-sm">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/85 backdrop-blur-md border-b border-soil/10 shadow-[0_2px_20px_rgba(43,42,38,0.06)]"
+          : "bg-white/60 backdrop-blur-sm border-b border-transparent"
+      }`}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
 
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 shrink-0 font-display font-bold text-green-deep hover:text-green-primary transition-colors"
+            className="shrink-0 text-green-deep hover:text-green-primary transition-colors"
           >
-            {/* Placeholder logo — replace with <Image> once brand assets supplied */}
-            <span
-              className="flex size-9 items-center justify-center rounded-full bg-green-primary text-white text-lg font-bold leading-none"
-              aria-hidden="true"
-            >
-              W
-            </span>
-            <span className="text-[1.05rem] leading-tight">
-              Hungry Worms
-            </span>
+            <Logo />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-5 text-sm font-medium text-soil/80" aria-label="Main navigation">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-soil/80" aria-label="Main navigation">
             {NAV_LINKS.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className={`hover:text-green-primary transition-colors ${
+                className={`link-underline transition-colors hover:text-green-primary ${
                   pathname === href ? "text-green-primary font-semibold" : ""
                 }`}
               >
@@ -55,9 +77,10 @@ export default function Header() {
               href="https://www.unclebobs.co.nz/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-green-leaf font-semibold hover:text-green-primary transition-colors"
+              className="inline-flex items-center gap-1 text-green-leaf font-semibold hover:text-green-primary transition-colors"
             >
-              Uncle Bob&apos;s Shop ↗
+              Uncle Bob&apos;s Shop
+              <span aria-hidden="true" className="text-xs">↗</span>
             </a>
           </nav>
 
@@ -71,9 +94,10 @@ export default function Header() {
             </Link>
             <Link
               href="/contact"
-              className="rounded-full bg-cta px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cta-dark transition-colors"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-cta px-4 py-2 text-sm font-semibold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-all hover:gap-2.5"
             >
               Free Trial
+              <Icon name="arrow-right" className="size-3.5" />
             </Link>
           </div>
 
@@ -98,13 +122,13 @@ export default function Header() {
 
       {/* Mobile menu */}
       {open && (
-        <div id="mobile-menu" className="md:hidden border-t border-green-primary/10 bg-white px-4 pb-5">
+        <div id="mobile-menu" className="md:hidden border-t border-soil/10 bg-white px-4 pb-5">
           <nav className="flex flex-col gap-0.5 pt-3" aria-label="Mobile navigation">
             {NAV_LINKS.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className={`block rounded-md px-3 py-2.5 text-sm font-medium transition-colors hover:bg-green-primary/5 hover:text-green-primary ${
+                className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-green-primary/5 hover:text-green-primary ${
                   pathname === href ? "text-green-primary bg-green-primary/5" : "text-soil"
                 }`}
                 onClick={() => setOpen(false)}
@@ -116,7 +140,7 @@ export default function Header() {
               href="https://www.unclebobs.co.nz/"
               target="_blank"
               rel="noopener noreferrer"
-              className="block rounded-md px-3 py-2.5 text-sm font-semibold text-green-leaf hover:text-green-primary transition-colors"
+              className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-green-leaf hover:text-green-primary transition-colors"
             >
               Uncle Bob&apos;s Shop ↗
             </a>
@@ -124,7 +148,7 @@ export default function Header() {
           <div className="mt-4 flex flex-col gap-2">
             <Link
               href="/portal"
-              className="block rounded-lg border border-green-primary px-4 py-2.5 text-center text-sm font-semibold text-green-primary hover:bg-green-primary/5 transition-colors"
+              className="block rounded-full border border-green-primary px-4 py-2.5 text-center text-sm font-semibold text-green-primary hover:bg-green-primary/5 transition-colors"
               onClick={() => setOpen(false)}
             >
               Client Login

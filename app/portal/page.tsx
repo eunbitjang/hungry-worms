@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
+import Icon from "../components/Icon";
 
 export default function PortalLoginPage() {
   const [email, setEmail] = useState("");
@@ -35,7 +36,9 @@ export default function PortalLoginPage() {
       {/* Portal header */}
       <header className="bg-green-deep px-6 py-4 flex items-center gap-3">
         <Link href="/" className="flex items-center gap-2 text-white hover:text-green-leaf transition-colors">
-          <span className="flex size-8 items-center justify-center rounded-full bg-green-primary text-white font-bold text-sm">W</span>
+          <span className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-green-primary to-green-deep">
+            <Icon name="worm" className="size-4.5 text-green-leaf" />
+          </span>
           <span className="font-display font-bold text-sm">Hungry Worms</span>
         </Link>
         <span className="text-white/40 text-sm">/ Impact Portal</span>
@@ -45,7 +48,9 @@ export default function PortalLoginPage() {
       <main className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="w-full max-w-sm">
           <div className="text-center mb-8">
-            <div className="mx-auto size-14 rounded-full bg-green-primary flex items-center justify-center text-white font-bold text-2xl mb-4 shadow-md">W</div>
+            <div className="mx-auto size-14 rounded-2xl bg-gradient-to-br from-green-primary to-green-deep flex items-center justify-center mb-4 shadow-md">
+              <Icon name="worm" className="size-7 text-green-leaf" />
+            </div>
             <h1 className="font-display text-2xl font-extrabold text-green-deep">Client Portal</h1>
             <p className="mt-1 text-sm text-soil/60">Sign in to view your impact dashboard</p>
           </div>

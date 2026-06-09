@@ -17,24 +17,122 @@
   /* Typography */
   --font-sans:    var(--font-inter);
   --font-display: var(--font-plus-jakarta);
+
+  /* Premium shadows — soft, layered, tinted toward soil */
+  --shadow-card:       0 1px 2px rgba(43,42,38,0.04), 0 4px 16px rgba(43,42,38,0.06);
+  --shadow-card-hover: 0 2px 4px rgba(43,42,38,0.06), 0 16px 40px rgba(43,42,38,0.12);
+  --shadow-cta:        0 4px 14px rgba(224,122,47,0.35);
+  --shadow-ring:       0 0 0 1px rgba(31,138,76,0.08);
 }
 
 body {
   background-color: var(--color-offwhite);
   color: var(--color-soil);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Smooth scroll for anchor links */
 html {
   scroll-behavior: smooth;
 }
 
-/* Count-up animation helper */
+/* Tighter, more confident display headings */
+.font-display {
+  letter-spacing: -0.02em;
+}
+
+/* ── Gradient text helper (leaf → primary) ──────────────────────────────── */
+.text-gradient-leaf {
+  background: linear-gradient(120deg, #A8D63A 0%, #7FB800 45%, #1F8A4C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Hero mesh background — subtle organic depth ────────────────────────── */
+.bg-mesh {
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(127,184,0,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 70% at 95% 30%, rgba(31,138,76,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 80% at 50% 110%, rgba(15,81,50,0.6) 0%, transparent 60%);
+}
+
+/* Fine grain texture overlay for richness on dark sections */
+.bg-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Card lift interaction ──────────────────────────────────────────────── */
+.card-lift {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.35s ease;
+  will-change: transform;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ── Animated underline for links ───────────────────────────────────────── */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── Scroll-reveal (paired with Reveal.tsx IntersectionObserver) ────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Count-up animation helper (hero stats on load) */
 @keyframes count-up {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .animate-count-up {
-  animation: count-up 0.6s ease-out forwards;
+  animation: count-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slow drift for decorative blobs */
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(2%, -3%) scale(1.05); }
+}
+.animate-drift {
+  animation: drift 14s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-count-up, .animate-drift { animation: none; }
+  html { scroll-behavior: auto; }
 }
