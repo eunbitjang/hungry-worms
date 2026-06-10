@@ -191,20 +191,12 @@ export default function PortalDashboard({ data }: { data: PortalData }) {
           </div>
           <div className="flex items-center gap-2 shrink-0">
             {data.isStaff && (
-              <>
-                <Link
-                  href="/portal/staff"
-                  className="hidden sm:flex items-center gap-1.5 rounded-full border border-white/30 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors"
-                >
-                  All clients
-                </Link>
-                <Link
-                  href="/portal/staff/pickup"
-                  className="flex items-center gap-1.5 rounded-full bg-green-leaf px-3 py-1.5 text-xs font-bold text-soil hover:bg-white transition-colors"
-                >
-                  ＋ Log a pickup
-                </Link>
-              </>
+              <Link
+                href="/portal/staff"
+                className="flex items-center gap-1.5 rounded-full bg-green-leaf px-3 py-1.5 text-xs font-bold text-soil hover:bg-white transition-colors"
+              >
+                Staff Portal
+              </Link>
             )}
             <button
               onClick={() => exportCSV(filteredRows, data.clientName)}

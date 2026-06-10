@@ -14,6 +14,14 @@ export default function PortalLoginPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
+  // Where to go after login: honour a ?next= deep link (e.g. a bookmarked
+  // /portal/staff/pickup), but only allow internal portal paths.
+  function destination() {
+    if (typeof window === "undefined") return "/portal/dashboard";
+    const next = new URLSearchParams(window.location.search).get("next");
+    return next && next.startsWith("/portal") ? next : "/portal/dashboard";
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("sending");
@@ -27,7 +35,7 @@ export default function PortalLoginPage() {
         setErrorMsg(error.message);
         setStatus("error");
       } else {
-        router.push("/portal/dashboard");
+        router.push(destination());
         router.refresh();
       }
       return;
@@ -36,7 +44,7 @@ export default function PortalLoginPage() {
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${window.location.origin}/portal/auth/callback`,
+        emailRedirectTo: `${window.location.origin}/portal/auth/callback?next=${encodeURIComponent(destination())}`,
       },
     });
 

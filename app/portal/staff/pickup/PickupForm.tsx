@@ -226,8 +226,8 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
             Log another pickup
           </button>
           <div className="mt-3 text-center">
-            <Link href="/portal/dashboard" className="text-sm font-semibold text-green-primary hover:underline">
-              ← Back to dashboard
+            <Link href="/portal/staff" className="text-sm font-semibold text-green-primary hover:underline">
+              ← Back to Staff Portal
             </Link>
           </div>
         </div>
@@ -406,13 +406,13 @@ function Header() {
   return (
     <header className="bg-green-deep text-white">
       <div className="mx-auto max-w-2xl px-4 h-16 flex items-center gap-3">
-        <Link href="/portal/dashboard" className="flex items-center gap-2.5">
+        <Link href="/portal/staff" className="flex items-center gap-2.5">
           <span className="flex size-9 items-center justify-center rounded-lg bg-white shadow-sm">
             <Image src="/logos/hungry-worms.png" alt="Hungry Worms" width={28} height={28} className="size-7 object-contain" />
           </span>
           <span className="leading-tight">
             <span className="block font-display font-bold text-sm">Log a Pickup</span>
-            <span className="block text-white/45 text-xs">Staff only</span>
+            <span className="block text-white/45 text-xs">Staff Portal</span>
           </span>
         </Link>
       </div>

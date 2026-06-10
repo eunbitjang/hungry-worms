@@ -1,12 +1,26 @@
-import { getStaffOverview } from "@/lib/data/staff-overview";
-import StaffOverview from "./StaffOverview";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import StaffHub from "./StaffHub";
 
 export const metadata: Metadata = {
-  title: "All Clients · Impact Overview | Hungry Worms Staff",
+  title: "Staff Portal | Hungry Worms",
 };
 
-export default async function StaffOverviewPage() {
-  const data = await getStaffOverview();
-  return <StaffOverview data={data} />;
+export default async function StaffPortalPage() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/portal");
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("is_staff")
+    .eq("id", user.id)
+    .single();
+  if (!profile?.is_staff) redirect("/portal/dashboard");
+
+  return <StaffHub staffEmail={user.email ?? ""} />;
 }

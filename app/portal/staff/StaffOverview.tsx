@@ -175,11 +175,11 @@ export default function StaffOverview({ data }: { data: StaffOverviewData }) {
       <header className="bg-green-deep text-white sticky top-0 z-40 shadow-md print:static">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
-            <Link href="/" className="flex items-center gap-2 shrink-0">
+            <Link href="/portal/staff" className="flex items-center gap-2 shrink-0">
               <span className="flex size-9 items-center justify-center rounded-lg bg-white shadow-sm">
                 <Image src="/logos/hungry-worms.png" alt="Hungry Worms" width={28} height={28} className="size-7 object-contain" />
               </span>
-              <span className="font-display font-bold text-sm hidden sm:block">Hungry Worms</span>
+              <span className="font-display font-bold text-sm hidden sm:block">Staff Portal</span>
             </Link>
             <span className="text-white/40 text-sm hidden sm:block">/</span>
             <span className="text-white font-semibold text-sm truncate">All Clients · Overview</span>

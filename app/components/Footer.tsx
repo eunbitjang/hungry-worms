@@ -118,7 +118,10 @@ export default function Footer() {
 
         <div className="mt-10 border-t border-offwhite/10 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-offwhite/40">
           <span>© {year} Hungry Worms Ltd. Canterbury, New Zealand.</span>
-          <span>Powered by nature. Proven by data.</span>
+          <div className="flex items-center gap-4">
+            <Link href="/portal/staff" className="hover:text-offwhite/70 transition-colors">Staff Portal</Link>
+            <span>Powered by nature. Proven by data.</span>
+          </div>
         </div>
       </div>
     </footer>
