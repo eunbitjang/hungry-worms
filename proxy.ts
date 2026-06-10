@@ -30,14 +30,13 @@ export async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Redirect unauthenticated users away from /portal/dashboard
-  if (
-    request.nextUrl.pathname.startsWith("/portal/dashboard") &&
-    !user
-  ) {
+  // Redirect unauthenticated users away from protected portal routes.
+  // (Per-route role checks like `is_staff` are enforced in the page itself.)
+  const path = request.nextUrl.pathname;
+  if ((path.startsWith("/portal/dashboard") || path.startsWith("/portal/staff")) && !user) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/portal";
-    loginUrl.searchParams.set("next", request.nextUrl.pathname);
+    loginUrl.searchParams.set("next", path);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -45,5 +44,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/portal/dashboard/:path*"],
+  matcher: ["/portal/dashboard/:path*", "/portal/staff/:path*"],
 };

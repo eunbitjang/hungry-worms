@@ -17,6 +17,7 @@ export type PortalData = {
   clientName: string;
   contactName: string;
   userEmail: string;
+  isStaff: boolean;
   rows: WasteRow[];
   firstPickupDate: string | null;
 };
@@ -50,6 +51,7 @@ export async function getPortalData(): Promise<PortalData> {
       clientName: "",
       contactName: user.email ?? "",
       userEmail: user.email ?? "",
+      isStaff: false,
       rows: [],
       firstPickupDate: null,
     };
@@ -87,6 +89,7 @@ export async function getPortalData(): Promise<PortalData> {
     clientName: client?.name ?? "Your Organisation",
     contactName: profile.contact_name ?? user.email ?? "",
     userEmail: user.email ?? "",
+    isStaff: profile.is_staff ?? false,
     rows,
     firstPickupDate: rows[0]?.pickup_date ?? null,
   };
