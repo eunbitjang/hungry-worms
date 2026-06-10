@@ -16,7 +16,35 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["400", "600", "700", "800"],
 });
 
-const SITE_URL = "https://hungryworms.nz";
+const SITE_URL = "https://www.hungryworms.nz";
+
+// Organization + LocalBusiness structured data (site-wide) — helps Google show
+// rich/knowledge results and strengthens local SEO for Canterbury searches.
+const ORG_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${SITE_URL}/#business`,
+  name: "Hungry Worms",
+  legalName: "Hungry Worms Ltd",
+  url: SITE_URL,
+  logo: `${SITE_URL}/logos/hungry-worms.png`,
+  image: `${SITE_URL}/opengraph-image`,
+  description:
+    "Canterbury's full-circle commercial food & green-waste recycling. We collect food & green waste, recycle it through compost worms, and turn it into 100% natural fertiliser.",
+  telephone: "+64 20 4184 1840",
+  email: "info@hungryworms.nz",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Christchurch",
+    addressRegion: "Canterbury",
+    addressCountry: "NZ",
+  },
+  areaServed: { "@type": "Place", name: "Canterbury, New Zealand" },
+  sameAs: [
+    "https://www.instagram.com/hungrywormsnz/",
+    "https://www.facebook.com/hungrywormsnz",
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -43,6 +71,10 @@ export default function RootLayout({
       className={`${inter.variable} ${plusJakarta.variable}`}
     >
       <body className="flex min-h-screen flex-col antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSONLD) }}
+        />
         <ConditionalShell>{children}</ConditionalShell>
       </body>
     </html>

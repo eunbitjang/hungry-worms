@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/portal/", "/api/"],
       },
     ],
-    sitemap: "https://hungryworms.nz/sitemap.xml",
+    sitemap: "https://www.hungryworms.nz/sitemap.xml",
   };
 }
