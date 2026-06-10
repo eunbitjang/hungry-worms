@@ -1,4 +1,5 @@
 import { google } from "googleapis";
+import { createHash } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase/server";
 
 const SHEET_ID = process.env.GOOGLE_SHEET_ID!;
@@ -13,7 +14,7 @@ function parseNZDate(raw: string): string | null {
   return `${y}-${mo.padStart(2, "0")}-${d.padStart(2, "0")}`;
 }
 
-export async function syncSheetsToSupabase(): Promise<{ synced: number; skipped: number }> {
+export async function syncSheetsToSupabase(): Promise<{ synced: number; skipped: number; deleted: number }> {
   // ── 1. Authenticate with Google ──────────────────────────────────────────
   // Use individual env vars instead of full JSON to avoid .env.local line-break issues.
   // GOOGLE_PRIVATE_KEY stores literal \n sequences — replace them with real newlines.
@@ -45,8 +46,21 @@ export async function syncSheetsToSupabase(): Promise<{ synced: number; skipped:
   );
 
   // ── 4. Parse rows → upsert records ───────────────────────────────────────
+  // One timestamp for the whole run: every current row gets stamped with it, so
+  // any waste_log row left with an OLDER stamp afterwards no longer exists in the
+  // sheet and can be deleted (keeps Supabase correct when rows are removed/edited).
+  const runStamp = new Date().toISOString();
+  const { count: existingCount } = await supabase
+    .from("waste_log")
+    .select("id", { count: "exact", head: true });
   const records: object[] = [];
   let skipped = 0;
+  // Stable, position-independent key per row: a hash of all 8 columns, plus an
+  // occurrence index so genuinely identical rows don't collide. This keeps a
+  // given pickup's external_id constant no matter how the Master Log re-sorts,
+  // so adding/removing a pickup touches exactly one row (no churn, no
+  // sensitivity to mid-recompute reads).
+  const seen = new Map<string, number>();
 
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
@@ -74,8 +88,14 @@ export async function syncSheetsToSupabase(): Promise<{ synced: number; skipped:
       clientMap.set(clientName, clientId);
     }
 
+    // Content key from all 8 source columns; disambiguate identical rows.
+    const contentKey = [0, 1, 2, 3, 4, 5, 6, 7].map((c) => (row[c] ?? "").toString().trim()).join("");
+    const occ = (seen.get(contentKey) ?? 0) + 1;
+    seen.set(contentKey, occ);
+    const externalId = "ml_" + createHash("sha1").update(`${contentKey}#${occ}`).digest("hex").slice(0, 24);
+
     records.push({
-      external_id: `sheet_row_${DATA_START_ROW + i}`,
+      external_id: externalId,
       client_id: clientId,
       pickup_date: pickupDate,
       location_site: row[3]?.trim() || null,
@@ -83,11 +103,12 @@ export async function syncSheetsToSupabase(): Promise<{ synced: number; skipped:
       bin_number: row[5]?.trim() || null,
       weight_kg: weightKg,
       notes: row[7]?.trim() || null,
-      synced_at: new Date().toISOString(),
+      synced_at: runStamp,
     });
   }
 
-  if (records.length === 0) return { synced: 0, skipped };
+  // Safety: never wipe waste_log if the sheet read came back empty/broken.
+  if (records.length === 0) return { synced: 0, skipped, deleted: 0 };
 
   const { error: upsertErr } = await supabase
     .from("waste_log")
@@ -95,5 +116,20 @@ export async function syncSheetsToSupabase(): Promise<{ synced: number; skipped:
 
   if (upsertErr) throw new Error(`Upsert failed: ${upsertErr.message}`);
 
-  return { synced: records.length, skipped };
+  // Remove rows that weren't part of this run (deleted/edited in the sheet).
+  // Safety guard: if this run read far fewer rows than already exist, the sheet
+  // was probably mid-recompute (a partial read) — skip the delete so we never
+  // wipe valid rows. The next clean sync reconciles.
+  if (records.length < (existingCount ?? 0) * 0.8) {
+    return { synced: records.length, skipped, deleted: 0 };
+  }
+
+  const { error: delErr, count: deleted } = await supabase
+    .from("waste_log")
+    .delete({ count: "exact" })
+    .lt("synced_at", runStamp);
+
+  if (delErr) throw new Error(`Stale cleanup failed: ${delErr.message}`);
+
+  return { synced: records.length, skipped, deleted: deleted ?? 0 };
 }

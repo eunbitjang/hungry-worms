@@ -1,7 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { PICKUP_CLIENTS } from "@/lib/staff/pickup-config";
 import { appendPickupRows, type CanonicalRow } from "@/lib/sheets/pickup";
+import { syncSheetsToSupabase } from "@/lib/sheets/sync";
 
 export const runtime = "nodejs";
 
@@ -129,6 +131,21 @@ export async function POST(req: Request) {
       { status: 502 }
     );
   }
+
+  // ── Push to the website in the background ─────────────────────────────────
+  // The pickup is already safely in the sheet, so we respond immediately and
+  // sync Sheets → Supabase afterwards. The short delay lets the Master Log's
+  // spilled formula recompute to include the new rows before the sync reads it.
+  after(async () => {
+    try {
+      // Let the Master Log's spilled formula finish re-sorting in the new rows.
+      await new Promise((r) => setTimeout(r, 12000));
+      await syncSheetsToSupabase();
+      revalidatePath("/"); // refresh the public hero scorecard
+    } catch (e) {
+      console.error("[pickup] post-write sync failed (will catch up on next sync):", e);
+    }
+  });
 
   return NextResponse.json({
     ok: true,
