@@ -86,7 +86,9 @@ export async function getPortalData(): Promise<PortalData> {
   }));
 
   return {
-    clientName: client?.name ?? "Your Organisation",
+    // Empty when the account isn't tied to a client (e.g. pure staff) — the
+    // dashboard page uses this to route staff to the all-clients overview.
+    clientName: profile.client_id ? client?.name ?? "Your Organisation" : "",
     contactName: profile.contact_name ?? user.email ?? "",
     userEmail: user.email ?? "",
     isStaff: profile.is_staff ?? false,

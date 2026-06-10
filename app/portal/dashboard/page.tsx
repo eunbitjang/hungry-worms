@@ -1,6 +1,7 @@
 import { getPortalData } from "@/lib/data/portal";
 import PortalDashboard from "./PortalDashboard";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Impact Dashboard | Hungry Worms Portal",
@@ -8,6 +9,9 @@ export const metadata: Metadata = {
 
 export default async function DashboardPage() {
   const data = await getPortalData();
+
+  // Staff with no client of their own → straight to the all-clients overview.
+  if (!data.clientName && data.isStaff) redirect("/portal/staff");
 
   // Not yet provisioned
   if (!data.clientName) {
