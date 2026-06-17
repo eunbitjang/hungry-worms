@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hungry Worms — Client Impact Dashboard (mockup)</title>
+<!--
+  Self-contained visual reference for the per-client portal dashboard (PROJECT_SPEC / DASHBOARD_DESIGN.md).
+  Sample data = Sudima Christchurch Airport Hotel. Open in a browser. Eco-green theme.
+  For Claude Code: reproduce this layout/feel in React + Recharts, fed by the client's live data.
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{
+    --green:#1D9E75; --green-deep:#0F6E56; --leaf:#7FB800; --amber:#BA7517;
+    --ink:#2B2A26; --muted:#6B6A63; --bg:#F4F6F2; --card:#FFFFFF; --surface:#EEF2EA;
+    --border:rgba(0,0,0,.10);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Plus Jakarta Sans',Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 18px;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .logo{width:36px;height:36px;border-radius:9px;background:var(--green);display:flex;align-items:center;justify-content:center;color:#E1F5EE;font-size:20px;}
+  .brand b{font-weight:600;font-size:15px;}
+  .brand small{display:block;color:var(--muted);font-size:13px;}
+  .btn{font-size:13px;border:1px solid var(--border);background:var(--card);border-radius:8px;padding:7px 12px;color:var(--ink);cursor:pointer;}
+  .periods{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;font-size:13px;}
+  .pill{padding:6px 12px;border-radius:8px;border:1px solid var(--border);color:var(--muted);background:var(--card);cursor:pointer;}
+  .pill.active{background:#E1F5EE;color:var(--green-deep);border-color:transparent;font-weight:600;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px;}
+  .kpi{background:var(--surface);border-radius:10px;padding:14px 16px;}
+  .kpi .lbl{font-size:13px;color:var(--muted);}
+  .kpi .val{font-size:26px;font-weight:600;margin-top:2px;}
+  .kpi .val span{font-size:14px;color:var(--muted);font-weight:400;}
+  .narr{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:22px;font-size:14px;line-height:1.6;}
+  .narr b{font-weight:600;}
+  .sec-label{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .chart-wrap{position:relative;width:100%;height:210px;margin-bottom:24px;}
+  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-bottom:24px;}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;font-size:12px;color:var(--muted);}
+  .legend span{display:flex;align-items:center;gap:5px;}
+  .dot{width:10px;height:10px;border-radius:2px;display:inline-block;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;color:var(--muted);font-weight:600;padding:8px;border-bottom:1px solid var(--border);}
+  td{padding:8px;border-bottom:1px solid var(--border);}
+  td.r,th.r{text-align:right;}
+  .foot{display:flex;align-items:center;gap:6px;margin-top:16px;font-size:12px;color:var(--muted);}
+  .row-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .link{color:var(--green-deep);font-size:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">&#127807;</div>
+      <div><b>Hungry Worms &middot; Impact dashboard</b><small>Sudima Christchurch Airport Hotel</small></div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn">&#128196; PDF</button>
+      <button class="btn">&#11015; CSV</button>
+    </div>
+  </div>
+
+  <div class="periods">
+    <span class="pill active">Since start</span>
+    <span class="pill">This year</span>
+    <span class="pill">This month</span>
+    <span class="pill">Custom range</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="lbl">Waste diverted</div><div class="val">30,873<span> kg</span></div></div>
+    <div class="kpi"><div class="lbl">CO&#8322;e avoided</div><div class="val">77,182<span> kg</span></div></div>
+    <div class="kpi"><div class="lbl">Cars off road &middot; 1 yr</div><div class="val">16.8</div></div>
+    <div class="kpi"><div class="lbl">This month &middot; May 2026</div><div class="val">1,444<span> kg</span></div></div>
+  </div>
+
+  <div class="narr">&#127807; Since 3 Mar 2023, you've diverted <b>30,873 kg</b> of food &amp; organic waste from landfill — avoiding <b>77,182 kg</b> of CO&#8322;e, like taking <b>16.8 petrol cars</b> off the road for a full year.</div>
+
+  <div class="sec-label">Monthly waste recycled &middot; last 12 months (kg)</div>
+  <div class="chart-wrap"><canvas id="barC"></canvas></div>
+
+  <div class="two">
+    <div>
+      <div class="sec-label">Waste by type</div>
+      <div class="legend">
+        <span><span class="dot" style="background:#1D9E75"></span>Restaurant / caf&eacute; 55%</span>
+        <span><span class="dot" style="background:#639922"></span>Food prep 28%</span>
+        <span><span class="dot" style="background:#BA7517"></span>Coffee 9%</span>
+        <span><span class="dot" style="background:#888780"></span>Eggshells 5%</span>
+        <span><span class="dot" style="background:#378ADD"></span>Food waste 3%</span>
+      </div>
+      <div class="chart-wrap" style="height:190px"><canvas id="donutC"></canvas></div>
+    </div>
+    <div>
+      <div class="sec-label">Cumulative CO&#8322;e avoided (kg)</div>
+      <div class="chart-wrap" style="height:222px"><canvas id="areaC"></canvas></div>
+    </div>
+  </div>
+
+  <div class="row-head"><div class="sec-label">Collection log</div><div class="link">Showing 5 of 412 &middot; export full log</div></div>
+  <table>
+    <thead><tr><th>Date</th><th>Waste type</th><th>Bin</th><th class="r">Weight</th><th class="r">CO&#8322;e</th></tr></thead>
+    <tbody>
+      <tr><td>25/05/2026</td><td>Restaurant / caf&eacute;</td><td>Bin 1</td><td class="r">103.9 kg</td><td class="r">259.8 kg</td></tr>
+      <tr><td>25/05/2026</td><td>Food prep waste</td><td>Bin 1</td><td class="r">66.7 kg</td><td class="r">166.8 kg</td></tr>
+      <tr><td>18/05/2026</td><td>Restaurant / caf&eacute;</td><td>Bin 3</td><td class="r">108.2 kg</td><td class="r">270.5 kg</td></tr>
+      <tr><td>11/05/2026</td><td>Food prep waste</td><td>Bin 1</td><td class="r">106.8 kg</td><td class="r">267.0 kg</td></tr>
+      <tr><td>04/05/2026</td><td>Eggshells</td><td>Bin 1</td><td class="r">12.5 kg</td><td class="r">31.3 kg</td></tr>
+    </tbody>
+  </table>
+
+  <div class="foot">&#128274; You're viewing only Sudima Christchurch Airport Hotel data. Updated live from Hungry Worms.</div>
+</div>
+
+<script>
+  var months=['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'];
+  new Chart(document.getElementById('barC'),{type:'bar',
+    data:{labels:months,datasets:[{data:[1017,766,672,937,726,849,1185,706,989,1944,1702,1444],backgroundColor:'#1D9E75',borderRadius:4,maxBarThickness:30}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(0,0,0,.06)'}}}}});
+  new Chart(document.getElementById('donutC'),{type:'doughnut',
+    data:{labels:['Restaurant / café','Food prep','Coffee','Eggshells','Food waste'],datasets:[{data:[55,28,9,5,3],backgroundColor:['#1D9E75','#639922','#BA7517','#888780','#378ADD'],borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
+  new Chart(document.getElementById('areaC'),{type:'line',
+    data:{labels:months,datasets:[{data:[47382,49296,50975,53318,55134,57256,60219,61982,64454,69315,73571,77182],borderColor:'#0F6E56',backgroundColor:'rgba(29,158,117,.14)',fill:true,tension:.35,pointRadius:0,borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(0,0,0,.06)'}}}}});
+</script>
+</body>
+</html>

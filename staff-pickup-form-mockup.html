@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hungry Worms — Staff Pickup Form (mockup)</title>
+<!--
+  DIRECTION-CHECK MOCKUP for the staff-only pickup form (see STAFF_PICKUP_FORM.md).
+  Standalone — open in a browser, phone/tablet/PC. Not production code; it shows look + flow.
+  UI language: English (the staff user speaks English only).
+  On "Save" it previews the exact canonical rows that would be written to the Google Sheet,
+  so you can confirm the Master Log / Client View mapping stays intact.
+-->
+<style>
+  :root{
+    --green:#1D9E75; --green-deep:#0F6E56; --leaf:#7FB800; --amber:#BA7517;
+    --ink:#2B2A26; --muted:#6B6A63; --bg:#F4F6F2; --card:#FFFFFF; --surface:#EEF2EA;
+    --border:rgba(0,0,0,.12); --chip:#E1F5EE;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Plus Jakarta Sans',Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+  .wrap{max-width:680px;margin:0 auto;padding:20px 16px 60px;}
+  .top{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .logo{width:38px;height:38px;border-radius:10px;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:21px;}
+  .top b{font-size:16px;font-weight:600;}
+  .top small{display:block;color:var(--muted);font-size:12.5px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:14px;}
+  label.fld{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:600;}
+  select,input[type=number],input[type=date],textarea{
+    width:100%;font-size:15px;padding:11px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--ink);font-family:inherit;}
+  select:focus,input:focus,textarea:focus{outline:2px solid var(--green);border-color:transparent;}
+  .nowline{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;flex-wrap:wrap;}
+  .nowline .stamp{font-weight:600;}
+  .toggle{font-size:13px;color:var(--green-deep);cursor:pointer;display:flex;align-items:center;gap:6px;user-select:none;}
+  .hidden{display:none !important;}
+  .clientsel{font-size:16px;}
+  .box{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed var(--border);flex-wrap:wrap;}
+  .box:last-child{border-bottom:none;}
+  .ord{width:26px;height:26px;border-radius:50%;background:var(--surface);color:var(--muted);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .chip{background:var(--chip);color:var(--green-deep);font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:999px;white-space:nowrap;}
+  .box select{flex:1 1 150px;min-width:130px;}
+  .kgwrap{position:relative;flex:0 0 122px;}
+  .kgwrap input{padding-right:34px;text-align:right;}
+  .kgwrap .u{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;}
+  .total{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding:12px 14px;background:var(--surface);border-radius:10px;font-size:15px;}
+  .total b{font-size:20px;color:var(--green-deep);}
+  .save{margin-top:16px;width:100%;border:none;background:var(--green);color:#fff;font-size:16px;font-weight:600;padding:14px;border-radius:12px;cursor:pointer;}
+  .save:disabled{background:#B9C9BE;cursor:not-allowed;}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px;text-align:center;}
+  .preview{margin-top:16px;border:1px solid var(--green);border-radius:12px;overflow:hidden;}
+  .preview h3{margin:0;padding:11px 14px;background:var(--chip);color:var(--green-deep);font-size:13.5px;}
+  table{width:100%;border-collapse:collapse;font-size:12px;}
+  th{background:#fafbfa;color:var(--muted);text-align:left;padding:7px 8px;border-bottom:1px solid var(--border);font-weight:600;white-space:nowrap;}
+  td{padding:7px 8px;border-bottom:1px solid var(--border);}
+  td.r{text-align:right;}
+  .pmeta{font-size:12px;color:var(--muted);padding:9px 14px;}
+  .placeholder{color:var(--muted);font-size:14px;padding:18px 4px;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="logo">&#127807;</div>
+    <div><b>Hungry Worms · Log a Pickup</b><small>Staff only · mockup</small></div>
+  </div>
+
+  <div class="card">
+    <div class="nowline">
+      <div><label class="fld" style="margin:0 0 2px">Pickup date · time (auto)</label><span class="stamp" id="stamp">—</span></div>
+      <label class="toggle"><input type="checkbox" id="manualToggle" style="width:auto"> Set a different date</label>
+    </div>
+    <div id="manualWrap" class="hidden" style="margin-top:10px">
+      <input type="date" id="manualDate">
+    </div>
+  </div>
+
+  <div class="card">
+    <label class="fld" for="client">Select client</label>
+    <select id="client" class="clientsel">
+      <option value="">— Select a client —</option>
+    </select>
+  </div>
+
+  <div class="card" id="boxesCard">
+    <div class="placeholder" id="placeholder">Select a client to show the input fields.</div>
+    <div id="boxes"></div>
+    <div class="total hidden" id="totalRow">
+      <span>Today's pickup total</span><b><span id="totalKg">0</span> kg</b>
+    </div>
+  </div>
+
+  <div class="card" id="notesCard" style="display:none">
+    <label class="fld" for="notes">Notes (optional)</label>
+    <textarea id="notes" rows="2" placeholder="e.g. bin 3 heavier than usual, extra bin added, etc."></textarea>
+  </div>
+
+  <button class="save" id="saveBtn" disabled>Save (preview)</button>
+  <div class="hint">Empty fields aren't saved (all optional). Fill at least one to save.</div>
+
+  <div id="previewWrap"></div>
+</div>
+
+<script>
+// ---- Per-client config (mirrors STAFF_PICKUP_FORM.md) ----
+function n(count, maker){ return Array.from({length:count}, (_,i)=>maker(i)); }
+const WASTE_SUDIMA = ['Restaurant / café waste','Food prep waste'];
+const WASTE_GREEN  = ['Food waste','Yard / green waste'];
+
+const CLIENTS = {
+  "Sudima Christchurch Airport Hotel": { boxes:[
+    ...n(6, ()=>({sel:'waste', opts:WASTE_SUDIMA})),
+    {fixed:'Eggshells'}, {fixed:'Coffee grounds'} ]},
+  "Sudima Christchurch City Hotel": { boxes:[
+    ...n(5, ()=>({fixed:'Food waste'})),
+    {fixed:'Eggshells'}, {fixed:'Coffee grounds'} ]},
+  "The Russley Village": { boxes:
+    n(4, ()=>({fixed:'Food waste', loc:['Main Kitchen','Ashley Block']})) },
+  "Ballantynes Department Store Christchurch": { boxes:
+    n(5, ()=>({fixed:'Food waste', cap:['120L','80L']})) },
+  "Willowbank Wildlife Reserve": { boxes:
+    n(4, ()=>({sel:'waste', opts:WASTE_GREEN})) },
+  "Mitre 10 MEGA Papanui": { boxes:
+    n(3, ()=>({sel:'waste', opts:WASTE_GREEN})) },
+  "Scenic Hotel Cotswold": { store:'Cotswold Scenic Circle Hotel', boxes:
+    n(3, ()=>({fixed:'Food waste'})) },
+  "Orana Wildlife Park": { note:'(Not yet active · same layout as Willowbank)', boxes:
+    n(4, ()=>({sel:'waste', opts:WASTE_GREEN})) },
+};
+
+// ---- date/time ----
+function pad(x){return String(x).padStart(2,'0');}
+function fmtNow(d){ return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`; }
+const stampEl = document.getElementById('stamp');
+function tick(){ stampEl.textContent = fmtNow(new Date()); }
+tick(); setInterval(tick, 1000*20);
+
+const manualToggle=document.getElementById('manualToggle');
+const manualWrap=document.getElementById('manualWrap');
+const manualDate=document.getElementById('manualDate');
+manualToggle.onchange=()=>{ manualWrap.classList.toggle('hidden', !manualToggle.checked); };
+
+// ---- build client dropdown ----
+const clientSel=document.getElementById('client');
+Object.keys(CLIENTS).forEach(name=>{
+  const o=document.createElement('option'); o.value=name; o.textContent=name; clientSel.appendChild(o);
+});
+
+const boxesEl=document.getElementById('boxes');
+const placeholder=document.getElementById('placeholder');
+const totalRow=document.getElementById('totalRow');
+const totalKg=document.getElementById('totalKg');
+const notesCard=document.getElementById('notesCard');
+const saveBtn=document.getElementById('saveBtn');
+const previewWrap=document.getElementById('previewWrap');
+
+function renderBoxes(name){
+  boxesEl.innerHTML=''; previewWrap.innerHTML='';
+  const cfg=CLIENTS[name];
+  if(!cfg){ placeholder.style.display='block'; totalRow.classList.add('hidden'); notesCard.style.display='none'; saveBtn.disabled=true; return; }
+  placeholder.style.display='none'; totalRow.classList.remove('hidden'); notesCard.style.display='block';
+
+  if(cfg.note){ const d=document.createElement('div'); d.className='hint'; d.style.textAlign='left'; d.style.margin='0 0 8px'; d.textContent=cfg.note; boxesEl.appendChild(d); }
+
+  cfg.boxes.forEach((b,i)=>{
+    const row=document.createElement('div'); row.className='box';
+    const ord=document.createElement('div'); ord.className='ord'; ord.textContent=i+1; row.appendChild(ord);
+
+    if(b.fixed){ const c=document.createElement('span'); c.className='chip'; c.textContent=b.fixed; row.appendChild(c); }
+
+    if(b.sel==='waste' || b.loc || b.cap){
+      const sel=document.createElement('select');
+      const opts = b.opts || b.loc || b.cap;
+      const kind = b.sel==='waste' ? 'waste' : (b.loc ? 'loc' : 'cap');
+      sel.dataset.kind=kind;
+      opts.forEach(o=>{ const op=document.createElement('option'); op.value=o; op.textContent=o; sel.appendChild(op); });
+      row.appendChild(sel);
+    }
+
+    const kw=document.createElement('div'); kw.className='kgwrap';
+    const inp=document.createElement('input'); inp.type='number'; inp.min='0'; inp.step='0.1'; inp.placeholder='0';
+    inp.className='kg'; inp.oninput=recalc;
+    const u=document.createElement('span'); u.className='u'; u.textContent='kg';
+    kw.appendChild(inp); kw.appendChild(u); row.appendChild(kw);
+    boxesEl.appendChild(row);
+  });
+  recalc();
+}
+
+function recalc(){
+  let sum=0, any=false;
+  boxesEl.querySelectorAll('.kg').forEach(i=>{ const v=parseFloat(i.value); if(!isNaN(v)&&v>0){ sum+=v; any=true; } });
+  totalKg.textContent = (Math.round(sum*10)/10).toLocaleString();
+  saveBtn.disabled = !any;
+}
+
+clientSel.onchange=()=>renderBoxes(clientSel.value);
+
+// ---- Save → preview canonical rows ----
+saveBtn.onclick=()=>{
+  const name=clientSel.value; const cfg=CLIENTS[name]; if(!cfg) return;
+  const storeName = cfg.store || name;
+  const now=new Date();
+  const pickupDate = manualToggle.checked && manualDate.value
+      ? manualDate.value.split('-').reverse().join('/')
+      : `${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()}`;
+  const notes=document.getElementById('notes').value.trim();
+  const rows=[];
+  boxesEl.querySelectorAll('.box').forEach(box=>{
+    const kgEl=box.querySelector('.kg'); const v=parseFloat(kgEl.value);
+    if(isNaN(v)||v<=0) return;
+    const chip=box.querySelector('.chip');
+    const sel=box.querySelector('select');
+    let waste = chip ? chip.textContent : '';
+    let location='', bin='';
+    if(sel){
+      const k=sel.dataset.kind;
+      if(k==='waste') waste=sel.value;
+      else if(k==='loc') location=sel.value;
+      else if(k==='cap') bin=sel.value;
+    }
+    rows.push({pickupDate, client:storeName, location, waste, bin, kg:v, notes});
+  });
+  renderPreview(rows, name, storeName);
+};
+
+function renderPreview(rows, displayName, storeName){
+  let html = `<div class="preview"><h3>&#10003; Preview of the rows that will be saved to the sheet — ${rows.length} row(s)</h3>`;
+  html += `<div style="overflow-x:auto"><table><thead><tr>
+    <th>Pickup Date</th><th>Client</th><th>Location / Site</th><th>Waste Type</th><th>Bin Number</th><th class="r">Weight kg</th></tr></thead><tbody>`;
+  rows.forEach(r=>{
+    html += `<tr><td>${r.pickupDate}</td><td>${r.client}</td><td>${r.location||'—'}</td><td>${r.waste||'—'}</td><td>${r.bin||'—'}</td><td class="r">${r.kg}</td></tr>`;
+  });
+  html += `</tbody></table></div>`;
+  const note = rows[0] && rows[0].notes ? rows[0].notes : '(none)';
+  let extra = '';
+  if(displayName!==storeName) extra = `<br>· Display name "${displayName}" → saved as <b>${storeName}</b> (matches historical data)`;
+  html += `<div class="pmeta">· ${rows.length} filled field(s) → ${rows.length} canonical row(s) (empty fields create no row)<br>· Timestamp is auto on entry · CO₂e / Car columns are computed by Master Log exactly as today · Bin Number is blank except Ballantynes capacity<br>· Notes: ${note}${extra}</div></div>`;
+  previewWrap.innerHTML = html;
+  previewWrap.scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
+</body>
+</html>
