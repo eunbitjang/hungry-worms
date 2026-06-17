@@ -32,8 +32,16 @@ export async function proxy(request: NextRequest) {
 
   // Redirect unauthenticated users away from protected portal routes.
   // (Per-route role checks like `is_staff` are enforced in the page itself.)
+  //
+  // NOTE: the staff hub (`/portal/staff`) and the "Log a pickup" form
+  // (`/portal/staff/pickup`) are intentionally left OPEN — no login required —
+  // so field staff can log pickups without dealing with sign-in. The
+  // all-clients dashboard (`/portal/staff/dashboard`) stays protected because
+  // it exposes every client's data.
   const path = request.nextUrl.pathname;
-  if ((path.startsWith("/portal/dashboard") || path.startsWith("/portal/staff")) && !user) {
+  const needsAuth =
+    path.startsWith("/portal/dashboard") || path.startsWith("/portal/staff/dashboard");
+  if (needsAuth && !user) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/portal";
     loginUrl.searchParams.set("next", path);

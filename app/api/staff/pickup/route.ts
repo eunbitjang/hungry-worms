@@ -1,6 +1,5 @@
 import { NextResponse, after } from "next/server";
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
 import { PICKUP_CLIENTS } from "@/lib/staff/pickup-config";
 import { appendPickupRows, type CanonicalRow } from "@/lib/sheets/pickup";
 import { syncSheetsToSupabase } from "@/lib/sheets/sync";
@@ -46,21 +45,11 @@ type Entry = {
 };
 
 export async function POST(req: Request) {
-  // ── Auth: must be a logged-in staff member ───────────────────────────────
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("is_staff")
-    .eq("id", user.id)
-    .single();
-  if (!profile?.is_staff) {
-    return NextResponse.json({ error: "Staff access required" }, { status: 403 });
-  }
+  // ── Open write path — no login required ───────────────────────────────────
+  // Pickups can be logged by anyone so field staff don't have to sign in.
+  // Input is still validated server-side against the canonical PICKUP_CLIENTS
+  // config below (only known clients/boxes/waste-types are accepted), and the
+  // sheet write uses the server's own service account, never the caller's.
 
   // ── Parse + validate payload against the canonical config ─────────────────
   let body: { client?: string; pickupDate?: unknown; notes?: unknown; entries?: Entry[] };

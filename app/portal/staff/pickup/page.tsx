@@ -1,5 +1,4 @@
 import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import PickupForm from "./PickupForm";
 
@@ -10,19 +9,11 @@ export const metadata: Metadata = {
 export default async function StaffPickupPage() {
   const supabase = await createClient();
 
+  // Open to everyone — no login required, so field staff can log pickups
+  // without signing in. Surface the email only if someone is logged in.
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect("/portal");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("is_staff")
-    .eq("id", user.id)
-    .single();
-
-  // Staff-only — normal client logins go back to their dashboard.
-  if (!profile?.is_staff) redirect("/portal/dashboard");
-
-  return <PickupForm staffEmail={user.email ?? ""} />;
+  return <PickupForm staffEmail={user?.email ?? ""} />;
 }

@@ -42,20 +42,24 @@ export default function StaffHub({ staffEmail }: { staffEmail: string }) {
               <span className="block text-white/45 text-xs">Hungry Worms internal</span>
             </span>
           </Link>
-          <button
-            onClick={signOut}
-            className="rounded-full bg-white/10 border border-white/20 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/20 transition-colors"
-          >
-            Sign out
-          </button>
+          {staffEmail && (
+            <button
+              onClick={signOut}
+              className="rounded-full bg-white/10 border border-white/20 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/20 transition-colors"
+            >
+              Sign out
+            </button>
+          )}
         </div>
       </header>
 
       <main className="flex-1 mx-auto w-full max-w-3xl px-4 sm:px-6 py-10">
         <h1 className="font-display text-2xl font-extrabold text-green-deep">Staff tools</h1>
-        <p className="mt-1 text-sm text-soil/60">
-          Signed in as <strong className="text-soil/80">{staffEmail}</strong>
-        </p>
+        {staffEmail && (
+          <p className="mt-1 text-sm text-soil/60">
+            Signed in as <strong className="text-soil/80">{staffEmail}</strong>
+          </p>
+        )}
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
           {TOOLS.map(({ href, icon, title, body }) => (

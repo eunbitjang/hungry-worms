@@ -1,5 +1,4 @@
 import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import StaffHub from "./StaffHub";
 
@@ -10,17 +9,12 @@ export const metadata: Metadata = {
 export default async function StaffPortalPage() {
   const supabase = await createClient();
 
+  // Open to everyone — no login required, so field staff can log pickups
+  // without signing in. We still surface the email if someone happens to be
+  // logged in. (The all-clients dashboard linked from here stays protected.)
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect("/portal");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("is_staff")
-    .eq("id", user.id)
-    .single();
-  if (!profile?.is_staff) redirect("/portal/dashboard");
-
-  return <StaffHub staffEmail={user.email ?? ""} />;
+  return <StaffHub staffEmail={user?.email ?? ""} />;
 }
