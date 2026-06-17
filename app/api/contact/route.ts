@@ -3,8 +3,11 @@ import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const TO_EMAIL = "info@hungryworms.nz";
-const FROM_EMAIL = "onboarding@resend.dev"; // swap to e.g. "hello@hungryworms.nz" after DNS verification
+const TO_EMAIL = "info@hungryworms.nz"; // Google Workspace inbox
+// Sent from the Resend-verified hungryworms.co.nz domain (Wix DNS can't host
+// Resend's required `send` subdomain MX, so .nz couldn't be verified). Replies
+// go to the enquirer via replyTo, and notifications land in the .nz inbox above.
+const FROM_EMAIL = "info@hungryworms.co.nz";
 
 export async function POST(request: Request) {
   let body: unknown;
