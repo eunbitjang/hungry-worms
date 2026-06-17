@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local working scratch (e.g. Search Console exports for redirect mapping)
+/tmp
+
 # print/vector logo source files (kept locally, not served or committed)
 /brand-source
 
