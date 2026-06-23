@@ -11,6 +11,25 @@ const nextConfig: NextConfig = {
   // export, June 2026). Pages that kept their path (/ and /faq) need no entry.
   async redirects() {
     return [
+      // ── Canonical host: force the bare apex (hungryworms.nz) to www ───────
+      // GSC was indexing the non-www host as a separate property. Funnel all
+      // apex traffic to the single canonical https://www.hungryworms.nz so
+      // ranking signals don't get split. The www host is left untouched, so
+      // there's no redirect loop. The .co.nz apex/www variants are likewise
+      // consolidated onto the primary .nz domain.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "hungryworms.nz" }],
+        destination: "https://www.hungryworms.nz/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "(www\\.)?hungryworms\\.co\\.nz" }],
+        destination: "https://www.hungryworms.nz/:path*",
+        permanent: true,
+      },
+
       // ── Marketing pages renamed in the new site ──────────────────────────
       { source: "/waste-collection-1", destination: "/services", permanent: true },
       { source: "/our-process", destination: "/process", permanent: true },
