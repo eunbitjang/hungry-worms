@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import Header from "./Header";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollToTop";
+import AnnouncementBar from "./AnnouncementBar";
+import BuyWormsFab from "./BuyWormsFab";
 
 export default function ConditionalShell({
   children,
@@ -19,10 +21,12 @@ export default function ConditionalShell({
 
   return (
     <>
+      <AnnouncementBar />
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
       <ScrollToTop />
+      <BuyWormsFab />
     </>
   );
 }

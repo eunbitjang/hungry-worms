@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon from "./Icon";
 import BrandLogo from "./BrandLogo";
+import { UNCLE_BOBS } from "@/lib/links";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -59,12 +60,13 @@ export default function Header() {
               </Link>
             ))}
             <a
-              href="https://www.unclebobs.co.nz/"
+              href={UNCLE_BOBS.worms}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-green-leaf font-semibold hover:text-green-primary transition-colors"
             >
-              Uncle Bob&apos;s Shop
+              <Icon name="worm" className="size-4" />
+              Buy Worms
               <span aria-hidden="true" className="text-xs">↗</span>
             </a>
           </nav>
@@ -122,12 +124,13 @@ export default function Header() {
               </Link>
             ))}
             <a
-              href="https://www.unclebobs.co.nz/"
+              href={UNCLE_BOBS.worms}
               target="_blank"
               rel="noopener noreferrer"
-              className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-green-leaf hover:text-green-primary transition-colors"
+              className="flex items-center gap-1.5 rounded-lg px-3 py-2.5 text-sm font-semibold text-green-leaf hover:text-green-primary transition-colors"
             >
-              Uncle Bob&apos;s Shop ↗
+              <Icon name="worm" className="size-4" />
+              Buy Worms ↗
             </a>
           </nav>
           <div className="mt-4 flex flex-col gap-2">

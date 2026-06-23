@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Icon from "./Icon";
 import BrandLogo from "./BrandLogo";
+import { UNCLE_BOBS } from "@/lib/links";
 
 const COMPANY_LINKS = [
   { href: "/services", label: "Services" },
@@ -66,12 +67,13 @@ export default function Footer() {
               </li>
               <li className="pt-2">
                 <a
-                  href="https://www.unclebobs.co.nz/"
+                  href={UNCLE_BOBS.shop}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-full border border-green-leaf/70 px-3 py-1 text-green-leaf text-xs font-semibold hover:bg-green-leaf hover:text-soil transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-green-leaf/70 px-3 py-1 text-green-leaf text-xs font-semibold hover:bg-green-leaf hover:text-soil transition-colors"
                 >
-                  Uncle Bob&apos;s Shop ↗
+                  <Icon name="worm" className="size-3.5" />
+                  Buy Worms &amp; Garden Products ↗
                 </a>
               </li>
             </ul>

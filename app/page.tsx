@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getHeroStats, formatNumber } from "@/lib/data/hero";
 import { PARTNERS } from "@/lib/partners";
 import { MEDIA } from "@/lib/media";
+import { UNCLE_BOBS } from "@/lib/links";
 import Icon, { type IconName } from "./components/Icon";
 import Reveal from "./components/Reveal";
 import VideoFrame from "./components/VideoFrame";
@@ -529,7 +530,7 @@ export default async function HomePage() {
                 regenerative garden products — 100% natural, NZ-made, and available nationwide.
               </p>
               <a
-                href="https://www.unclebobs.co.nz/"
+                href={UNCLE_BOBS.shop}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-green-deep hover:bg-green-leaf hover:text-soil transition-all hover:gap-3"

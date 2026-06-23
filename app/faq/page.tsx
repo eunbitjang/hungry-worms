@@ -105,8 +105,12 @@ const FAQ: Section[] = [
         a: "Plans are tailored to your operations, so pricing depends on factors like volume, pickup frequency, and any additional services. Contact us for a tailored quote.",
       },
       {
+        q: "Where can I buy composting worms?",
+        a: "You're in the right place — but the worms are sold through our sister shop, Uncle Bob's. Hungry Worms runs the commercial waste-collection side; the live composting worms (and the garden products made from the waste we recycle) are sold at unclebobs.co.nz. Head to our Buy Worms page or go straight to unclebobs.co.nz to order — we deliver nationwide.",
+      },
+      {
         q: "What is Uncle Bob's?",
-        a: "Uncle Bob's is our sister brand of regenerative garden products — 100% natural, NZ-made fertiliser created from the waste we recycle. It's the final step in the full circle, and the products are available nationwide at unclebobs.co.nz.",
+        a: "Uncle Bob's is our sister brand of regenerative garden products — 100% natural, NZ-made fertiliser and live composting worms created from the waste we recycle. It's the final step in the full circle, and the products are available nationwide at unclebobs.co.nz.",
       },
     ],
   },
