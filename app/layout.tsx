@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import ConditionalShell from "./components/ConditionalShell";
+
+// GA4 measurement ID comes from the environment (never hard-coded). Set
+// NEXT_PUBLIC_GA_ID in Vercel / .env.local — see .env.example. The tag only
+// loads in production builds, so local dev and previews don't pollute analytics.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GA_ENABLED = process.env.NODE_ENV === "production" && Boolean(GA_ID);
 
 const inter = Inter({
   variable: "--font-inter",
@@ -77,6 +84,7 @@ export default function RootLayout({
         />
         <ConditionalShell>{children}</ConditionalShell>
       </body>
+      {GA_ENABLED && <GoogleAnalytics gaId={GA_ID!} />}
     </html>
   );
 }
