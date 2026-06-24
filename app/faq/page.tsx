@@ -107,7 +107,7 @@ const FAQ: Section[] = [
       },
       {
         q: "Where can I buy composting worms?",
-        a: "You're in the right place — but the worms are sold through our sister shop, Uncle Bob's. Hungry Worms runs the commercial waste-collection side; the live composting worms (and the garden products made from the waste we recycle) are sold at unclebobs.co.nz. Head to our Buy Worms page or go straight to unclebobs.co.nz to order — we deliver nationwide.",
+        a: "You're in the right place — but the worms are sold through our sister shop, Uncle Bob's. Hungry Worms runs the commercial waste-collection side; the live composting worms (and the garden products made from the waste we recycle) are sold at unclebobs.co.nz, with delivery nationwide. Just head to unclebobs.co.nz to order.",
       },
       {
         q: "What is Uncle Bob's?",
@@ -131,21 +131,12 @@ const faqJsonLd = {
 };
 
 // Answers are stored as plain strings (so the FAQPage JSON-LD above stays plain
-// text, which is what search engines want). For display we linkify the two
-// references that should be clickable: the unclebobs.co.nz shop and our own
-// /worms page.
+// text, which is what search engines want). For display we linkify the
+// unclebobs.co.nz mentions so visitors can click straight through to the shop.
 const LINK_CLASS =
   "font-semibold text-green-primary underline underline-offset-2 hover:text-green-deep transition-colors";
 
 const ANSWER_LINKS: { match: string; render: (key: string) => React.ReactNode }[] = [
-  {
-    match: "Buy Worms page",
-    render: (key) => (
-      <Link key={key} href="/worms" className={LINK_CLASS}>
-        Buy Worms page
-      </Link>
-    ),
-  },
   {
     match: "unclebobs.co.nz",
     render: (key) => (

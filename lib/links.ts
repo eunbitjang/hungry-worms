@@ -4,8 +4,8 @@
  * recycle, including live composting worms, are actually sold.
  *
  * Centralised here so every "buy worms" entry point on the marketing site
- * (header, footer, announcement bar, floating button, /worms landing page)
- * points at the same deep links and stays in sync if the shop URLs change.
+ * (header, footer, announcement bar, floating button, product cards) points
+ * at the same deep links and stays in sync if the shop URLs change.
  *
  * The UTM tags let us attribute, in analytics, how much worm-buying traffic
  * Hungry Worms hands off to Uncle Bob's — the whole point of these entry points.

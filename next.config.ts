@@ -44,6 +44,17 @@ const nextConfig: NextConfig = {
       { source: "/shipping-returns", destination: "https://www.unclebobs.co.nz/", permanent: true },
       { source: "/product-page/:path*", destination: "https://www.unclebobs.co.nz/", permanent: true },
       { source: "/category/:path*", destination: "https://www.unclebobs.co.nz/", permanent: true },
+
+      // ── /worms → straight to the worms product on Uncle Bob's ────────────
+      // We dropped the standalone /worms bridge page in favour of sending all
+      // worm-buyer traffic directly to the shop for the fastest conversion.
+      // This 301 keeps the URL (already in the sitemap / shared) converting.
+      {
+        source: "/worms",
+        destination:
+          "https://www.unclebobs.co.nz/shop-all/p/premium-composting-worms?utm_source=hungryworms&utm_medium=referral&utm_campaign=worms_redirect",
+        permanent: true,
+      },
     ];
   },
 };
