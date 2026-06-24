@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Icon from "../components/Icon";
+import { UNCLE_BOBS } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
@@ -129,6 +130,55 @@ const faqJsonLd = {
   ),
 };
 
+// Answers are stored as plain strings (so the FAQPage JSON-LD above stays plain
+// text, which is what search engines want). For display we linkify the two
+// references that should be clickable: the unclebobs.co.nz shop and our own
+// /worms page.
+const LINK_CLASS =
+  "font-semibold text-green-primary underline underline-offset-2 hover:text-green-deep transition-colors";
+
+const ANSWER_LINKS: { match: string; render: (key: string) => React.ReactNode }[] = [
+  {
+    match: "Buy Worms page",
+    render: (key) => (
+      <Link key={key} href="/worms" className={LINK_CLASS}>
+        Buy Worms page
+      </Link>
+    ),
+  },
+  {
+    match: "unclebobs.co.nz",
+    render: (key) => (
+      <a key={key} href={UNCLE_BOBS.shop} target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
+        unclebobs.co.nz
+      </a>
+    ),
+  },
+];
+
+function renderAnswer(text: string): React.ReactNode {
+  const nodes: React.ReactNode[] = [];
+  let rest = text;
+  let i = 0;
+  while (rest.length > 0) {
+    let earliest: { idx: number; link: (typeof ANSWER_LINKS)[number] } | null = null;
+    for (const link of ANSWER_LINKS) {
+      const idx = rest.indexOf(link.match);
+      if (idx !== -1 && (earliest === null || idx < earliest.idx)) {
+        earliest = { idx, link };
+      }
+    }
+    if (!earliest) {
+      nodes.push(rest);
+      break;
+    }
+    if (earliest.idx > 0) nodes.push(rest.slice(0, earliest.idx));
+    nodes.push(earliest.link.render(`l${i++}`));
+    rest = rest.slice(earliest.idx + earliest.link.match.length);
+  }
+  return nodes;
+}
+
 export default function FaqPage() {
   return (
     <>
@@ -176,7 +226,7 @@ export default function FaqPage() {
                         </svg>
                       </span>
                     </summary>
-                    <p className="px-5 pb-5 sm:px-6 sm:pb-6 -mt-1 text-soil/70 leading-relaxed">{a}</p>
+                    <p className="px-5 pb-5 sm:px-6 sm:pb-6 -mt-1 text-soil/70 leading-relaxed">{renderAnswer(a)}</p>
                   </details>
                 ))}
               </div>

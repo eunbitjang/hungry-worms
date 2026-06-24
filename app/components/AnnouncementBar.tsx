@@ -51,7 +51,7 @@ export default function AnnouncementBar() {
     <div className="relative bg-green-deep text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 py-2 pr-8 text-center text-sm">
-          <Icon name="worm" className="size-4 shrink-0 text-green-leaf" />
+          <Icon name="sprout" className="size-4 shrink-0 text-green-leaf" />
           <span className="text-white/85">
             Want to <strong className="font-semibold text-white">buy composting worms</strong> or garden products?
           </span>
