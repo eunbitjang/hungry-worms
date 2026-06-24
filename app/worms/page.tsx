@@ -6,23 +6,23 @@ import { MEDIA } from "@/lib/media";
 import { UNCLE_BOBS } from "@/lib/links";
 
 export const metadata: Metadata = {
-  title: "Buy Composting Worms in Christchurch & Canterbury, NZ",
+  title: "Buy Composting Worms Online in NZ — Delivered Nationwide",
   description:
-    "Looking to buy composting worms? Hungry Worms' live worms and regenerative garden products are sold through our sister shop, Uncle Bob's — premium NZ-made, delivered nationwide.",
+    "Looking to buy composting worms? Hungry Worms' live worms and regenerative garden products are sold through our sister shop, Uncle Bob's — premium, Canterbury-made and delivered NZ-wide.",
   alternates: { canonical: "/worms" },
   openGraph: {
-    title: "Buy Composting Worms in Christchurch & Canterbury, NZ",
+    title: "Buy Composting Worms Online in NZ — Delivered Nationwide",
     description:
-      "Hungry Worms' live composting worms and garden products are sold at Uncle Bob's — premium, NZ-made, delivered nationwide.",
+      "Hungry Worms' live composting worms and garden products are sold at Uncle Bob's — premium, Canterbury-made and delivered NZ-wide.",
   },
 };
 
 /* Products carried by Uncle Bob's — the shop worm-buyers actually want. */
-const PRODUCTS: { name: string; image: string }[] = [
-  { name: "Premium Composting Worms", image: MEDIA.products.worms },
-  { name: "Premium Worm Castings", image: MEDIA.products.vermicast },
-  { name: "All-Purpose Plant Food", image: MEDIA.products.plantFood },
-  { name: "Regenerative Solid Fertiliser", image: MEDIA.products.fertiliser },
+const PRODUCTS: { name: string; image: string; href: string }[] = [
+  { name: "Premium Composting Worms", image: MEDIA.products.worms, href: UNCLE_BOBS.products.worms },
+  { name: "Premium Worm Castings", image: MEDIA.products.vermicast, href: UNCLE_BOBS.products.vermicast },
+  { name: "All-Purpose Plant Food", image: MEDIA.products.plantFood, href: UNCLE_BOBS.products.plantFood },
+  { name: "Regenerative Solid Fertiliser", image: MEDIA.products.fertiliser, href: UNCLE_BOBS.products.fertiliser },
 ];
 
 export default function WormsPage() {
@@ -48,7 +48,7 @@ export default function WormsPage() {
             Buy Composting Worms
           </span>
           <h1 className="mt-6 font-display text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-            Buy composting worms in Christchurch &amp; Canterbury
+            Premium composting worms for your garden, delivered NZ-wide
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-white/80">
             You&apos;re in the right place. Hungry Worms runs Canterbury&apos;s commercial
@@ -125,13 +125,14 @@ export default function WormsPage() {
             </p>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {PRODUCTS.map(({ name, image }) => (
+            {PRODUCTS.map(({ name, image, href }) => (
               <a
                 key={name}
-                href={UNCLE_BOBS.worms}
+                href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card-lift group block overflow-hidden rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm"
+                aria-label={`Shop ${name} at Uncle Bob's`}
+                className="card-lift group block overflow-hidden rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm hover:border-white/40 transition-colors"
               >
                 <div className="relative aspect-square">
                   <Image

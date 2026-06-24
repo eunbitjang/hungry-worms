@@ -21,11 +21,21 @@ function shopLink(path: string, campaign: string): string {
   return `${UNCLE_BOBS_ORIGIN}${path}?${params.toString()}`;
 }
 
+/** Individual product pages, so a product photo links to that exact product. */
+const products = {
+  worms: shopLink("/shop-all/p/premium-composting-worms", "buy_worms"),
+  plantFood: shopLink("/shop-all/p/uncle-bobs-premium-natural-all-purpose-plant-food", "buy_plant_food"),
+  vermicast: shopLink("/shop-all/p/premium-worm-castings", "buy_vermicast"),
+  fertiliser: shopLink("/shop-all/p/regenerative-solid-fertiliser", "buy_fertiliser"),
+};
+
 export const UNCLE_BOBS = {
   /** Shop homepage — used for general brand links. */
   home: `${UNCLE_BOBS_ORIGIN}/`,
   /** Full product listing — for "browse the range" CTAs. */
   shop: shopLink("/shop-all", "shop"),
   /** Live composting worms product page — for worm-buyer intent. */
-  worms: shopLink("/shop-all/p/premium-composting-worms", "buy_worms"),
+  worms: products.worms,
+  /** Deep links to each individual product page. */
+  products,
 };

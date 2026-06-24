@@ -73,11 +73,11 @@ const WHY_US: { icon: IconName; title: string; body: string }[] = [
 ];
 
 /* ─── Uncle Bob's product teasers ───────────────────────────────────────── */
-const UNCLEBOBS_PRODUCTS: { name: string; image: string }[] = [
-  { name: "Premium Composting Worms", image: MEDIA.products.worms },
-  { name: "All-Purpose Plant Food", image: MEDIA.products.plantFood },
-  { name: "Premium Worm Castings", image: MEDIA.products.vermicast },
-  { name: "Regenerative Solid Fertiliser", image: MEDIA.products.fertiliser },
+const UNCLEBOBS_PRODUCTS: { name: string; image: string; href: string }[] = [
+  { name: "Premium Composting Worms", image: MEDIA.products.worms, href: UNCLE_BOBS.products.worms },
+  { name: "All-Purpose Plant Food", image: MEDIA.products.plantFood, href: UNCLE_BOBS.products.plantFood },
+  { name: "Premium Worm Castings", image: MEDIA.products.vermicast, href: UNCLE_BOBS.products.vermicast },
+  { name: "Regenerative Solid Fertiliser", image: MEDIA.products.fertiliser, href: UNCLE_BOBS.products.fertiliser },
 ];
 
 export default async function HomePage() {
@@ -540,9 +540,15 @@ export default async function HomePage() {
               </a>
             </Reveal>
             <div className="grid grid-cols-2 gap-4">
-              {UNCLEBOBS_PRODUCTS.map(({ name, image }, i) => (
+              {UNCLEBOBS_PRODUCTS.map(({ name, image, href }, i) => (
                 <Reveal key={name} delay={i * 90}>
-                  <div className="card-lift group h-full overflow-hidden rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm">
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Shop ${name} at Uncle Bob's`}
+                    className="card-lift group block h-full overflow-hidden rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm hover:border-white/40 transition-colors"
+                  >
                     <div className="relative aspect-square overflow-hidden bg-white">
                       <Image
                         src={image}
@@ -555,8 +561,9 @@ export default async function HomePage() {
                     <div className="flex items-center gap-2 p-4">
                       <Icon name="sprout" className="size-4 shrink-0 text-green-leaf" />
                       <span className="text-sm font-semibold text-white leading-snug">{name}</span>
+                      <span aria-hidden="true" className="ml-auto text-white/50 transition-colors group-hover:text-white">↗</span>
                     </div>
-                  </div>
+                  </a>
                 </Reveal>
               ))}
             </div>
