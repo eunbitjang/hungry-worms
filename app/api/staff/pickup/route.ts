@@ -1,7 +1,11 @@
 import { NextResponse, after } from "next/server";
 import { revalidatePath } from "next/cache";
 import { PICKUP_CLIENTS } from "@/lib/staff/pickup-config";
-import { appendPickupRows, type CanonicalRow } from "@/lib/sheets/pickup";
+import {
+  appendPickupRows,
+  MissingSheetsCredentialsError,
+  type CanonicalRow,
+} from "@/lib/sheets/pickup";
 import { syncSheetsToSupabase } from "@/lib/sheets/sync";
 
 export const runtime = "nodejs";
@@ -115,6 +119,13 @@ export async function POST(req: Request) {
     await appendPickupRows(rows);
   } catch (err) {
     console.error("App Pickups append failed:", err);
+    if (err instanceof MissingSheetsCredentialsError) {
+      // Server isn't configured (Google env vars absent) — not a sheet-permission issue.
+      return NextResponse.json(
+        { error: "Server isn't configured to save pickups yet. Please contact the site admin." },
+        { status: 503 }
+      );
+    }
     return NextResponse.json(
       { error: "Couldn't save to the sheet. Check the service account has edit access." },
       { status: 502 }

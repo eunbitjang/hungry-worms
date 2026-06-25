@@ -36,9 +36,22 @@ export type CanonicalRow = {
   notes: string;
 };
 
+/** Thrown when the Google service-account env vars aren't configured (e.g. on Vercel). */
+export class MissingSheetsCredentialsError extends Error {
+  constructor(missing: string[]) {
+    super(`Google Sheets credentials not configured — missing env var(s): ${missing.join(", ")}`);
+    this.name = "MissingSheetsCredentialsError";
+  }
+}
+
 function getSheets() {
   // Individual env vars (not full JSON) to avoid .env line-break issues.
   // GOOGLE_PRIVATE_KEY stores literal \n sequences — restore real newlines.
+  const missing = (["GOOGLE_SHEET_ID", "GOOGLE_CLIENT_EMAIL", "GOOGLE_PRIVATE_KEY"] as const).filter(
+    (k) => !process.env[k]
+  );
+  if (missing.length > 0) throw new MissingSheetsCredentialsError(missing);
+
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_CLIENT_EMAIL!,
