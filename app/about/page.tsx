@@ -119,6 +119,17 @@ export default function AboutPage() {
                 that return value to the community. We keep the Google Sheet, the worm farm, and the
                 ESG report in the same story.
               </p>
+              <p className="mt-4 text-white/80 leading-relaxed max-w-3xl">
+                Curious about the bigger picture? Our Library gathers news and research on
+                regenerative farming, worm farming and food security — the ideas that drive what we do.
+              </p>
+              <Link
+                href="/library"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-green-leaf px-6 py-3 text-sm font-bold text-soil hover:bg-white transition-all hover:gap-3"
+              >
+                Explore the Library
+                <Icon name="arrow-right" className="size-4" />
+              </Link>
             </div>
           </Reveal>
         </div>

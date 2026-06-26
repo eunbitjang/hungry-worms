@@ -7,6 +7,7 @@ const COMPANY_LINKS = [
   { href: "/services", label: "Services" },
   { href: "/process", label: "Our Process" },
   { href: "/about", label: "About Us" },
+  { href: "/library", label: "Library" },
   { href: "/contact", label: "Contact" },
   { href: "/portal", label: "Client Portal" },
 ];
