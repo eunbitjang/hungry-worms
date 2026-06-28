@@ -42,6 +42,21 @@ const nextConfig: NextConfig = {
       // The webshop now lives on unclebobs.co.nz. Wildcards also catch any
       // shop URLs not in the indexed set (stray inbound links, old shares).
       { source: "/shipping-returns", destination: "https://www.unclebobs.co.nz/", permanent: true },
+      // Two old product pages still indexed in GSC. Point them at the matching
+      // current products on Uncle Bob's (not the generic homepage below) so the
+      // 301 recovers residual link value instead of being treated as a soft 404.
+      // These must precede the /product-page/:path* catch-all (first match wins).
+      {
+        source: "/product-page/premium-wool-pellets",
+        destination: "https://www.unclebobs.co.nz/shop-all/p/premium-wool-pellets-for-plants-500g",
+        permanent: true,
+      },
+      {
+        source: "/product-page/premium-vermicast-tonic-20-ltr-container",
+        destination:
+          "https://www.unclebobs.co.nz/shop-all/p/premium-natural-soil-conditioner-growth-booster-20l-bulk-concentrate",
+        permanent: true,
+      },
       { source: "/product-page/:path*", destination: "https://www.unclebobs.co.nz/", permanent: true },
       { source: "/category/:path*", destination: "https://www.unclebobs.co.nz/", permanent: true },
 
