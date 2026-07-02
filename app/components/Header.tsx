@@ -42,6 +42,12 @@ export default function Header() {
           <Link
             href="/"
             className="shrink-0 text-green-deep hover:text-green-primary transition-colors"
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
           >
             <BrandLogo variant="light" priority />
           </Link>
