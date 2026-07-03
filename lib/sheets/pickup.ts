@@ -13,7 +13,10 @@ import { google } from "googleapis";
 const SHEET_ID = process.env.GOOGLE_SHEET_ID!;
 const TAB = "App Pickups";
 
-// Same column order as `Form responses 1` (cols A–H).
+// Cols A–H mirror `Form responses 1` (the Master Log combines them and the
+// Supabase sync only reads A–H). Col I is an app-only idempotency key: it is
+// invisible to the Master Log formula and the sync, so it never touches client
+// data — it only lets us recognise a re-submitted pickup and skip re-appending.
 const HEADER = [
   "Timestamp",
   "Pickup Date",
@@ -23,6 +26,7 @@ const HEADER = [
   "Bin Number",
   "Weight kg",
   "Notes",
+  "Request ID",
 ];
 
 export type CanonicalRow = {
@@ -88,14 +92,44 @@ async function ensureTab(sheets: SheetsClient): Promise<void> {
 }
 
 /**
- * Append canonical rows to `App Pickups`. Returns the number of rows written.
- * Uses USER_ENTERED so Sheets parses dates/numbers exactly like Form rows.
+ * True if a pickup with this Request ID has already been written. Used to make
+ * the write path idempotent: if a submit reaches the server but its response is
+ * lost (flaky field network), the retry carries the same Request ID and we skip
+ * the duplicate append instead of piling up rows in the Master Log.
  */
-export async function appendPickupRows(rows: CanonicalRow[]): Promise<number> {
-  if (rows.length === 0) return 0;
+async function requestAlreadyLogged(
+  sheets: SheetsClient,
+  requestId: string
+): Promise<boolean> {
+  const res = await sheets.spreadsheets.values.get({
+    spreadsheetId: SHEET_ID,
+    range: `${TAB}!I2:I`, // Request ID column, data rows only
+  });
+  const ids = res.data.values ?? [];
+  return ids.some((r) => (r[0] ?? "").toString().trim() === requestId);
+}
+
+/**
+ * Append canonical rows to `App Pickups`. Returns how many rows were written and
+ * whether the write was skipped as a duplicate retry.
+ *
+ * When `requestId` is supplied, every row of this submission is tagged with it
+ * in col I, and a matching prior submission short-circuits the append (idempotent
+ * retry). Uses USER_ENTERED so Sheets parses dates/numbers exactly like Form rows.
+ */
+export async function appendPickupRows(
+  rows: CanonicalRow[],
+  requestId?: string
+): Promise<{ written: number; duplicate: boolean }> {
+  if (rows.length === 0) return { written: 0, duplicate: false };
 
   const sheets = getSheets();
   await ensureTab(sheets);
+
+  // Idempotency guard: don't re-append a submission we've already recorded.
+  if (requestId && (await requestAlreadyLogged(sheets, requestId))) {
+    return { written: 0, duplicate: true };
+  }
 
   const values = rows.map((r) => [
     r.timestamp,
@@ -106,15 +140,16 @@ export async function appendPickupRows(rows: CanonicalRow[]): Promise<number> {
     r.binNumber,
     r.weightKg,
     r.notes,
+    requestId ?? "",
   ]);
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: SHEET_ID,
-    range: `${TAB}!A:H`,
+    range: `${TAB}!A:I`,
     valueInputOption: "USER_ENTERED",
     insertDataOption: "INSERT_ROWS",
     requestBody: { values },
   });
 
-  return rows.length;
+  return { written: rows.length, duplicate: false };
 }

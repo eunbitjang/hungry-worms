@@ -21,6 +21,11 @@ const isoToDisplay = (iso: string) => {
   const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   return m ? `${m[3]}/${m[2]}/${m[1]}` : iso;
 };
+/** Stable per-form-fill id so a retried submit is de-duplicated server-side. */
+const newRequestId = () =>
+  typeof crypto !== "undefined" && crypto.randomUUID
+    ? crypto.randomUUID()
+    : `rid-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
 /** What kind of selector (if any) a box carries. */
 function selectorFor(box: PickupBox):
@@ -58,6 +63,9 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState<Result | null>(null);
+  // One id per form fill; reused across retries so the server can dedupe, and
+  // regenerated only when a fresh pickup is started (see reset()).
+  const [requestId, setRequestId] = useState(newRequestId);
 
   const cfg = client ? PICKUP_CLIENTS[client] : undefined;
 
@@ -130,7 +138,7 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
       const res = await fetch("/api/staff/pickup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ client, pickupDate, notes, entries }),
+        body: JSON.stringify({ client, pickupDate, notes, entries, requestId }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -172,6 +180,7 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
     setManualOn(false);
     setManualDate(todayISO());
     setError("");
+    setRequestId(newRequestId()); // fresh id for the next pickup
   }
 
   /* ── Success screen ─────────────────────────────────────────────────────── */

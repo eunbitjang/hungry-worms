@@ -56,7 +56,13 @@ export async function POST(req: Request) {
   // sheet write uses the server's own service account, never the caller's.
 
   // ── Parse + validate payload against the canonical config ─────────────────
-  let body: { client?: string; pickupDate?: unknown; notes?: unknown; entries?: Entry[] };
+  let body: {
+    client?: string;
+    pickupDate?: unknown;
+    notes?: unknown;
+    entries?: Entry[];
+    requestId?: unknown;
+  };
   try {
     body = await req.json();
   } catch {
@@ -65,6 +71,14 @@ export async function POST(req: Request) {
 
   const cfg = body.client ? PICKUP_CLIENTS[body.client] : undefined;
   if (!cfg) return NextResponse.json({ error: "Unknown client" }, { status: 400 });
+
+  // Idempotency key from the client — stable across retries of one form fill, so
+  // a lost response doesn't turn a retry into a duplicate row. Bounded length to
+  // reject junk. Absent/invalid → dedup is simply skipped (still safe).
+  const requestId =
+    typeof body.requestId === "string" && /^[\w-]{1,64}$/.test(body.requestId)
+      ? body.requestId
+      : undefined;
   if (!Array.isArray(body.entries) || body.entries.length === 0) {
     return NextResponse.json({ error: "No pickup entries provided" }, { status: 400 });
   }
@@ -115,8 +129,9 @@ export async function POST(req: Request) {
   }
 
   // ── Write to the sheet ────────────────────────────────────────────────────
+  let duplicate = false;
   try {
-    await appendPickupRows(rows);
+    ({ duplicate } = await appendPickupRows(rows, requestId));
   } catch (err) {
     console.error("App Pickups append failed:", err);
     if (err instanceof MissingSheetsCredentialsError) {
@@ -136,20 +151,26 @@ export async function POST(req: Request) {
   // The pickup is already safely in the sheet, so we respond immediately and
   // sync Sheets → Supabase afterwards. The short delay lets the Master Log's
   // spilled formula recompute to include the new rows before the sync reads it.
-  after(async () => {
-    try {
-      // Let the Master Log's spilled formula finish re-sorting in the new rows.
-      await new Promise((r) => setTimeout(r, 12000));
-      await syncSheetsToSupabase();
-      revalidatePath("/"); // refresh the public hero scorecard
-    } catch (e) {
-      console.error("[pickup] post-write sync failed (will catch up on next sync):", e);
-    }
-  });
+  // On a duplicate retry nothing new was written, so skip the sync entirely.
+  if (!duplicate) {
+    after(async () => {
+      try {
+        // Let the Master Log's spilled formula finish re-sorting in the new rows.
+        await new Promise((r) => setTimeout(r, 12000));
+        await syncSheetsToSupabase();
+        revalidatePath("/"); // refresh the public hero scorecard
+      } catch (e) {
+        console.error("[pickup] post-write sync failed (will catch up on next sync):", e);
+      }
+    });
+  }
 
+  // Report success whether we just wrote the rows or recognised a retry of an
+  // already-saved submission — either way the pickup is safely logged once.
   return NextResponse.json({
     ok: true,
     saved: rows.length,
+    duplicate,
     client: storeName,
     pickupDate,
     totalKg: Math.round(rows.reduce((s, r) => s + r.weightKg, 0) * 10) / 10,
