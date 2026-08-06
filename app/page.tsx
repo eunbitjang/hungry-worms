@@ -124,16 +124,16 @@ export default async function HomePage() {
         <div
           className={`absolute inset-0 ${
             MEDIA.heroImage
-              ? "bg-gradient-to-r from-green-deep/95 via-green-deep/85 to-green-deep/55"
+              ? "bg-gradient-to-r from-green-deep/95 via-green-deep/80 to-green-deep/30"
               : ""
           }`}
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-mesh opacity-90" aria-hidden="true" />
+        <div className="absolute inset-0 bg-mesh opacity-60" aria-hidden="true" />
         {/* drifting decorative glow */}
         <div className="absolute -top-32 -right-32 size-96 rounded-full bg-green-leaf/10 blur-3xl animate-drift" aria-hidden="true" />
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 md:py-18 lg:py-20">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-leaf backdrop-blur-sm">
               <span className="size-1.5 rounded-full bg-green-leaf animate-pulse" />
@@ -153,7 +153,7 @@ export default async function HomePage() {
             </p>
 
             {/* CTAs */}
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/contact"
                 className="group inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-bold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-all hover:gap-3"
@@ -171,7 +171,7 @@ export default async function HomePage() {
           </div>
 
           {/* Hero KPI stats */}
-          <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:max-w-3xl">
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:max-w-3xl">
             {heroStats.map(({ value, unit, label, icon }, i) => (
               <div
                 key={label}

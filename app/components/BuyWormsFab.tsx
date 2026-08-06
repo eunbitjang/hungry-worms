@@ -14,14 +14,27 @@ import { UNCLE_BOBS } from "@/lib/links";
  * initial load.
  */
 export default function BuyWormsFab() {
-  const [visible, setVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [footerInView, setFooterInView] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 300);
+    const onScroll = () => setScrolled(window.scrollY > 300);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Hide while the footer is on screen — it has its own Uncle Bob's button,
+  // and the pill would otherwise cover the copyright line.
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+    const observer = new IntersectionObserver(([entry]) => setFooterInView(entry.isIntersecting));
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
+  const visible = scrolled && !footerInView;
 
   return (
     <a

@@ -93,11 +93,11 @@ export default function ServicesPage() {
             priority
             sizes="100vw"
             aria-hidden="true"
-            className="object-cover opacity-25"
+            className="object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-green-deep/95 via-green-deep/85 to-green-deep/55" aria-hidden="true" />
-        <div className="absolute inset-0 bg-mesh opacity-80" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-r from-green-deep/95 via-green-deep/80 to-green-deep/25" aria-hidden="true" />
+        <div className="absolute inset-0 bg-mesh opacity-50" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-leaf backdrop-blur-sm">

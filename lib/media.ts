@@ -18,7 +18,7 @@
  */
 export const MEDIA = {
   // Home hero — shown beneath the gradient/overlay. Missing file → gradient only.
-  heroImage: "/images/hero.png" as string | null,
+  heroImage: "/images/hero.webp" as string | null,
 
   // Willowbank case study (Home)
   willowbankVideo: "/videos/willowbank.mp4" as string | null,
@@ -34,13 +34,13 @@ export const MEDIA = {
 
   // ── Photography (curated from the team's asset library) ─────────────────
   collectInAction: "/images/collect-bin-cafe.png" as string | null,   // worker collecting a bin at a Canterbury café
-  wormsInHands: "/images/worms-soil-hands.jpg" as string | null,      // compost worms in soil — the core of the business
+  wormsInHands: "/images/worms-soil-hands.webp" as string | null,     // compost worms in soil — the core of the business
   sudimaHotel: "/images/sudima-hotel.png" as string | null,           // Sudima hotel exterior
   forestMist: "/images/forest-mist.jpg" as string | null,             // misty native forest — atmospheric dark bg
-  christchurchHarbour: "/images/christchurch-harbour.jpg" as string | null, // Lyttelton / Canterbury panorama
-  handsTogether: "/images/hands-together.jpg" as string | null,       // many hands — partnership / community
+  christchurchHarbour: "/images/christchurch-harbour.webp" as string | null, // Lyttelton / Canterbury panorama
+  handsTogether: "/images/hands-together.webp" as string | null,      // many hands — partnership / community
   chefKitchen: "/images/chef-kitchen.jpg" as string | null,           // chef in a commercial kitchen
-  kitchenOverhead: "/images/kitchen-overhead.jpg" as string | null,   // overhead of chefs in a restaurant kitchen
+  kitchenOverhead: "/images/kitchen-overhead.webp" as string | null,  // overhead of chefs in a restaurant kitchen
   foodScraps: "/images/food-scraps.jpg" as string | null,             // food peelings — the waste we divert
   compostingMachine: "/images/composting-machine.png" as string | null, // industrial composter
 
