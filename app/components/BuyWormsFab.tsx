@@ -42,7 +42,7 @@ export default function BuyWormsFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Buy composting worms at Uncle Bob's shop"
-      className={`fixed bottom-6 left-6 z-40 inline-flex items-center gap-2 rounded-full bg-cta px-4 py-2.5 text-sm font-bold text-white shadow-[var(--shadow-cta)] ring-1 ring-white/10 transition-all duration-300 hover:bg-cta-dark hover:-translate-y-0.5 ${
+      className={`fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 rounded-full bg-cta px-4 py-2.5 text-sm font-bold text-white shadow-[var(--shadow-cta)] ring-1 ring-white/10 transition-all duration-300 hover:bg-cta-dark hover:-translate-y-0.5 ${
         visible ? "opacity-100 translate-y-0" : "pointer-events-none opacity-0 translate-y-3"
       }`}
     >
