@@ -49,7 +49,7 @@ const STEPS: { step: string; icon: IconName; title: string; body: string }[] = [
 ];
 
 /* ─── Why choose us ─────────────────────────────────────────────────────── */
-const WHY_US: { icon: IconName; title: string; body: string }[] = [
+const WHY_US: { icon: IconName; title: string; body: string; stat?: { value: string; label: string } }[] = [
   {
     icon: "sparkles",
     title: "Effortless",
@@ -68,7 +68,8 @@ const WHY_US: { icon: IconName; title: string; body: string }[] = [
   {
     icon: "gift",
     title: "Free trial, proven results",
-    body: "Start with zero commitment. 99% of businesses who trial our service continue as long-term partners.",
+    body: "Start with zero commitment and see the results for yourself.",
+    stat: { value: "99%", label: "of trial clients stay on as long-term partners" },
   },
 ];
 
@@ -124,16 +125,16 @@ export default async function HomePage() {
         <div
           className={`absolute inset-0 ${
             MEDIA.heroImage
-              ? "bg-gradient-to-r from-green-deep/95 via-green-deep/85 to-green-deep/55"
+              ? "bg-gradient-to-r from-green-deep/95 via-green-deep/80 to-green-deep/30"
               : ""
           }`}
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-mesh opacity-90" aria-hidden="true" />
+        <div className="absolute inset-0 bg-mesh opacity-60" aria-hidden="true" />
         {/* drifting decorative glow */}
         <div className="absolute -top-32 -right-32 size-96 rounded-full bg-green-leaf/10 blur-3xl animate-drift" aria-hidden="true" />
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 md:py-18 lg:py-20">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-leaf backdrop-blur-sm">
               <span className="size-1.5 rounded-full bg-green-leaf animate-pulse" />
@@ -153,7 +154,7 @@ export default async function HomePage() {
             </p>
 
             {/* CTAs */}
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/contact"
                 className="group inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-bold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-all hover:gap-3"
@@ -171,7 +172,7 @@ export default async function HomePage() {
           </div>
 
           {/* Hero KPI stats */}
-          <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:max-w-3xl">
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:max-w-3xl">
             {heroStats.map(({ value, unit, label, icon }, i) => (
               <div
                 key={label}
@@ -222,11 +223,13 @@ export default async function HomePage() {
                   aria-label={`${name} — visit website`}
                   className="relative block h-12 w-36 transition hover:scale-105"
                 >
+                  {/* Grayscale at rest so mixed brand colours read as one row; colour returns on hover */}
                   <Image
                     src={logo}
                     alt={name}
                     fill
                     sizes="144px"
+                    className="grayscale opacity-60 transition duration-200 hover:grayscale-0 hover:opacity-100"
                     style={{ objectFit: "contain", transform: scale ? `scale(${scale})` : undefined }}
                   />
                 </a>
@@ -477,15 +480,31 @@ export default async function HomePage() {
             </p>
           </Reveal>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY_US.map(({ icon, title, body }, i) => (
+            {WHY_US.map(({ icon, title, body, stat }, i) => (
               <Reveal key={title} delay={i * 100}>
-                <div className="card-lift group h-full rounded-2xl bg-white border border-soil/8 p-7 shadow-[var(--shadow-card)]">
-                  <div className="flex size-12 items-center justify-center rounded-xl bg-green-primary/10 text-green-primary transition-colors group-hover:bg-green-primary group-hover:text-white">
-                    <Icon name={icon} className="size-6" />
+                {stat ? (
+                  /* Featured card — the one number that closes the argument */
+                  <div className="card-lift group relative h-full overflow-hidden rounded-2xl bg-green-deep text-white p-7 shadow-[var(--shadow-card)] bg-grain">
+                    <div className="absolute -top-10 -right-10 size-32 rounded-full bg-green-leaf/15 blur-2xl" aria-hidden="true" />
+                    <div className="relative">
+                      <div className="flex size-12 items-center justify-center rounded-xl bg-green-leaf/20 text-green-leaf">
+                        <Icon name={icon} className="size-6" />
+                      </div>
+                      <div className="mt-5 font-display text-5xl font-extrabold text-green-leaf">{stat.value}</div>
+                      <p className="mt-1 text-sm font-semibold text-white/90">{stat.label}</p>
+                      <h3 className="mt-4 font-display font-bold text-white text-lg">{title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-white/70">{body}</p>
+                    </div>
                   </div>
-                  <h3 className="mt-5 font-display font-bold text-green-deep text-lg">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-soil/65">{body}</p>
-                </div>
+                ) : (
+                  <div className="card-lift group h-full rounded-2xl bg-white border border-soil/8 p-7 shadow-[var(--shadow-card)]">
+                    <div className="flex size-12 items-center justify-center rounded-xl bg-green-primary/10 text-green-primary transition-colors group-hover:bg-green-primary group-hover:text-white">
+                      <Icon name={icon} className="size-6" />
+                    </div>
+                    <h3 className="mt-5 font-display font-bold text-green-deep text-lg">{title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-soil/65">{body}</p>
+                  </div>
+                )}
               </Reveal>
             ))}
           </div>

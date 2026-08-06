@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import ContactForm from "./ContactForm";
 import Icon from "../components/Icon";
+import { MEDIA } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Contact Us — Start Your Free Trial",
@@ -20,7 +22,19 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-green-deep text-white py-16 lg:py-20 bg-grain">
-        <div className="absolute inset-0 bg-mesh" aria-hidden="true" />
+        {MEDIA.handsTogether && (
+          <Image
+            src={MEDIA.handsTogether}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            aria-hidden="true"
+            className="object-cover"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-r from-green-deep/95 via-green-deep/80 to-green-deep/25" aria-hidden="true" />
+        <div className="absolute inset-0 bg-mesh opacity-50" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-leaf backdrop-blur-sm">

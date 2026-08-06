@@ -93,11 +93,11 @@ export default function ServicesPage() {
             priority
             sizes="100vw"
             aria-hidden="true"
-            className="object-cover opacity-25"
+            className="object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-green-deep/95 via-green-deep/85 to-green-deep/55" aria-hidden="true" />
-        <div className="absolute inset-0 bg-mesh opacity-80" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-r from-green-deep/95 via-green-deep/80 to-green-deep/25" aria-hidden="true" />
+        <div className="absolute inset-0 bg-mesh opacity-50" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-leaf backdrop-blur-sm">
@@ -138,9 +138,10 @@ export default function ServicesPage() {
             <h2 className="mt-3 font-display text-3xl font-extrabold text-soil sm:text-4xl">How it works</h2>
             <p className="mt-3 text-soil/55">Five straightforward steps — and we handle four of them.</p>
           </Reveal>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          {/* 3 + 2 layout: five equal-width cards read cramped at desktop widths */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6">
             {HOW_IT_WORKS.map(({ step, icon, title, body }, i) => (
-              <Reveal key={step} delay={i * 90}>
+              <Reveal key={step} delay={i * 90} className={`lg:col-span-2 ${i === 3 ? "lg:col-start-2" : ""}`}>
                 <div className="card-lift group h-full rounded-2xl bg-white border border-soil/8 p-6 shadow-[var(--shadow-card)]">
                   <div className="flex items-center justify-between">
                     <div className="flex size-12 items-center justify-center rounded-xl bg-green-primary/10 text-green-primary transition-colors group-hover:bg-green-primary group-hover:text-white">
@@ -271,6 +272,7 @@ export default function ServicesPage() {
                       alt={name}
                       fill
                       sizes="160px"
+                      className="grayscale opacity-70 transition duration-200 hover:grayscale-0 hover:opacity-100"
                       style={{ objectFit: "contain", transform: scale ? `scale(${scale})` : undefined }}
                     />
                   </div>

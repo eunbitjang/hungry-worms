@@ -108,11 +108,11 @@ export default function ProcessPage() {
             priority
             sizes="100vw"
             aria-hidden="true"
-            className="object-cover opacity-25"
+            className="object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-green-deep/95 via-green-deep/80 to-green-deep/50" aria-hidden="true" />
-        <div className="absolute inset-0 bg-mesh opacity-80" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-r from-green-deep/95 via-green-deep/80 to-green-deep/25" aria-hidden="true" />
+        <div className="absolute inset-0 bg-mesh opacity-50" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-leaf backdrop-blur-sm">
@@ -133,11 +133,17 @@ export default function ProcessPage() {
       {/* Process steps */}
       <section className="relative overflow-hidden bg-offwhite bg-dots py-20 lg:py-24">
         <div className="pointer-events-none absolute -top-20 -right-16 size-72 rounded-full bg-green-leaf/10 blur-3xl" aria-hidden="true" />
-        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <h2 className="sr-only">Our recycling process</h2>
-          <div className="space-y-8">
+          <div>
             {PROCESS_STEPS.map(({ step, icon, title, body, ring, iconBg, textColor }, idx) => (
               <Reveal key={step}>
+                {/* Connector between steps — the material literally flows from one stage to the next */}
+                {idx > 0 && (
+                  <div className="flex justify-center py-3" aria-hidden="true">
+                    <div className="h-10 border-l-2 border-dashed border-green-primary/30" />
+                  </div>
+                )}
                 <div
                   className={`flex flex-col sm:flex-row ${idx % 2 === 1 ? "sm:flex-row-reverse" : ""} gap-6 sm:gap-8 items-center`}
                 >
