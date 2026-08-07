@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getHeroStats, formatNumber } from "@/lib/data/hero";
+import { getHeroStats } from "@/lib/data/hero";
 import { PARTNERS } from "@/lib/partners";
 import { MEDIA } from "@/lib/media";
 import { UNCLE_BOBS } from "@/lib/links";
 import Icon, { type IconName } from "./components/Icon";
 import Reveal from "./components/Reveal";
+import CountingNumber from "./components/CountingNumber";
 import VideoFrame from "./components/VideoFrame";
 
 // ISR: cache the page for 10 minutes, then revalidate in the background
@@ -84,21 +85,22 @@ const UNCLEBOBS_PRODUCTS: { name: string; image: string; href: string }[] = [
 export default async function HomePage() {
   const stats = await getHeroStats();
 
-  const heroStats: { value: string; unit: string; label: string; icon: IconName }[] = [
+  const heroStats: { value: number; decimals?: number; unit: string; label: string; icon: IconName }[] = [
     {
-      value: formatNumber(stats.total_waste_kg),
+      value: stats.total_waste_kg,
       unit: "kg",
       label: "Food waste diverted from landfill",
       icon: "apple",
     },
     {
-      value: formatNumber(stats.total_co2e_kg),
+      value: stats.total_co2e_kg,
       unit: "kg CO₂e",
       label: "Greenhouse gas avoided",
       icon: "co2",
     },
     {
-      value: formatNumber(stats.total_cars_year, 1),
+      value: stats.total_cars_year,
+      decimals: 1,
       unit: "cars",
       label: "Off the road for a year",
       icon: "car",
@@ -173,7 +175,7 @@ export default async function HomePage() {
 
           {/* Hero KPI stats */}
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:max-w-3xl">
-            {heroStats.map(({ value, unit, label, icon }, i) => (
+            {heroStats.map(({ value, decimals, unit, label, icon }, i) => (
               <div
                 key={label}
                 className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.07] px-6 py-5 backdrop-blur-md animate-count-up"
@@ -183,7 +185,7 @@ export default async function HomePage() {
                   <Icon name={icon} className="size-6" />
                 </div>
                 <div className="font-display text-3xl font-extrabold text-white sm:text-4xl">
-                  {value}
+                  <CountingNumber target={value} decimals={decimals} delay={180 + i * 90} />
                 </div>
                 <div className="mt-0.5 text-xs font-bold uppercase tracking-widest text-green-leaf">
                   {unit}
