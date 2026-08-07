@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "title": "Design System: Hungry Worms",
+  "extensions": {
+    "colorMeta": {
+      "canterbury-green": {
+        "role": "primary",
+        "displayName": "Canterbury Green",
+        "canonical": "#1F8A4C",
+        "tonalRamp": ["oklch(20% 0.06 152)", "oklch(30% 0.09 152)", "oklch(40% 0.12 152)", "oklch(55% 0.14 152)", "oklch(65% 0.13 152)", "oklch(75% 0.10 152)", "oklch(86% 0.06 152)", "oklch(95% 0.02 152)"]
+      },
+      "forest-floor": {
+        "role": "primary",
+        "displayName": "Forest Floor",
+        "canonical": "#0F5132",
+        "tonalRamp": ["oklch(15% 0.04 155)", "oklch(24% 0.06 155)", "oklch(36% 0.09 155)", "oklch(46% 0.10 155)", "oklch(58% 0.10 155)", "oklch(70% 0.08 155)", "oklch(83% 0.05 155)", "oklch(94% 0.02 155)"]
+      },
+      "new-leaf": {
+        "role": "secondary",
+        "displayName": "New Leaf",
+        "canonical": "#7FB800",
+        "tonalRamp": ["oklch(25% 0.07 128)", "oklch(36% 0.10 128)", "oklch(47% 0.13 128)", "oklch(58% 0.15 128)", "oklch(72% 0.17 128)", "oklch(82% 0.13 128)", "oklch(90% 0.08 128)", "oklch(96% 0.03 128)"]
+      },
+      "kiln-orange": {
+        "role": "tertiary",
+        "displayName": "Kiln Orange",
+        "canonical": "#E07A2F",
+        "tonalRamp": ["oklch(25% 0.07 55)", "oklch(36% 0.10 55)", "oklch(47% 0.13 55)", "oklch(58% 0.15 55)", "oklch(68% 0.15 55)", "oklch(78% 0.11 55)", "oklch(87% 0.07 55)", "oklch(95% 0.03 55)"]
+      },
+      "kiln-orange-deep": {
+        "role": "tertiary",
+        "displayName": "Kiln Orange Deep",
+        "canonical": "#C5661A",
+        "tonalRamp": ["oklch(22% 0.07 52)", "oklch(32% 0.10 52)", "oklch(43% 0.13 52)", "oklch(54% 0.14 52)", "oklch(62% 0.14 52)", "oklch(74% 0.11 52)", "oklch(85% 0.07 52)", "oklch(94% 0.03 52)"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#F7F6F1",
+        "tonalRamp": ["oklch(20% 0.004 95)", "oklch(32% 0.004 95)", "oklch(44% 0.005 95)", "oklch(56% 0.005 95)", "oklch(68% 0.005 95)", "oklch(80% 0.005 95)", "oklch(90% 0.005 95)", "oklch(97% 0.005 95)"]
+      },
+      "card-white": {
+        "role": "neutral",
+        "displayName": "Card White",
+        "canonical": "#FFFFFF",
+        "tonalRamp": ["oklch(20% 0 0)", "oklch(32% 0 0)", "oklch(44% 0 0)", "oklch(56% 0 0)", "oklch(68% 0 0)", "oklch(80% 0 0)", "oklch(92% 0 0)", "oklch(100% 0 0)"]
+      },
+      "wet-soil": {
+        "role": "neutral",
+        "displayName": "Wet Soil",
+        "canonical": "#2B2A26",
+        "tonalRamp": ["oklch(16% 0.005 90)", "oklch(28% 0.006 90)", "oklch(40% 0.006 90)", "oklch(52% 0.006 90)", "oklch(64% 0.006 90)", "oklch(76% 0.005 90)", "oklch(88% 0.004 90)", "oklch(96% 0.003 90)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline, once per page. Steps 2.25rem to 3rem to 3.75rem across breakpoints." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles, always directly under an eyebrow label." },
+      "title": { "displayName": "Title", "purpose": "Card and list-item headings." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs capped near 65ch; drops to 0.875rem inside cards." },
+      "label": { "displayName": "Label", "purpose": "Uppercase eyebrow above every section heading, and stat units." }
+    },
+    "shadows": [
+      { "name": "card", "value": "0 1px 2px rgba(43,42,38,0.04), 0 4px 16px rgba(43,42,38,0.06)", "purpose": "Resting state for a white card on Paper. Barely there by design." },
+      { "name": "card-hover", "value": "0 2px 4px rgba(43,42,38,0.06), 0 16px 40px rgba(43,42,38,0.12)", "purpose": "Hover state, paired with a 4px rise." },
+      { "name": "cta", "value": "0 1px 2px rgba(43,42,38,0.10), 0 4px 10px rgba(43,42,38,0.12)", "purpose": "Under orange pills. Deliberately neutral; a tinted shadow produced a hazy glow." },
+      { "name": "ring", "value": "0 0 0 1px rgba(31,138,76,0.08)", "purpose": "Green-tinted hairline edge where a visible border would be too loud." },
+      { "name": "header-scrolled", "value": "0 2px 20px rgba(43,42,38,0.06)", "purpose": "Appears on the sticky header once the page has scrolled past 8px." }
+    ],
+    "motion": [
+      { "name": "ease-lift", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Card lift and shadow change, 0.35s." },
+      { "name": "ease-reveal", "value": "cubic-bezier(0.33, 1, 0.68, 1)", "purpose": "Scroll reveal and entrance animations, 0.3-0.45s." },
+      { "name": "ease-count", "value": "easeOutCubic", "purpose": "Number count-up, 1100ms, staggered 90ms per card." },
+      { "name": "duration-state", "value": "300ms", "purpose": "Default for colour, opacity, and header state transitions." },
+      { "name": "drift", "value": "14s ease-in-out infinite", "purpose": "Slow drift on decorative background blobs only." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The conversion pill. Kiln Orange, full radius, arrow slides out on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Start a Free Trial <svg class=\"ds-btn-primary__icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--color-cta, #E07A2F); color: #fff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 700; text-decoration: none; padding: 14px 28px; border-radius: 9999px; box-shadow: 0 1px 2px rgba(43,42,38,0.10), 0 4px 10px rgba(43,42,38,0.12); transition: background 0.3s, gap 0.3s, transform 0.3s; } .ds-btn-primary__icon { width: 16px; height: 16px; } .ds-btn-primary:hover { background: var(--color-cta-dark, #C5661A); gap: 12px; transform: translateY(-1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-green-primary, #1F8A4C); outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "The secondary path on light ground, e.g. Client Login.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Client Login</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; background: transparent; color: var(--color-green-primary, #1F8A4C); border: 1px solid var(--color-green-primary, #1F8A4C); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 10px 16px; border-radius: 9999px; transition: background 0.3s; } .ds-btn-outline:hover { background: rgba(31,138,76,0.05); } .ds-btn-outline:focus-visible { outline: 2px solid var(--color-green-primary, #1F8A4C); outline-offset: 3px; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The workhorse surface: white on Paper, flat at rest, lifting 4px on hover.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card__title\">Measurable</h3><p class=\"ds-card__body\">Monthly and annual ESG impact reports &mdash; real numbers for sustainability commitments and council reporting.</p></div>",
+      "css": ".ds-card { background: #fff; border: 1px solid rgba(43,42,38,0.08); border-radius: 16px; padding: 24px; box-shadow: 0 1px 2px rgba(43,42,38,0.04), 0 4px 16px rgba(43,42,38,0.06); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.35s ease; } .ds-card:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgba(43,42,38,0.06), 0 16px 40px rgba(43,42,38,0.12); border-color: rgba(127,184,0,0.30); } .ds-card__title { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: var(--color-soil, #2B2A26); margin: 0 0 8px; } .ds-card__body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 14px; line-height: 1.65; color: rgba(43,42,38,0.70); margin: 0; }"
+    },
+    {
+      "name": "Stat Card",
+      "kind": "custom",
+      "refersTo": "card-dark",
+      "description": "Signature component. Live impact figure over the dark hero: number, unit label, description, corner icon.",
+      "html": "<div class=\"ds-stat\"><svg class=\"ds-stat__icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"M12 3c4 3 6 6 6 9a6 6 0 1 1-12 0c0-3 2-6 6-9z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg><div class=\"ds-stat__value\">72,386</div><div class=\"ds-stat__unit\">kg</div><div class=\"ds-stat__label\">Food waste diverted from landfill</div></div>",
+      "css": ".ds-stat { position: relative; overflow: hidden; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 20px 24px; backdrop-filter: blur(12px); color: #fff; } .ds-stat__icon { position: absolute; top: 16px; right: 16px; width: 24px; height: 24px; color: rgba(127,184,0,0.30); transition: color 0.3s; } .ds-stat:hover .ds-stat__icon { color: rgba(127,184,0,0.60); } .ds-stat__value { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; font-size: 36px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; } .ds-stat__unit { margin-top: 2px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-green-leaf, #7FB800); } .ds-stat__label { margin-top: 6px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 14px; color: rgba(255,255,255,0.65); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Contact-form field: Paper fill, hairline border, green focus ring.",
+      "html": "<input class=\"ds-input\" type=\"email\" placeholder=\"you@company.co.nz\" aria-label=\"Email\" />",
+      "css": ".ds-input { width: 100%; background: var(--color-offwhite, #F7F6F1); color: var(--color-soil, #2B2A26); border: 1px solid rgba(43,42,38,0.20); border-radius: 8px; padding: 10px 14px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 14px; transition: border-color 0.2s, box-shadow 0.2s; } .ds-input::placeholder { color: rgba(43,42,38,0.40); } .ds-input:focus { outline: none; border-color: var(--color-green-primary, #1F8A4C); box-shadow: 0 0 0 2px rgba(31,138,76,0.20); } .ds-input:disabled { opacity: 0.6; cursor: not-allowed; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Signature detail. Header link with an underline that wipes in from the left on hover.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">Our Process</a>",
+      "css": ".ds-nav-link { position: relative; display: inline-block; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 500; color: rgba(43,42,38,0.80); text-decoration: none; transition: color 0.3s; } .ds-nav-link::after { content: ''; position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; } .ds-nav-link:hover { color: var(--color-green-primary, #1F8A4C); } .ds-nav-link:hover::after { transform: scaleX(1); transform-origin: left; } .ds-nav-link:focus-visible { outline: 2px solid var(--color-green-primary, #1F8A4C); outline-offset: 4px; }"
+    },
+    {
+      "name": "Section Eyebrow",
+      "kind": "chip",
+      "refersTo": "eyebrow",
+      "description": "Signature detail. The uppercase label that opens every major section.",
+      "html": "<span class=\"ds-eyebrow\">Our partners</span>",
+      "css": ".ds-eyebrow { display: inline-block; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-green-primary, #1F8A4C); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Sunlit Soil",
+    "overview": "Warm paper in daylight, deep forest in shade. Every surface in this system is one of two materials: an off-white page that reads like recycled stock, or a dark green band that reads like soil and canopy. Both carry a faint grain so nothing looks vacuum-sealed. The palette comes from the actual business — leaf, forest, soil, and the kiln orange of a warm action — and the writing on top of it is plain and specific, because the product's credibility rests on numbers that can be checked.\n\nThis is a sales asset for people with a reporting deadline. Optimism is carried by colour and texture, never by adjectives or ornament. Content is generously spaced and falls in a single readable column at any width; density is a portal concern, not a marketing-page one.\n\nThree looks are explicitly rejected. Tech SaaS: violet-to-blue gradients, neon glows, glassy floating panels, dark heroes. Cold corporate IR: uniform grey, stock handshake photography, dense unstyled tables. Waste-hauler trade: fluorescent safety orange and yellow, truck-and-plant photography, industrial-equipment framing. The first is where an AI drifts when unattended; the other two are where this category drifts.",
+    "keyCharacteristics": [
+      "Two materials only — warm paper and deep forest — each with a faint grain",
+      "One orange, reserved entirely for actions the business gets paid for",
+      "Flat at rest, lifting only in response to the cursor",
+      "Generous pill geometry on anything clickable; soft rectangles on anything readable",
+      "Real photography of Canterbury sites, worms, and produce; never stock abstraction"
+    ],
+    "rules": [
+      { "name": "The One Orange Rule", "body": "Kiln Orange marks actions the business gets paid for: starting a trial, making contact, buying worms. It never appears on an icon, a badge, a chart series, a border, or a heading. If a screen shows two orange things, one of them is wrong.", "section": "colors" },
+      { "name": "The Warm Neutral Rule", "body": "There is no grey in this system. Neutrals run through Paper and Wet Soil, and translucency is always expressed against those (soil/10 borders, white/65 text on dark), never against a cold grey.", "section": "colors" },
+      { "name": "The Leaf-on-Dark Rule", "body": "New Leaf is legible on Forest Floor and illegible on Paper. It may be used as text only on dark bands; on light ground it appears solely as a fill or icon.", "section": "colors" },
+      { "name": "The Eyebrow Rule", "body": "Every major section opens with the same three-part stack: an uppercase Label eyebrow, a Headline, and one supporting sentence. This repetition is the site's rhythm — do not invent alternative section openers.", "section": "typography" },
+      { "name": "The Big Number Rule", "body": "Figures pulled from real data are set in the display face at weight 800 and count up from zero when they scroll into view. They are never decorated, never gradient-filled, and never rounded to look better than they are.", "section": "typography" },
+      { "name": "The Portal Density Rule", "body": "/portal uses the same colours, fonts, and corner language as the marketing site and a tighter spatial setting: smaller type steps, reduced section padding, no decorative photography, no mesh or drift backgrounds. Same brand, different density.", "section": "layout" },
+      { "name": "The Flat-At-Rest Rule", "body": "Nothing floats until it is pointed at. A card that carries a heavy shadow in its default state is wrong, no matter how good it looks in isolation.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do open every section with the eyebrow to headline to one-sentence stack.",
+      "Do keep Kiln Orange (#E07A2F) for conversion actions only, and expect at most one orange element in view at a time.",
+      "Do set data figures in the display face at weight 800 with tabular numerals, and count them up from zero when they enter the viewport.",
+      "Do render real values server-side before animating them, so crawlers and no-JS visitors see the number.",
+      "Do keep surfaces flat at rest and reserve the 4px lift and deepened shadow for hover.",
+      "Do put full-radius pills on anything clickable and 1rem soft rectangles on anything readable.",
+      "Do tint every shadow toward Wet Soil (rgba(43,42,38,…)) rather than black.",
+      "Do carry the same palette and type into /portal at a tighter density, with the decoration removed.",
+      "Do honour prefers-reduced-motion — reveals, count-ups, and drifts all stop."
+    ],
+    "donts": [
+      "Don't introduce violet or blue gradients, neon glows, or dark glassy hero panels. This is the single most likely drift and it is out of the palette entirely.",
+      "Don't use grey. There is Paper and there is Wet Soil.",
+      "Don't put New Leaf text on a light background — it fails contrast.",
+      "Don't use fluorescent safety orange or yellow, or lead with truck and industrial plant imagery.",
+      "Don't use stock corporate photography, or dense unstyled tables, in place of the real Canterbury site and produce photography.",
+      "Don't nest a card inside a card; use whitespace and a rule to separate instead.",
+      "Don't add a second display or accent typeface. Plus Jakarta Sans and Inter are the whole set.",
+      "Don't add bouncing or overshooting easings. Motion is short, decelerating, and stops cleanly.",
+      "Don't state an impact figure that does not come from the pickup log, and don't round one to look better than it is."
+    ]
+  }
+}

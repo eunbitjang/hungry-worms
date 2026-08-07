@@ -69,7 +69,7 @@ export default function Header() {
               href={UNCLE_BOBS.worms}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-green-leaf font-semibold hover:text-green-primary transition-colors"
+              className="inline-flex items-center gap-1 text-green-deep font-semibold hover:text-green-primary transition-colors"
             >
               <Icon name="worm" className="size-4" />
               Buy Worms
@@ -133,7 +133,7 @@ export default function Header() {
               href={UNCLE_BOBS.worms}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-lg px-3 py-2.5 text-sm font-semibold text-green-leaf hover:text-green-primary transition-colors"
+              className="flex items-center gap-1.5 rounded-lg px-3 py-2.5 text-sm font-semibold text-green-deep hover:text-green-primary transition-colors"
             >
               <Icon name="worm" className="size-4" />
               Buy Worms ↗
