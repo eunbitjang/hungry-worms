@@ -122,3 +122,35 @@ every run. All are intentional; none is drift.
 | `design-system-font-size` | DESIGN.md's ramp is rem-based for a web viewport; this is a fixed 1080px canvas read at ~0.36×. See "Type on a phone". |
 | `design-system-radius` (3px) | The tonne-block isotype glyphs are 44×30px data marks, not UI surfaces. The 0.5rem floor would round them into lozenges. |
 | `design-system-color` (`#c9c7bf`, `rgba(0,0,0,0.28)`) | The HTML editor backdrop and comp-sheet shadow. `render.mjs` screenshots the `.slide` element, so neither can reach a PNG. |
+
+## Facebook Page cover
+
+`facebook-cover.html` → `out/facebook/facebook-cover.png` (**1640 × 720**, upload this one).
+
+Facebook renders a single upload at two different crops, and they disagree:
+
+| | Displays at | What it hides |
+|---|---|---|
+| Desktop | 820 × 312 | 48px off the top **and** bottom (@2×) |
+| Mobile | 640 × 360 | 180px off **each side** (@2×) |
+| Safe on both | 640 × 312 | centre 1280 × 624 (@2×) |
+
+820 × 360 (here 1640 × 720) is the only upload size that feeds both crops without
+upscaling. There is a third obstacle no size guide mentions: on desktop the Page's own
+profile picture sits **on top of** the cover's lower left, roughly canvas x 48–388,
+y 428–672. The layout finishes above that line.
+
+```bash
+node social/render.mjs social/facebook-cover.html social/out/facebook   # the upload
+node social/render-cover-guides.mjs                                     # crop overlay
+```
+
+The overlay draws the desktop crop, the mobile crop, the safe zone and the profile-picture
+footprint over the design. Check two things on it after any edit: nothing crosses the green
+safe-zone outline, and the logo row finishes above the profile-picture box. `preview-desktop.png`
+and `preview-mobile.png` are the actual crops at real display size — look at those, not at
+the full canvas, because the full canvas is the one view no visitor ever gets.
+
+KPI figures are rounded **down** to whole tonnes and whole cars. The totals only grow, so an
+understated cover stays true between refreshes; rounding up would go stale the moment it
+was uploaded.

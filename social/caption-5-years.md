@@ -37,14 +37,18 @@ Slides: `social/out/5-years/01-cover.png` → `08-team.png`, in filename order (
 **Hashtags** (put in the first comment, not the caption):
 
 ```
+#SudimaHotels #Mitre10MEGA #WillowbankWildlifeReserve #Ballantynes
+#ScenicHotelCotswold #TheRussleyVillage
+
 #HungryWorms #Christchurch #Canterbury #Otautahi #FoodWaste #FoodWasteRecycling
 #Vermicomposting #CircularEconomy #ZeroWaste #SustainableBusinessNZ #ESG
 #NZBusiness #SupportLocalNZ #WasteNotNZ #ClimateActionNZ #5Years
 ```
 
-**Tag on the images:** @sudimahotels · @mitre10nz · @willowbanknz · @ballantynes1854 ·
-@scenichotelgroup · The Russley Village
-*(Verify each handle before publishing — do not tag an account you have not checked.)*
+**Partner credit is by hashtag, not by @handle.** A hashtag cannot land on the wrong
+account; an unverified @ can, and doing that on a post whose whole point is crediting these
+six organisations would be the worst possible place for it. Account tags get added by hand
+after publishing, once each handle has been checked against the real profile.
 
 ---
 

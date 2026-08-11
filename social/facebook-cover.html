@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8" />
+<title>Hungry Worms — Facebook Page cover (1640 × 720)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="lib/slides.css" />
+<style>
+/* ─────────────────────────────────────────────────────────────────────────
+   FACEBOOK PAGE COVER — geometry
+
+   Facebook renders one upload at two different crops:
+     desktop   820 × 312   (full width, 48px trimmed off top AND bottom @2×)
+     mobile    640 × 360   (full height, 180px trimmed off EACH side @2×)
+
+   Uploading at 820 × 360 (here 1640 × 720 for retina) is the only size that
+   feeds both crops without upscaling. What survives on every device is the
+   intersection: the centre 1280 × 624.
+
+     canvas     1640 × 720
+     safe zone  x 180 → 1460, y 48 → 672
+     desktop    also hides y 0–48 and y 672–720
+     mobile     also hides x 0–180 and x 1460–1640
+     profile    on desktop the Page's profile picture overlaps the lower left,
+                canvas x 48–388, y 428–672. Nothing goes there.
+
+   Everything lands inside the safe zone, six logos included — the row measures
+   1250px against the 1280px mobile width, so nothing is sacrificed to a crop on
+   either device. The plan had been to let the outer logos fall outside the
+   mobile crop; tightening the tiles by a few pixels made that unnecessary.
+
+   Verify after any edit by rendering the guide overlay:
+     node social/render-cover-guides.mjs      →  out/facebook/facebook-cover-GUIDES.png
+   Two things to check on it: nothing crosses the green safe-zone outline, and
+   the logo row finishes above the profile-picture box.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.cover {
+  position: relative;
+  width: 1640px;
+  height: 720px;
+  overflow: hidden;
+  background: var(--green-deep);
+  color: var(--white);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.cover > * { position: relative; z-index: 2; }
+
+.inner {
+  position: absolute;
+  left: 180px;
+  right: 180px;
+  top: 48px;
+  bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Top-aligned, not centred. On desktop the Page's profile picture covers the
+     lower left of the cover (canvas x 48–388, y 428–672), so the whole
+     composition is lifted to finish above that line. The quiet band underneath
+     is not wasted space — it is where the profile picture lands. */
+  justify-content: flex-start;
+  padding-top: 12px;
+  text-align: center;
+}
+
+.eyebrow-c {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-leaf);
+}
+
+.line {
+  margin-top: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: 46px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* ── KPI row ─────────────────────────────────────────────────────────────
+   Figures are rounded DOWN to whole tonnes and whole cars: the totals only
+   grow, so an understated cover stays true between refreshes. Never round up. */
+.kpis {
+  margin-top: 18px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+}
+
+.kpi { padding: 0 44px; }
+
+.kpi + .kpi { border-left: 1px solid rgba(255, 255, 255, 0.16); }
+
+.kpi .num {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: 86px;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi .num small {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-left: 6px;
+}
+
+.kpi .cap {
+  margin-top: 12px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--green-leaf);
+}
+
+.foot-note {
+  margin-top: 12px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* ── Partner logo row ─────────────────────────────────────────────────────
+   Breaks the safe zone's left/right padding so the row can use the full mobile
+   width: six tiles + five gaps = 1250px inside the 1280px mobile crop. All six
+   survive on a phone.
+
+   White tiles, logos in their own colours — the same card language as the
+   carousel's heroes slide. Knocking the marks back to flat white was tried and
+   fails outright: three of the six are opaque-background JPEGs, so a
+   brightness/invert filter turns the whole rectangle white, not the logo. */
+.partners {
+  /* Clears y=428, where the desktop profile picture starts. */
+  margin: 26px -180px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+}
+
+.partners .tile {
+  width: 190px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  background: var(--white);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(43, 42, 38, 0.1);
+}
+
+.partners img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* ── Materials ───────────────────────────────────────────────────────────── */
+.cover .mesh-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    radial-gradient(ellipse 55% 90% at 8% 0%, rgba(127, 184, 0, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 100% at 96% 40%, rgba(31, 138, 76, 0.4) 0%, transparent 62%),
+    radial-gradient(ellipse 80% 70% at 50% 118%, rgba(15, 81, 50, 0.75) 0%, transparent 64%);
+}
+
+.cover .grain-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Crop guides — only rendered in the *-guides file, never on the upload ─
+   Pinned to the cover's own box. Without this it inherits .slide's 88px padding
+   from lib/slides.css and every guide lands 88px low, which is how a correct
+   layout gets "fixed" against a wrong overlay. */
+.guides { display: none; position: absolute; inset: 0; z-index: 9; }
+body.show-guides .guides { display: block; }
+
+.guides div { position: absolute; z-index: 9; }
+.guides .box { border: 2px dashed; }
+.guides .lbl {
+  position: absolute;
+  font: 700 15px Inter, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+</style>
+</head>
+<body>
+
+<section class="slide cover" data-id="facebook-cover">
+  <div class="mesh-bg"></div>
+  <div class="grain-bg"></div>
+
+  <div class="inner">
+    <div class="eyebrow-c">Canterbury, Aotearoa New Zealand</div>
+    <h1 class="line">Commercial food waste, weighed and accounted for.</h1>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="num">72<small>tonnes</small></div>
+        <div class="cap">Food waste diverted</div>
+      </div>
+      <div class="kpi">
+        <div class="num">180<small>tonnes</small></div>
+        <div class="cap">Greenhouse gas avoided</div>
+      </div>
+      <div class="kpi">
+        <div class="num">39<small>cars</small></div>
+        <div class="cap">Off the road for a year</div>
+      </div>
+    </div>
+
+    <p class="foot-note">Every figure from a weighed bin · hungryworms.nz</p>
+
+    <div class="partners">
+      <span class="tile"><img src="../public/logos/sudima.png" alt="Sudima Hotels" /></span>
+      <span class="tile"><img src="../public/logos/mitre10.jpg" alt="Mitre 10 MEGA" /></span>
+      <span class="tile"><img src="../public/logos/willowbank.jpg" alt="Willowbank Wildlife Reserve" style="filter:brightness(1.06)" /></span>
+      <span class="tile"><img src="../public/logos/ballantynes.png" alt="Ballantynes" /></span>
+      <span class="tile"><img src="../public/logos/cotswold.svg" alt="Scenic Hotel Cotswold" style="transform:scale(1.7)" /></span>
+      <span class="tile"><img src="../public/logos/russley.jpeg" alt="The Russley Village" style="transform:scale(1.4)" /></span>
+    </div>
+  </div>
+
+  <!-- Crop guides. Hidden unless body.show-guides — the uploaded file never has them. -->
+  <div class="guides">
+    <div class="box" style="left:0;top:48px;width:1636px;height:620px;border-color:rgba(255,255,255,0.5)"></div>
+    <div class="lbl" style="left:14px;top:58px;background:rgba(255,255,255,0.85);color:#2B2A26">Desktop 820×312</div>
+
+    <div class="box" style="left:180px;top:0;width:1276px;height:716px;border-color:rgba(224,122,47,0.9)"></div>
+    <div class="lbl" style="left:194px;top:12px;background:#E07A2F;color:#fff">Mobile 640×360</div>
+
+    <div style="left:180px;top:48px;width:1280px;height:624px;background:rgba(127,184,0,0.14);outline:3px solid rgba(127,184,0,0.9)"></div>
+    <div class="lbl" style="left:194px;top:634px;background:#7FB800;color:#0F5132">Safe zone 640×312</div>
+
+    <div style="left:48px;top:428px;width:340px;height:244px;background:rgba(0,0,0,0.55);outline:2px dashed rgba(255,255,255,0.7);border-radius:12px"></div>
+    <div class="lbl" style="left:60px;top:444px;background:rgba(0,0,0,0.7);color:#fff">Profile pic</div>
+  </div>
+</section>
+
+<script>
+  if (new URLSearchParams(location.search).has("guides")) {
+    document.body.classList.add("show-guides");
+  }
+</script>
+</body>
+</html>
