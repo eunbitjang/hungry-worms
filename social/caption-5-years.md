@@ -17,8 +17,8 @@ Slides: `social/out/5-years/01-cover.png` → `08-team.png`, in filename order (
 > happened. The same as taking 39 cars off the road for a year. Every one of those
 > kilograms was weighed at a kerb and written down by hand — by Mark, who started Hungry
 > Worms with his wife Juline, and by the team who came to work for what the two of them
-> believe. 1,488 pickups, across 379 collection days, since our first logged run in
-> March 2023.
+> believe. 1,488 pickups, across 379 collection days, since we started keeping
+> records in March 2023.
 >
 > We weighed it. They chose it.
 >
@@ -33,7 +33,7 @@ Slides: `social/out/5-years/01-cover.png` → `08-team.png`, in filename order (
 > carry on or wind it up, your call. Link in bio.
 >
 > —
-> Figures from our Master Log, 3 March 2023 – 6 August 2026. CO₂e = weight × 2.5
+> Figures from our Master Log, kept since March 2023, to 6 August 2026. CO₂e = weight × 2.5
 > (UN FAO 2013). Car equivalent = CO₂e ÷ 4,600 kg.
 
 **Hashtags** (put in the first comment, not the caption):
@@ -65,8 +65,8 @@ Facebook rewards a slightly longer first line and does not truncate as aggressiv
 > 🚗 **39 cars'** worth of annual emissions, gone
 >
 > Every kilogram in there was weighed on collection and written into our Master Log —
-> 1,488 individual pickups, across 379 collection days, since our first logged run in
-> March 2023. Nothing modelled, nothing estimated.
+> 1,488 individual pickups, across 379 collection days, since we started keeping
+> records in March 2023. Nothing modelled, nothing estimated.
 >
 > We weighed it. They chose it. It belongs to the six Canterbury organisations who decided
 > their food scraps were worth separating: **Sudima Hotels, Mitre 10 MEGA Papanui,
@@ -78,8 +78,8 @@ Facebook rewards a slightly longer first line and does not truncate as aggressiv
 > 👉 Room for one more. A one-month trial, no long-term commitment — carry on at the end
 > of it or wind it up, no exit fee. **hungryworms.nz**
 >
-> *Figures from our Master Log, 3 March 2023 – 6 August 2026. CO₂e = weight × 2.5 (UN FAO
-> 2013, Food Wastage Footprint). Car equivalent = CO₂e ÷ 4,600 kg.*
+> *Figures from our Master Log, kept since March 2023, to 6 August 2026. CO₂e = weight × 2.5
+> (UN FAO 2013, Food Wastage Footprint). Car equivalent = CO₂e ÷ 4,600 kg.*
 
 ---
 
@@ -90,7 +90,7 @@ Lead with the ESG angle; the same numbers do more work in front of a procurement
 > Hungry Worms Ltd turned five this month. Rather than mark it with a photo, we published
 > the ledger.
 >
-> Since our first logged pickup in March 2023, our Canterbury clients have diverted
+> Since we started keeping records in March 2023, our Canterbury clients have diverted
 > 72,385 kg of commercial food waste from landfill — 180,964 kg CO₂e avoided, the
 > equivalent of 39 cars off the road for a year.
 >
@@ -125,11 +125,17 @@ Lead with the ESG angle; the same numbers do more work in front of a procurement
 
 ## One rule for every caption on this post
 
-The company is five years old. **The pickup log is not.** It starts 3 March 2023, so no
-line may thank a named client for "five years" or imply their relationship ran that long —
-the longest of them is about 3.4 years, and these are people who will read it. Credit the
-company's age to the company, and credit the tonnage to the log period. Every slide carries
-its own data window for the same reason.
+The company is five years old. **The record is not.** It starts 3 March 2023 — not because
+nothing was collected before then, but because that is when the team started weighing and
+logging every pickup, having realised the number was the whole point. So:
+
+- Never write "since our first pickup" or "since we started collecting". Both are false;
+  there were collections before the log. Write **"since we started keeping records in
+  March 2023"**.
+- Never thank a named client for "five years", or imply their relationship ran that long.
+  The longest is about 3.4 years, and these are people who will read it.
+- Credit the company's age to the company, and every tonnage figure to the record period.
+  Every slide carries its own data window for this reason.
 
 ---
 

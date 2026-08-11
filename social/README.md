@@ -61,7 +61,9 @@ but every slide would need re-checking, not just re-rendering.
   CO₂e = weight × 2.5 (UN FAO 2013); cars = CO₂e ÷ 4,600 kg. Same formulas as the site.
 - **Never round a figure up to look better**, and never present a company-age figure and a
   data-window figure as the same period. The company was registered 3 August 2021; the
-  pickup log starts 3 March 2023. Slides that show totals say so.
+  record starts 3 March 2023 — not because nothing was collected earlier, but because that
+  is when the team started weighing and logging every pickup. Write "since we started
+  keeping records", never "since our first pickup". Slides that show totals say so.
 - **No per-client data, ever.** Client isolation applies to social exactly as it applies to
   the portal — aggregate totals only, never one client's weight or pickup count.
 - **One orange.** Kiln Orange (`#E07A2F`) appears on the CTA of the final slide and
