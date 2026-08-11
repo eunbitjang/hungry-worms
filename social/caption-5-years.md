@@ -1,5 +1,3 @@
-| 07 | Dark green slide. The same field of pickup dots, dimmed, with one bright green dot in the next empty slot. Large white text "Join them." and an orange button reading hungryworms.nz. |
-| 08 | Photograph of the six-person Hungry Worms team in green branded shirts, standing in front of a stone wall, dissolving into a dark green panel below. Headline: "We want to help you achieve your sustainability goals." Beneath: "Mark and Juline started Hungry Worms in 2021. Everyone here came for the same reason." and the line "Be part of the solution, not the pollution." |
 # Caption copy — "Five years" carousel
 
 Post date target: week of 11 August 2026 (the 5th anniversary fell on Monday 3 August 2026).
@@ -61,7 +59,7 @@ Facebook rewards a slightly longer first line and does not truncate as aggressiv
 > that's the whole point of what we do.
 >
 > 🌱 **72,385 kg** of commercial food waste kept out of landfill
-> 🌏 **180,964 kg** of CO₂e that never reached the atmosphere
+> 🌏 **180,964 kg** of greenhouse gas that never reached the atmosphere
 > 🚗 **39 cars'** worth of annual emissions, gone
 >
 > Every kilogram in there was weighed on collection and written into our Master Log —
@@ -75,8 +73,8 @@ Facebook rewards a slightly longer first line and does not truncate as aggressiv
 >
 > Proud to be part of your sustainability journey. Thank you.
 >
-> 👉 Room for one more. A one-month trial, no long-term commitment — carry on at the end
-> of it or wind it up, no exit fee. **hungryworms.nz**
+> 👉 Want your site on this list? Start with a one-month trial, no long-term commitment —
+> carry on at the end of it or wind it up, no exit fee. **hungryworms.nz**
 >
 > *Figures from our Master Log, kept since March 2023, to 6 August 2026. CO₂e = weight × 2.5
 > (UN FAO 2013, Food Wastage Footprint). Car equivalent = CO₂e ÷ 4,600 kg.*
@@ -91,7 +89,7 @@ Lead with the ESG angle; the same numbers do more work in front of a procurement
 > the ledger.
 >
 > Since we started keeping records in March 2023, our Canterbury clients have diverted
-> 72,385 kg of commercial food waste from landfill — 180,964 kg CO₂e avoided, the
+> 72,385 kg of commercial food waste from landfill — 180,964 kg of greenhouse gas avoided, the
 > equivalent of 39 cars off the road for a year.
 >
 > The number that matters more to us: 1,488. That's how many individual bins were weighed
@@ -115,11 +113,12 @@ Lead with the ESG angle; the same numbers do more work in front of a procurement
 |---|---|
 | 01 | Dark green slide. A field of 1,488 small light-green dots, one per waste pickup, above the figure 1,488 labelled "bins weighed, one at a time". Large white text reads "Five years." with "Here's what Canterbury did with us." underneath. |
 | 02 | Cream slide. 73 solid green blocks, one per tonne. Headline: "Seventy-two tonnes that never saw a landfill." Figure: 72,385 kg of food waste diverted. |
-| 03 | Cream slide. 181 dashed green outline blocks at the same size and grid as the previous slide, so the field is visibly 2.5 times as large. Headline: "A hundred and eighty tonnes that never happened." Figure: 180,964 kg CO₂e avoided. |
+| 03 | Cream slide. 181 dashed green outline blocks at the same size and grid as the previous slide, so the field is visibly 2.5 times as large. Headline: "A hundred and eighty tonnes that never happened." Figure: 180,964 kg of greenhouse gas avoided. |
 | 04 | Dark green slide. Thirty-nine car icons in light green plus a partly drawn fortieth. Headline: "Thirty-nine cars, parked for a whole year." Figure: 39.3 cars off the road for a year. |
-| 05 | Dark green summary slide headed "Impact you can count.", showing all three figures together with their block and car illustrations: 72,385 kg diverted, 180,964 kg CO₂e avoided, 39.3 cars. |
+| 05 | Dark green summary slide headed "Impact you can count.", showing all three figures together with their block and car illustrations: 72,385 kg diverted, 180,964 kg of greenhouse gas avoided, 39.3 cars. |
 | 06 | Cream slide headed "Local heroes." with the line "Proud to be part of these six Canterbury organisations' sustainability journey", above the logos of Sudima Hotels, Mitre 10 MEGA, Willowbank Wildlife Reserve, Ballantynes, Scenic Hotel Cotswold and The Russley Village. |
 | 07 | Dark green slide. The same field of pickup dots, dimmed, with one bright green dot in the next empty slot. Large white text "Join them." and an orange button reading hungryworms.nz. |
+| 08 | Photograph of the six-person Hungry Worms team in green branded shirts, standing in front of a stone wall, dissolving into a dark green panel below. Headline: "We want to help you achieve your sustainability goals." Beneath: "Mark and Juline started Hungry Worms in 2021. Everyone here came for the same reason." and the line "Be part of the solution, not the pollution." |
 
 ---
 
@@ -167,3 +166,17 @@ checked.
 That the meeting alone usually closes it is a genuinely strong fact — but it has never been
 counted, so write it as the plain observation it is ("most clients decide after one
 conversation"), never as a percentage.
+
+---
+
+## Say "greenhouse gas", not "CO₂"
+
+Food waste rotting in landfill releases **methane**, which the IPCC puts at 25× the warming
+power of carbon dioxide — the methane is the point, not a footnote. "CO₂e" is the correct
+unit (the *e* is exactly what folds methane in), but a reader scrolling a feed sees "CO₂"
+and thinks carbon dioxide only, which undersells what the service actually prevents.
+
+So: **plain language where people read, the precise unit where people check.** Headlines,
+figure labels and captions say "greenhouse gas". Source lines, formulas and the sheet keep
+"CO₂e" so anyone auditing the number knows exactly what was measured. The website already
+splits it this way — the hero reads "Greenhouse gas avoided" over the unit "kg CO₂e".
