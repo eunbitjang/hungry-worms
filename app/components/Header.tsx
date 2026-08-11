@@ -89,7 +89,7 @@ export default function Header() {
               href="/contact"
               className="group inline-flex items-center gap-1.5 rounded-full bg-cta px-4 py-2 text-sm font-semibold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-all hover:gap-2.5"
             >
-              Free Trial
+              Start a Trial
               <Icon name="arrow-right" className="size-3.5" />
             </Link>
           </div>
@@ -152,7 +152,7 @@ export default function Header() {
               className="block rounded-full bg-cta px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-cta-dark transition-colors"
               onClick={() => setOpen(false)}
             >
-              Start Free Trial
+              Start a One-Month Trial
             </Link>
           </div>
         </div>

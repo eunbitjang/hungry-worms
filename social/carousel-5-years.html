@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8" />
+<title>Hungry Worms — Five years carousel (1080 × 1350)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="lib/slides.css" />
+<style>
+  /* ── Countable glyph fields — the signature of this carousel ─────────── */
+  .field { display: flex; flex-wrap: wrap; align-content: flex-start; }
+
+  .blk { flex: 0 0 auto; }
+  .blk i { display: block; height: 100%; width: 100%; border-radius: 3px; }
+  .blk.solid i { background: var(--green-primary); }
+  .blk.hollow i { border: 2px dashed rgba(31, 138, 76, 0.6); }
+  .dark .blk.solid i { background: var(--green-leaf); }
+  .dark .blk.hollow i { border-color: rgba(127, 184, 0, 0.65); }
+  /* At summary scale a dashed stroke collapses into stipple, so the hollow
+     block becomes a tinted plate with a hairline: still visibly "not solid",
+     but countable at a glance, which is that slide's entire job. */
+  .blk.hollow.small i {
+    border: 1px solid rgba(127, 184, 0, 0.75);
+    background: rgba(127, 184, 0, 0.2);
+  }
+  .blk.part { overflow: hidden; }
+
+  .car { flex: 0 0 auto; color: var(--green-primary); overflow: hidden; }
+  .dark .car { color: var(--green-leaf); }
+  /* A part-car is drawn twice: a ghost of the whole vehicle so the silhouette
+     stays readable, and the true fraction clipped solid over the top. */
+  .car.part { position: relative; overflow: visible; }
+  .car.part .ghost { position: absolute; inset: 0; opacity: 0.28; }
+  .car.part .fill { position: absolute; inset: 0; overflow: hidden; }
+
+  .pdot { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 9999px; background: rgba(127, 184, 0, 0.62); }
+  .pdot.faint { width: 8px; height: 8px; background: rgba(255, 255, 255, 0.2); }
+  /* The next empty slot. The closing slide says the next pickup is yours — this
+     draws it, so the promise is a thing on the canvas and not just a sentence. */
+  /* DELIBERATE EXCEPTION, approved by the client 11 Aug 2026.
+     DESIGN.md's "no neon glows" ban exists to keep tech-SaaS lighting out of the
+     brand, and the design detector will flag this line every run. It stays: this
+     is one 14px dot on one slide, and the soft halo is what lifts it out of a
+     field of 1,488 dimmed ones. Do not "fix" it — restore it if a later pass
+     strips it back to hard rings. */
+  .pdot.open {
+    width: 14px; height: 14px; margin: -3px; background: var(--green-leaf);
+    box-shadow: 0 0 0 8px rgba(127, 184, 0, 0.22), 0 0 22px 6px rgba(127, 184, 0, 0.35);
+  }
+
+  /* Slides 2 and 3 rhyme through an identical block, an identical grid and an
+     identical starting y — both headlines are forced to exactly two lines — so
+     swiping between them multiplies the field in place. */
+  .headline-2 { min-height: 136px; }
+
+  /* ── Summary rows ────────────────────────────────────────────────────── */
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 356px;
+    gap: 28px;
+    align-items: center;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .row:last-of-type { border-bottom: 0; padding-bottom: 0; }
+  .row .figure { text-align: right; font-size: 80px; }
+  .row .unit { margin-top: 18px; font-size: 32px; letter-spacing: 0.02em; white-space: nowrap; }
+
+  /* ── Brand mark ──────────────────────────────────────────────────────── */
+  /* The real Hungry Worms emblem, and nothing beside it: the mark already
+     carries "HUNGRY WORMS LTD" in its own lockup, so a text wordmark next to it
+     sets the name twice and steals the room the mark needs to resolve. At 88px
+     the recycle triangle, the worm and the name all read.
+       · On Paper: multiply drops the file's white ground so the mark sits
+         directly on the page, with no tile edge against #F7F6F1.
+       · On Forest Floor: a white rounded tile, the same card language as the
+         logo tiles on slide 6 — the emblem is green-on-white and cannot be
+         reversed out without altering the client's asset. */
+  .mark { display: block; height: 88px; }
+  .mark img { height: 100%; width: auto; display: block; mix-blend-mode: multiply; }
+  .dark .mark {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 4px;
+    box-shadow: 0 1px 2px rgba(43, 42, 38, 0.1);
+  }
+  .dark .mark img { mix-blend-mode: normal; }
+
+  /* The opening and closing slides are the two the brand should sign properly:
+     one is the feed thumbnail, the other is where the viewer decides. The
+     interior slides keep the smaller mark so the figures stay the loudest thing
+     on them. */
+  .mark-lg { height: 156px; }
+  .dark .mark-lg { border-radius: 34px; padding: 7px; }
+
+  /* ── Full-bleed photo band ───────────────────────────────────────────── */
+  /* The team photo is 1672×941 (16:9). Cropping it to a 4:5 portrait would cut
+     the people on both ends off, so it runs the full width of the canvas as a
+     band and breaks out of the slide padding instead. A short gradient at its
+     foot dissolves the photo into the Forest Floor below rather than leaving a
+     pasted-on edge. */
+  .photo-band {
+    position: relative;
+    margin: calc(var(--pad) * -1) calc(var(--pad) * -1) 0;
+    height: 560px;
+    overflow: hidden;
+  }
+  /* Upper body only. team-group.png is 1672×941; the crop below takes
+     x 240→1360, y 30→610 of the source — enough headroom above the tallest
+     head, cut just under the hands — and scales it to the 1080px band.
+     Recompute these four numbers if the photo is ever replaced. */
+  .photo-band img {
+    position: absolute;
+    left: -231px;
+    top: -29px;
+    width: 1612px;
+    height: 907px;
+    max-width: none;
+    display: block;
+  }
+  /* Just enough to dissolve the seam. A taller scrim swallows the group to the
+     waist and they read as wading in green rather than standing in a courtyard. */
+  .photo-band::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 104px;
+    background: linear-gradient(180deg, rgba(15, 81, 50, 0) 0%, rgba(15, 81, 50, 0.55) 55%, var(--green-deep) 100%);
+  }
+
+  .signature {
+    font-family: Inter, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green-leaf);
+    white-space: nowrap;
+  }
+
+  /* ── Logo tiles ──────────────────────────────────────────────────────── */
+  .logo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .logo-grid .logo-tile { height: 176px; overflow: hidden; padding: 26px 32px; }
+  .logo-grid .logo-tile img { mix-blend-mode: multiply; }
+
+  .caption-micro {
+    font-size: var(--t-caption); font-weight: 600; letter-spacing: 0.01em;
+    line-height: 1.35; color: rgba(255, 255, 255, 0.78);
+  }
+  .slide:not(.dark) .caption-micro { color: rgba(43, 42, 38, 0.68); }
+</style>
+</head>
+<body>
+<!--
+  IMPECCABLE DIRECTION CONTRACT — Hungry Worms 5-year carousel
+  THESIS: An anniversary post that spends none of itself on the anniversary. It refuses the
+    category default (a gold "5 YEARS" badge over a team photo and a thank-you paragraph) and
+    instead hands the viewer quantities they can count with their own eyes.
+  OWN-WORLD: DESIGN.md "Sunlit Soil", unchanged — Forest Floor and Paper bands, Plus Jakarta
+    Sans 800 figures on tabular numerals, New Leaf labels on dark, Canterbury Green on light,
+    hairline logo tiles. Kiln Orange appears exactly once, on the final slide, on the only
+    element that asks for anything.
+  STORY: Five years old → here is what was actually weighed → here is what it prevented → we
+    weighed it but they chose it → there is room for you.
+  FIRST VIEWPORT: Forest Floor. Date chip top-left; a field of 1,488 New Leaf dots (one per
+    logged pickup) as the upper mass, answered by the figure 1,488 and its data window;
+    "Five years." at 144px with "Here's what Canterbury did with us." beneath.
+  FORM: "Weight made visible" — candidate 3 of the ordered structural list; seed key b3551d9e.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review,
+    the verdict, and DESIGN.md.
+
+  TYPE: every size resolves from the canvas scale in lib/slides.css, which is keyed to the
+  ~0.36× a 1080px image is displayed at on a phone. Nothing sits below 34px (≈12pt), and the
+  secondary tier holds 4.5:1 against both grounds because it is where the citations live.
+-->
+
+<!-- ══ 1 · COVER ══════════════════════════════════════════════════════════ -->
+<section class="slide dark mesh grain" data-id="01-cover">
+  <div class="chip"><span class="dot-live"></span>3 August 2021 → 3 August 2026</div>
+
+  <div class="field" data-field="pickups" style="gap:5px; margin-top:40px; max-width:904px"></div>
+
+  <div class="figure" style="font-size:80px; margin-top:28px">1,488</div>
+  <div class="unit" style="margin-top:18px">bins weighed, one at a time</div>
+  <p class="source" style="margin-top:14px">One dot each, logged since 3 March 2023.</p>
+
+  <div style="flex:1 1 auto; min-height:64px"></div>
+
+  <h1 class="display" style="font-size:144px">Five years.</h1>
+  <p class="body" style="font-size:46px; margin-top:26px; max-width:860px">
+    Here&rsquo;s what Canterbury did with us.
+  </p>
+
+  <div class="foot" style="margin-top:48px">
+    <span class="mark mark-lg"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+    <span class="swipe">Swipe &nbsp;→</span>
+  </div>
+</section>
+
+
+<!-- ══ 2 · 72,385 KG DIVERTED ═════════════════════════════════════════════ -->
+<section class="slide dots" data-id="02-diverted">
+  <div class="eyebrow">Kept out of landfill</div>
+  <h2 class="headline headline-2" style="font-size:58px; margin-top:20px">
+    Seventy-two tonnes<br />that never saw a landfill.
+  </h2>
+
+  <div class="field" data-field="tonnes-solid" style="gap:8px; margin-top:48px; max-width:904px"></div>
+  <p class="caption-micro" style="margin-top:24px">One block = one tonne.</p>
+
+  <div style="flex:1 1 auto"></div>
+
+  <div class="figure" style="font-size:146px; color:var(--green-deep)">72,385</div>
+  <div class="unit" style="margin-top:30px">kg of food waste diverted</div>
+  <p class="source" style="margin-top:24px; max-width:880px">
+    Every kilogram weighed on collection and logged in our Master Log.
+    Totals since our first recorded pickup, 3 March 2023.
+  </p>
+
+  <div class="foot" style="margin-top:44px">
+    <span class="mark"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+    <span class="swipe">Swipe &nbsp;→</span>
+  </div>
+</section>
+
+
+<!-- ══ 3 · 180,964 KG CO₂e AVOIDED ════════════════════════════════════════ -->
+<section class="slide dots" data-id="03-co2e">
+  <div class="eyebrow">The part you can&rsquo;t see</div>
+  <h2 class="headline headline-2" style="font-size:58px; margin-top:20px">
+    A hundred and eighty tonnes<br />that never happened.
+  </h2>
+
+  <div class="field" data-field="tonnes-hollow" style="gap:8px; margin-top:44px; max-width:904px"></div>
+  <p class="caption-micro" style="margin-top:22px">Same block, same scale &mdash; 2.5× as many.</p>
+
+  <div style="flex:1 1 auto"></div>
+
+  <div class="figure" style="font-size:132px; color:var(--green-deep); margin-top:34px">180,964</div>
+  <div class="unit" style="margin-top:30px">kg CO₂e avoided</div>
+  <p class="source" style="margin-top:24px; max-width:880px">
+    More than 2.5&nbsp;kg CO₂e per kg of food waste sent to landfill &mdash; UN FAO (2013).
+    Totals since 3 March 2023.
+  </p>
+
+  <div class="foot" style="margin-top:40px">
+    <span class="mark"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+    <span class="swipe">Swipe &nbsp;→</span>
+  </div>
+</section>
+
+
+<!-- ══ 4 · 39.3 CARS ══════════════════════════════════════════════════════ -->
+<section class="slide dark mesh grain" data-id="04-cars">
+  <div class="eyebrow">Put another way</div>
+  <h2 class="headline" style="font-size:60px; margin-top:20px">
+    Thirty-nine cars,<br />parked for a whole year.
+  </h2>
+
+  <div class="field" data-field="cars" style="gap:12px; margin-top:52px; max-width:904px"></div>
+
+  <div style="flex:1 1 auto"></div>
+
+  <div class="figure" style="font-size:146px">39.3</div>
+  <div class="unit" style="margin-top:30px">cars off the road for a year</div>
+  <p class="source" style="margin-top:24px; max-width:880px">
+    180,964&nbsp;kg CO₂e ÷ 4,600&nbsp;kg, the annual emissions we count for one average car.
+    Totals since 3 March 2023.
+  </p>
+
+  <div class="foot" style="margin-top:40px">
+    <span class="mark"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+    <span class="swipe">Swipe &nbsp;→</span>
+  </div>
+</section>
+
+
+<!-- ══ 5 · ALL THREE, TOGETHER ════════════════════════════════════════════ -->
+<section class="slide dark mesh grain" data-id="05-impact">
+  <div class="eyebrow">Nothing estimated</div>
+  <h2 class="headline" style="font-size:68px; margin-top:18px">Impact you can count.</h2>
+
+  <div style="margin-top:24px">
+    <div class="row">
+      <div>
+        <div class="field" data-field="board-solid" style="gap:6px; max-width:500px"></div>
+        <div class="unit">kg food waste diverted</div>
+      </div>
+      <div class="figure">72,385</div>
+    </div>
+
+    <div class="row">
+      <div>
+        <div class="field" data-field="board-hollow" style="gap:6px; max-width:500px"></div>
+        <div class="unit">kg CO₂e avoided</div>
+      </div>
+      <div class="figure">180,964</div>
+    </div>
+
+    <div class="row">
+      <div>
+        <div class="field" data-field="board-cars" style="gap:10px; max-width:500px"></div>
+        <div class="unit">cars off the road for a year</div>
+      </div>
+      <div class="figure">39.3</div>
+    </div>
+  </div>
+
+  <p class="source" style="margin-top:26px; max-width:904px">
+    CO₂e = weight × 2.5 (UN FAO 2013) · Cars = CO₂e ÷ 4,600&nbsp;kg ·
+    Master Log, Mar 2023 &ndash; Aug 2026.
+  </p>
+
+  <div class="foot" style="margin-top:auto">
+    <span class="mark"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+    <span class="swipe">Swipe &nbsp;→</span>
+  </div>
+</section>
+
+
+<!-- ══ 6 · THE LOCAL HEROES ═══════════════════════════════════════════════ -->
+<section class="slide dots" data-id="06-heroes">
+  <div class="eyebrow">We weighed it. They chose it.</div>
+  <h2 class="headline" style="font-size:92px; margin-top:18px">Local heroes.</h2>
+  <p class="body" style="font-size:42px; margin-top:20px; max-width:900px">
+    Proud to be part of these six Canterbury organisations&rsquo; sustainability journey.
+  </p>
+
+  <div class="logo-grid" style="margin-top:40px">
+    <div class="logo-tile"><img src="../public/logos/sudima.png" alt="Sudima Hotels" /></div>
+    <div class="logo-tile"><img src="../public/logos/mitre10.jpg" alt="Mitre 10 MEGA" /></div>
+    <!-- willowbank.jpg ships on an off-white ground; lift it to true white before multiply. -->
+    <div class="logo-tile"><img src="../public/logos/willowbank.jpg" alt="Willowbank Wildlife Reserve" style="filter:brightness(1.06)" /></div>
+    <div class="logo-tile"><img src="../public/logos/ballantynes.png" alt="Ballantynes" /></div>
+    <div class="logo-tile"><img src="../public/logos/cotswold.svg" alt="Scenic Hotel Cotswold" style="transform:scale(1.85)" /></div>
+    <div class="logo-tile"><img src="../public/logos/russley.jpeg" alt="The Russley Village" style="transform:scale(1.5)" /></div>
+  </div>
+
+  <p class="source" style="margin-top:26px">Seven Canterbury sites · 379 collection days.</p>
+
+  <div class="foot" style="margin-top:auto">
+    <span class="mark"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+    <span class="swipe">Swipe &nbsp;→</span>
+  </div>
+</section>
+
+
+<!-- ══ 7 · JOIN THEM ══════════════════════════════════════════════════════ -->
+<section class="slide dark mesh grain" data-id="07-join">
+  <!-- Bookend: the cover's field of pickups, returned faint — with the next
+       slot lit, so "room for yours" is drawn rather than only claimed. -->
+  <div class="field" data-field="pickups-faint" style="gap:6px; max-width:904px"></div>
+  <p class="caption-micro" style="margin-top:28px">1,488 pickups since March 2023. The next one is yours.</p>
+
+  <div style="flex:1 1 auto"></div>
+
+  <h2 class="display" style="font-size:144px">Join them.</h2>
+  <p class="body" style="font-size:42px; margin-top:26px; max-width:900px">
+    Try us for a month, with no long-term commitment. Then carry on, or wind it up &mdash;
+    your call.
+  </p>
+
+  <a class="cta" style="margin-top:40px; align-self:flex-start">
+    hungryworms.nz
+    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor"
+         stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+    </svg>
+  </a>
+
+  <div class="foot" style="margin-top:48px">
+    <span class="mark"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+    <span class="swipe" style="letter-spacing:0.01em">Swipe &nbsp;→</span>
+  </div>
+</section>
+
+
+<!-- ══ 8 · THE TEAM ═══════════════════════════════════════════════════════
+     The first and only photograph in the carousel, held back to the end so the
+     numbers land as evidence first and the people as the reason second.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="slide dark grain" data-id="08-team">
+  <div class="photo-band">
+    <img src="../public/images/team-group.png" alt="The Hungry Worms team" />
+  </div>
+
+  <div class="eyebrow" style="margin-top:34px">The people behind the numbers</div>
+  <h2 class="headline" style="font-size:62px; margin-top:18px; max-width:920px">
+    We want to help you achieve your sustainability goals.
+  </h2>
+  <p class="body" style="font-size:38px; margin-top:22px; max-width:900px">
+    Mark and Juline started Hungry Worms in 2021.<br />
+    Everyone here came for the same reason.
+  </p>
+
+  <div style="flex:1 1 auto; min-height:34px"></div>
+
+  <p class="signature">Be part of the solution, not the pollution.</p>
+
+  <div class="foot" style="margin-top:30px">
+    <span class="mark mark-lg"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+    <span class="swipe" style="letter-spacing:0.01em">hungryworms.nz</span>
+  </div>
+</section>
+
+
+<script>
+/* ─────────────────────────────────────────────────────────────────────────
+   Countable glyph fields.
+   Every quantity below is drawn from the live Master Log totals:
+     72,385.73 kg diverted · 180,964.33 kg CO₂e · 39.3427 cars · 1,488 pickups
+   A partial unit is CLIPPED to its true fraction (isotype convention), never
+   faded or rounded up — see PRODUCT.md principle 1. Where a glyph is too
+   small for a fraction to read as anything but a rendering error, the field
+   shows whole units only and the printed figure carries the remainder; the
+   illustration may under-state, never over-state.
+   ───────────────────────────────────────────────────────────────────────── */
+const KG      = 72385.73;
+const CO2E    = 180964.33;
+const CARS    = 39.3427;
+const PICKUPS = 1488;
+
+const CAR_PATH = 'M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2';
+
+function blocks(total, kind, w, h, small) {
+  const whole = Math.floor(total);
+  const frac = total - whole;
+  const cls = `blk ${kind}${small ? ' small' : ''}`;
+  const box = (width, part) =>
+    `<span class="${cls}${part ? ' part' : ''}" style="width:${width}px;height:${h}px">` +
+    `<span style="display:block;width:${w}px;height:${h}px"><i></i></span></span>`;
+
+  let out = box(w, false).repeat(whole);
+  if (frac > 0.02) out += box(w * frac, true);
+  return out;
+}
+
+function cars(total, size, wholeOnly) {
+  const whole = Math.floor(total);
+  const frac = total - whole;
+  const svg = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none"
+      stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+      style="display:block"><path d="${CAR_PATH}"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>`;
+
+  const full = `<span class="car" style="width:${size}px;height:${size}px">${svg}</span>`;
+  const part = `<span class="car part" style="width:${size}px;height:${size}px">
+      <span class="ghost">${svg}</span>
+      <span class="fill" style="width:${size * frac}px">
+        <span style="display:block;width:${size}px">${svg}</span>
+      </span>
+    </span>`;
+
+  return full.repeat(whole) + (!wholeOnly && frac > 0.02 ? part : '');
+}
+
+const BUILD = {
+  pickups: () => '<span class="pdot"></span>'.repeat(PICKUPS),
+
+  // Slides 2 and 3: identical block, identical grid — 5 rows against 11.
+  'tonnes-solid':  () => blocks(KG / 1000, 'solid', 44, 30),
+  'tonnes-hollow': () => blocks(CO2E / 1000, 'hollow', 44, 30),
+
+  // Slide 4: exactly ten across, four down.
+  cars: () => cars(CARS, 76),
+
+  // Slide 5, at summary scale: tinted plates, and whole cars only.
+  'board-solid':  () => blocks(KG / 1000, 'solid', 20, 13, true),
+  'board-hollow': () => blocks(CO2E / 1000, 'hollow', 20, 13, true),
+  'board-cars':   () => cars(CARS, 30, true),
+
+  // Slide 7: the same census, dimmed, plus the next open slot.
+  'pickups-faint': () =>
+    '<span class="pdot faint"></span>'.repeat(PICKUPS) + '<span class="pdot open"></span>',
+};
+
+document.querySelectorAll('[data-field]').forEach((el) => {
+  const build = BUILD[el.dataset.field];
+  if (build) el.innerHTML = build();
+});
+</script>
+</body>
+</html>

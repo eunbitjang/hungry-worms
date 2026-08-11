@@ -124,7 +124,7 @@ export default function LibraryPage() {
               href="/contact"
               className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-green-deep hover:bg-green-leaf hover:text-soil transition-all hover:gap-3"
             >
-              Start a free trial
+              Start a one-month trial
               <Icon name="arrow-right" className="size-4" />
             </Link>
             <Link

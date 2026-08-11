@@ -45,7 +45,7 @@ export default function PrivacyPage() {
               <ul className="mt-3 list-disc space-y-2 pl-6">
                 <li>
                   <strong>Contact details</strong> — your name, business name, email address, and phone
-                  number, when you enquire, request a free trial, or become a client.
+                  number, when you enquire, request a trial, or become a client.
                 </li>
                 <li>
                   <strong>Service data</strong> — information related to your waste collection, such as
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
               <p className="mt-3">We use your personal information to:</p>
               <ul className="mt-3 list-disc space-y-2 pl-6">
                 <li>provide, manage, and improve our waste collection and recycling services;</li>
-                <li>respond to your enquiries and arrange free trials or tailored plans;</li>
+                <li>respond to your enquiries and arrange trials or tailored plans;</li>
                 <li>generate the impact and sustainability reports available in your client portal;</li>
                 <li>communicate with you about your service, including updates and reminders;</li>
                 <li>meet our legal and regulatory obligations.</li>

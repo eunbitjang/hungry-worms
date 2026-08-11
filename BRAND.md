@@ -8,7 +8,7 @@
 
 ## Voice & tone
 - Warm, optimistic, credible, locally-proud (Aotearoa / Canterbury / Christchurch). Sustainability-led but **business-practical** — speak to ESG managers, GMs, ops leads who need measurable results, easy onboarding, and a trustworthy partner.
-- Emphasise: **effortless** ("simple-as"), **measurable** (real numbers, reports), **local/closed-loop**, **proven** (named partners + a free trial with 99% continuation).
+- Emphasise: **effortless** ("simple-as"), **measurable** (real numbers, reports), **local/closed-loop**, **proven** (named partners + a one-month trial with no long-term commitment).
 - Avoid greenwashing fluff — back claims with the live numbers and case studies.
 
 ## Colour direction

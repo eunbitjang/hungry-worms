@@ -5,13 +5,13 @@ import Icon from "../components/Icon";
 import { MEDIA } from "@/lib/media";
 
 export const metadata: Metadata = {
-  title: "Contact Us — Start Your Free Trial",
+  title: "Contact Us — Start a One-Month Trial",
   description:
-    "Get in touch with Hungry Worms. Start a free trial, ask about our services, or find out how we can help your business reduce its environmental footprint.",
+    "Get in touch with Hungry Worms. Start a one-month trial, ask about our services, or find out how we can help your business reduce its environmental footprint.",
   openGraph: {
-    title: "Contact Us — Start Your Free Trial | Hungry Worms",
+    title: "Contact Us — Start a One-Month Trial | Hungry Worms",
     description:
-      "Get in touch with Hungry Worms. Start a free trial, ask about our services, or find out how we can help your business reduce its environmental footprint.",
+      "Get in touch with Hungry Worms. Start a one-month trial, ask about our services, or find out how we can help your business reduce its environmental footprint.",
     url: "/contact",
   },
   alternates: { canonical: "/contact" },
@@ -44,7 +44,7 @@ export default function ContactPage() {
               Let&apos;s chat!
             </h1>
             <p className="mt-4 text-white/75 text-lg leading-relaxed">
-              Whether you&apos;re ready to start a free trial or just want to explore options —
+              Whether you&apos;re ready to start a one-month trial or just want to explore options —
               we&apos;d love to hear from you.
             </p>
           </div>
@@ -94,13 +94,13 @@ export default function ContactPage() {
                 <div className="flex size-12 items-center justify-center rounded-xl bg-cta text-white mb-4">
                   <Icon name="gift" className="size-6" />
                 </div>
-                <h3 className="font-display font-bold text-soil text-base mb-2">Free trial available</h3>
+                <h3 className="font-display font-bold text-soil text-base mb-2">One-month trial available</h3>
                 <p className="text-sm text-soil/70 leading-relaxed">
-                  Start with zero commitment. We&apos;ll set up bins, run your first collection, and
-                  send you an impact report — no invoice until you decide to continue.
+                  We&apos;ll set up your bins, run a month of collections, and send you the impact
+                  report — then you decide whether to carry on.
                 </p>
                 <p className="mt-3 text-xs font-semibold text-cta-dark">
-                  99% of trial clients become long-term partners.
+                  No long-term commitment, no exit fee.
                 </p>
               </div>
 

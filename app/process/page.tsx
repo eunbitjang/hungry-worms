@@ -271,7 +271,7 @@ export default function ProcessPage() {
               href="/contact"
               className="group inline-flex items-center gap-2 rounded-full bg-green-primary px-8 py-3.5 text-sm font-bold text-white hover:bg-green-deep transition-all hover:gap-3"
             >
-              Join the loop — start your free trial
+              Join the loop — start your one-month trial
               <Icon name="arrow-right" className="size-4" />
             </Link>
           </div>

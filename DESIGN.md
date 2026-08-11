@@ -138,7 +138,7 @@ warm paper ground, and a single fired-clay orange that exists only to be clicked
   as text.
 
 ### Tertiary
-- **Kiln Orange** (`#E07A2F`): Conversion only. Every "Start a free trial", "Contact",
+- **Kiln Orange** (`#E07A2F`): Conversion only. Every "Start a One-Month Trial", "Contact",
   "Buy Worms" pill.
 - **Kiln Orange Deep** (`#C5661A`): The hover and press state of the above. It appears
   nowhere else.

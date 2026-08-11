@@ -6,7 +6,7 @@ import { UNCLE_BOBS } from "@/lib/links";
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
-    "Answers to common questions about Hungry Worms' commercial food & green-waste recycling — free trials, accepted waste, impact reporting, the client portal, and more.",
+    "Answers to common questions about Hungry Worms' commercial food & green-waste recycling — trials, accepted waste, impact reporting, the client portal, and more.",
   alternates: { canonical: "/faq" },
 };
 
@@ -31,7 +31,7 @@ const FAQ: Section[] = [
       },
       {
         q: "How do I get started?",
-        a: "Start with a no-obligation free trial. Contact us and we'll tailor a plan to your operations — bin size and count, pickup frequency, and reporting format — then get you set up.",
+        a: "Contact us and we'll tailor a plan to your operations — bin size and count, pickup frequency, and reporting format — then get you set up. You can start with a one-month trial, or go straight to an ongoing service; most clients decide after one conversation.",
       },
     ],
   },
@@ -98,8 +98,8 @@ const FAQ: Section[] = [
     title: "Trial, pricing & products",
     items: [
       {
-        q: "Is there really a free trial?",
-        a: "Yes — a no-obligation free trial for every new client. We believe our service speaks for itself; in fact, 99% of businesses who trial our service choose to continue as long-term partners.",
+        q: "Do you offer a trial?",
+        a: "Yes — a one-month trial, charged at the normal rate, with no long-term commitment. Run it for a month, then either carry on or wind it up; there's no exit fee and nothing to sign in advance. In practice most clients skip it and start the ongoing service straight after our first meeting.",
       },
       {
         q: "How much does it cost?",
@@ -232,7 +232,7 @@ export default function FaqPage() {
         <div className="relative mx-auto max-w-3xl px-4 text-center">
           <h2 className="font-display text-2xl font-extrabold sm:text-3xl">Still have questions?</h2>
           <p className="mt-3 text-white/80">
-            Talk to our team — or start your free trial today.
+            Talk to our team — or start your one-month trial today.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Link

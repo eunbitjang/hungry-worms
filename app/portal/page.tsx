@@ -178,7 +178,7 @@ export default function PortalLoginPage() {
           <p className="mt-6 text-center text-xs text-soil/40">
             Not a client yet?{" "}
             <Link href="/contact" className="text-green-primary hover:underline font-semibold">
-              Start your free trial
+              Start your one-month trial
             </Link>
           </p>
         </div>

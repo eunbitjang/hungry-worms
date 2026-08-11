@@ -1,0 +1,306 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Hungry Worms — social slide framework
+   Mirrors app/globals.css tokens exactly. See DESIGN.md ("Sunlit Soil").
+   Canvas: 1080 × 1350 (Instagram / Facebook carousel, 4:5).
+   ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --green-primary: #1f8a4c;
+  --green-deep: #0f5132;
+  --green-leaf: #7fb800;
+  --soil: #2b2a26;
+  --paper: #f7f6f1;
+  --white: #ffffff;
+  --cta: #e07a2f;
+
+  --shadow-card: 0 1px 2px rgba(43, 42, 38, 0.04), 0 4px 16px rgba(43, 42, 38, 0.06);
+  --shadow-lift: 0 2px 4px rgba(43, 42, 38, 0.06), 0 16px 40px rgba(43, 42, 38, 0.12);
+
+  --pad: 88px;
+
+  /* ── Canvas type scale ────────────────────────────────────────────────
+     These slides are read on a phone, not a desktop. A 1080px-wide image
+     fills roughly 390pt of a phone screen, so everything here is displayed
+     at ~0.36× — a 22px caption arrives as 7.9pt, which is unreadable.
+     Every size below is chosen from its ON-PHONE result, not from how it
+     looks in the editor. Nothing sits under 34px (≈12pt).
+
+       canvas px   on-phone pt   used for
+       ---------   -----------   ------------------------------------------
+          34          12.3       citations, sources, fine print
+          36          13.0       eyebrows, chips, footers, brand lockup
+          40          14.4       captions that must actually be read
+          42          15.2       stat units
+          48          17.3       supporting body copy
+          64–76       23–27      section headlines
+          150         54.1       display
+     ──────────────────────────────────────────────────────────────────── */
+  --t-fine: 34px;
+  --t-label: 36px;
+  --t-caption: 40px;
+  --t-unit: 42px;
+  --t-body: 48px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #c9c7bf;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── The canvas ─────────────────────────────────────────────────────────── */
+.slide {
+  position: relative;
+  width: 1080px;
+  height: 1350px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--pad);
+  color: var(--soil);
+  background: var(--paper);
+}
+
+.slide.dark {
+  background: var(--green-deep);
+  color: var(--white);
+}
+
+.slide.white {
+  background: var(--white);
+}
+
+/* ── Materials ──────────────────────────────────────────────────────────── */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  z-index: 3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.mesh::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(ellipse 80% 55% at 12% 0%, rgba(127, 184, 0, 0.2) 0%, transparent 58%),
+    radial-gradient(ellipse 70% 60% at 100% 32%, rgba(31, 138, 76, 0.38) 0%, transparent 58%),
+    radial-gradient(ellipse 95% 70% at 50% 108%, rgba(15, 81, 50, 0.7) 0%, transparent 62%);
+}
+
+.dots {
+  background-image: radial-gradient(rgba(31, 138, 76, 0.08) 1px, transparent 1.4px);
+  background-size: 30px 30px;
+}
+
+.slide > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Type ───────────────────────────────────────────────────────────────── */
+.eyebrow {
+  font-family: Inter, sans-serif;
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--green-primary);
+}
+
+.dark .eyebrow {
+  color: var(--green-leaf);
+}
+
+.display {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.headline {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  font-size: 76px;
+}
+
+.body {
+  font-size: var(--t-body);
+  line-height: 1.45;
+  color: rgba(43, 42, 38, 0.72);
+}
+
+.dark .body {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.figure {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The caption to a big number. Tracking is optical: the wide 0.18em that suits
+   a 26px label is far too loose at 42px, and it detaches the words from the
+   figure they belong to. Tight tracking + a wider gap above reads as one unit. */
+.unit {
+  font-family: Inter, sans-serif;
+  font-size: var(--t-unit);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--green-leaf);
+}
+
+.light .unit,
+.slide:not(.dark) .unit {
+  color: var(--green-primary);
+}
+
+/* Citations, formulas and data windows live here. This is the text that makes
+   every figure on the slide checkable, so it is held at 4.5:1 or better against
+   both grounds — the tier that carries the truth is not the tier to fade. */
+.source {
+  font-size: var(--t-fine);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.slide:not(.dark) .source {
+  color: rgba(43, 42, 38, 0.66);
+}
+
+/* ── Footer / swipe rail ────────────────────────────────────────────────── */
+.foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.slide:not(.dark) .foot {
+  color: rgba(43, 42, 38, 0.4);
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.wordmark svg {
+  width: 34px;
+  height: 34px;
+}
+
+.swipe {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Pills & tiles ──────────────────────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 16px 34px;
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-leaf);
+}
+
+.slide:not(.dark) .chip {
+  border-color: rgba(31, 138, 76, 0.22);
+  background: rgba(31, 138, 76, 0.06);
+  color: var(--green-primary);
+}
+
+.dot-live {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: var(--green-leaf);
+}
+
+.slide:not(.dark) .dot-live {
+  background: var(--green-primary);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 9999px;
+  background: var(--cta);
+  color: var(--white);
+  padding: 30px 54px;
+  font-size: 44px;
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(43, 42, 38, 0.1), 0 4px 10px rgba(43, 42, 38, 0.12);
+}
+
+/* ── Logo tiles ─────────────────────────────────────────────────────────── */
+.logo-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border: 1px solid rgba(43, 42, 38, 0.07);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  padding: 30px;
+}
+
+.logo-tile img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* ── Contact sheet (comp review only — never exported) ──────────────────── */
+.sheet {
+  display: flex;
+  gap: 40px;
+  padding: 56px;
+  background: #c9c7bf;
+  align-items: flex-start;
+}
+
+.sheet .slide {
+  transform: scale(0.44);
+  transform-origin: top left;
+  flex: 0 0 475px;
+  margin-bottom: -756px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+}

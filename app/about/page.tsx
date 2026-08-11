@@ -235,13 +235,13 @@ export default function AboutPage() {
           <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
             Want to work with us?
           </h2>
-          <p className="mt-3 text-white/70">Start with a free trial or get in touch to learn more.</p>
+          <p className="mt-3 text-white/70">Start with a one-month trial or get in touch to learn more.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
               href="/contact"
               className="group inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3 text-sm font-bold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-all hover:gap-3"
             >
-              Start a Free Trial
+              Start a One-Month Trial
               <Icon name="arrow-right" className="size-4" />
             </Link>
             <Link

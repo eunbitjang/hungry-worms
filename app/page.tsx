@@ -16,11 +16,11 @@ export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Hungry Worms — Canterbury's Full-Circle Food Waste Recycling",
   description:
-    "Effortless food waste recycling with real ESG impact. Trusted by Sudima, Mitre 10, Ballantynes, and Willowbank. Start your free trial today.",
+    "Effortless food waste recycling with real ESG impact. Trusted by Sudima, Mitre 10, Ballantynes, and Willowbank. Start your one-month trial today.",
   openGraph: {
     title: "Hungry Worms — Canterbury's Full-Circle Food Waste Recycling",
     description:
-      "Effortless food waste recycling with real ESG impact. Trusted by Sudima, Mitre 10, Ballantynes, and Willowbank. Start your free trial today.",
+      "Effortless food waste recycling with real ESG impact. Trusted by Sudima, Mitre 10, Ballantynes, and Willowbank. Start your one-month trial today.",
     url: "/",
     type: "website",
   },
@@ -68,9 +68,9 @@ const WHY_US: { icon: IconName; title: string; body: string; stat?: { value: str
   },
   {
     icon: "gift",
-    title: "Free trial, proven results",
-    body: "Start with zero commitment and see the results for yourself.",
-    stat: { value: "99%", label: "of trial clients stay on as long-term partners" },
+    title: "Try it for a month",
+    body: "A one-month paid trial with no long-term commitment. Keep going, or wind it up — your call, no exit fee.",
+    stat: { value: "1", label: "month, then you decide" },
   },
 ];
 
@@ -161,7 +161,7 @@ export default async function HomePage() {
                 href="/contact"
                 className="group inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-bold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-all hover:gap-3"
               >
-                Start a Free Trial
+                Start a One-Month Trial
                 <Icon name="arrow-right" className="size-4" />
               </Link>
               <Link
@@ -225,13 +225,14 @@ export default async function HomePage() {
                   aria-label={`${name} — visit website`}
                   className="relative block h-12 w-36 transition hover:scale-105"
                 >
-                  {/* Grayscale at rest so mixed brand colours read as one row; colour returns on hover */}
+                  {/* Full colour at rest — these are the partners' own brands and they
+                      earn their real colours; hover lifts the logo rather than tinting it. */}
                   <Image
                     src={logo}
                     alt={name}
                     fill
                     sizes="144px"
-                    className="grayscale opacity-60 transition duration-200 hover:grayscale-0 hover:opacity-100"
+                    className="opacity-95 transition duration-200 hover:opacity-100"
                     style={{ objectFit: "contain", transform: scale ? `scale(${scale})` : undefined }}
                   />
                 </a>
@@ -613,14 +614,14 @@ export default async function HomePage() {
             </h2>
             <p className="mt-4 text-white/65 text-lg leading-relaxed">
               Join the Canterbury businesses already diverting tonnes from landfill and earning
-              real ESG credentials. Your free trial starts with a single conversation.
+              real ESG credentials. It starts with a single conversation.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 href="/contact"
                 className="group inline-flex items-center gap-2 rounded-full bg-cta px-8 py-3.5 text-sm font-bold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-all hover:gap-3"
               >
-                Start a Free Trial
+                Start a One-Month Trial
                 <Icon name="arrow-right" className="size-4" />
               </Link>
               <Link
@@ -631,7 +632,7 @@ export default async function HomePage() {
               </Link>
             </div>
             <p className="mt-5 text-xs text-white/40">
-              No commitment required. 99% of trial clients become long-term partners.
+              One month, no long-term commitment.
             </p>
           </Reveal>
         </div>

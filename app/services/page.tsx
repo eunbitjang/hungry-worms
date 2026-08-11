@@ -9,11 +9,11 @@ import Reveal from "../components/Reveal";
 export const metadata: Metadata = {
   title: "Commercial Waste Collection & Recycling Services",
   description:
-    "Canterbury's most trusted commercial food & green-waste recycling service. Tailored plans, free trial, and full ESG reporting. Start today.",
+    "Canterbury's most trusted commercial food & green-waste recycling service. Tailored plans, a one-month trial, and full ESG reporting. Start today.",
   openGraph: {
     title: "Commercial Waste Collection & Recycling Services | Hungry Worms",
     description:
-      "Canterbury's most trusted commercial food & green-waste recycling service. Tailored plans, free trial, and full ESG reporting. Start today.",
+      "Canterbury's most trusted commercial food & green-waste recycling service. Tailored plans, a one-month trial, and full ESG reporting. Start today.",
     url: "/services",
   },
   alternates: { canonical: "/services" },
@@ -115,7 +115,7 @@ export default function ServicesPage() {
                 href="/contact"
                 className="group inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-bold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-all hover:gap-3"
               >
-                Start a Free Trial
+                Start a One-Month Trial
                 <Icon name="arrow-right" className="size-4" />
               </Link>
               <Link
@@ -158,25 +158,25 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Free trial */}
+      {/* One-month trial */}
       <section className="bg-white py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <Reveal>
-              <p className="text-xs font-bold uppercase tracking-widest text-cta mb-3">No commitment required</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-cta mb-3">No long-term commitment</p>
               <h2 className="font-display text-3xl font-extrabold text-soil sm:text-4xl leading-tight">
-                Start with a free trial.
+                Start with a one-month trial.
               </h2>
               <p className="mt-5 text-soil/70 leading-relaxed text-lg">
-                We believe our service speaks for itself — which is why we offer a no-obligation
-                free trial for every new client.
+                One month of the full service, at the normal rate, with nothing to sign beyond it.
+                We&apos;d rather you judge us on a month of real pickups than on a sales pitch.
               </p>
               <div className="mt-5 flex items-center gap-4 rounded-2xl bg-gradient-to-br from-green-primary/8 to-green-leaf/5 border border-green-primary/15 p-5">
                 <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-green-primary text-white">
-                  <Icon name="target" className="size-6" />
+                  <Icon name="check-circle" className="size-6" />
                 </div>
                 <p className="text-green-deep font-semibold">
-                  99% of businesses who trial our service choose to continue as long-term partners.
+                  At the end of the month, carry on or wind it up. No exit fee, no lock-in, no awkward conversation.
                 </p>
               </div>
               <p className="mt-5 text-soil/70 leading-relaxed">
@@ -202,7 +202,7 @@ export default function ServicesPage() {
                   href="/contact"
                   className="mt-8 block rounded-full bg-cta text-center py-3.5 text-sm font-bold text-white shadow-[var(--shadow-cta)] hover:bg-cta-dark transition-colors"
                 >
-                  Start My Free Trial
+                  Start My One-Month Trial
                 </Link>
               </div>
             </Reveal>
@@ -272,7 +272,7 @@ export default function ServicesPage() {
                       alt={name}
                       fill
                       sizes="160px"
-                      className="grayscale opacity-70 transition duration-200 hover:grayscale-0 hover:opacity-100"
+                      className="opacity-95 transition duration-200 hover:opacity-100"
                       style={{ objectFit: "contain", transform: scale ? `scale(${scale})` : undefined }}
                     />
                   </div>

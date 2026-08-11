@@ -34,7 +34,7 @@ it, and sells the resulting products through its sister brand Uncle Bob's. This 
 both the sales asset for the collection service and the reporting surface for existing
 clients.
 
-Success has three shapes: a prospective client starts a free trial or makes contact; a
+Success has three shapes: a prospective client starts a one-month trial or makes contact; a
 worm buyer reaches the Uncle Bob's shop; an existing client gets their own impact numbers
 without emailing anyone.
 
@@ -103,7 +103,10 @@ Confirmed by the client as fact-checked and cleared for publication:
 - **Partner logo usage** — Sudima Hotels, Mitre 10, Ryman Healthcare, Willowbank Wildlife
   Reserve, plus active clients Ballantynes, Cotswold Scenic Circle Hotel, The Russley
   Village, Mitre 10 MEGA Papanui.
-- **99% of free-trial clients continue as long-term partners.**
+- **The trial is one month, charged at the normal rate, with no long-term commitment**
+  (updated 2026-08-11). At the end of the month the client either continues or winds it up;
+  there is no exit fee and nothing signed in advance. It is not, and must never be called,
+  a free trial.
 - **Sudima** — since 2024, food-waste recycling across Sudima Christchurch City and
   Christchurch Airport has offset the greenhouse gas emissions of Sudima's entire South
   Island vehicle fleet. Testimonial from Rajas Patil, Hotel General Manager, Sudima
@@ -120,9 +123,17 @@ Also on hand:
   development), Ian Lamb (regenerative farming), Mido Jang (strategic communications),
   Tim Lamb (digital marketing).
 
+**Retired 2026-08-11 — do not republish:** "99% of free-trial clients continue as long-term
+partners." Exactly one client has ever taken a trial; nearly everyone else commits after the
+first meeting without one. A percentage resting on a single case cannot survive being
+checked, which is the one thing every number on this site has to do. That the first meeting
+usually closes the sale is real and worth saying — as the plain observation it is ("most
+clients decide after one conversation"), never as a measured rate.
+
 Not established — future work must not invent these: pricing or rate cards; any
 testimonial other than Rajas Patil's; client counts or tonnage beyond what the sheet
-returns; certifications, awards, or accreditations.
+returns; certifications, awards, or accreditations; any conversion, retention, or
+satisfaction percentage.
 
 ## Product Principles
 

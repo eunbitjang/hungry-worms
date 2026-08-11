@@ -1,0 +1,21 @@
+{
+  "approved": true,
+  "approvedOn": "2026-08-11",
+  "surface": "social/carousel-5-years.html",
+  "medium": "html-render",
+  "note": "Direction comps for this surface were authored as HTML against the real brand tokens, real partner logos and real Supabase figures, then screenshotted at the publishing canvas (1080x1350) — not image-generated. Three directions were rendered: A 'The Chain' (A1-A3), B 'One Board' (B1-B3), C 'The Count-Out' (C1-C3).",
+  "approvedDirection": "C 'The Count-Out' as the carousel spine, plus direction B's combined scoreboard (B2.png) as one slide. Chosen by the user at the single approval point.",
+  "approvedFiles": [
+    "social/out/comps/C1.png",
+    "social/out/comps/C2.png",
+    "social/out/comps/C3.png",
+    "social/out/comps/B2.png"
+  ],
+  "rejected": {
+    "A": "Chained arithmetic operators (x 2.5, / 4,600) bleeding across slide edges were too fine to survive a phone screen; the dashed CO2 cloud was the weakest illustration in the set.",
+    "B-as-spine": "The single scoreboard reads fastest but has the least impact; retained as one slide rather than the whole structure."
+  },
+  "userRevision": "Cover line changed from 'Here's what Canterbury did with them.' to 'Here's what Canterbury did with us.' at the user's request.",
+  "seedKey": "b3551d9e",
+  "concept": "Weight made visible — surface-concept candidate 3"
+}
