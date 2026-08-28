@@ -23,3 +23,9 @@ Drop real logo files here, then reference them in code.
 - **SVG preferred** — crisp at any size.
 - Transparent **PNG** also fine (use @2x resolution, e.g. 240×72px).
 - Keep partner logos a similar visual weight; the strip displays them ~36px tall.
+
+## Email signature
+`email-signature.png` — 240×240 transparent PNG, downscaled from `hungry-worms.png`.
+Sized for a ~110px display in email clients (2× for retina). Served at
+`https://www.hungryworms.nz/logos/email-signature.png`. Always set `width`/`height`
+on the `<img>`; Outlook renders it at full size otherwise.
