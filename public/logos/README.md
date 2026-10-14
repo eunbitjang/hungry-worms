@@ -29,3 +29,8 @@ Drop real logo files here, then reference them in code.
 Sized for a ~110px display in email clients (2× for retina). Served at
 `https://www.hungryworms.nz/logos/email-signature.png`. Always set `width`/`height`
 on the `<img>`; Outlook renders it at full size otherwise.
+
+`uncle-bobs-email-signature.png` — the same treatment for Uncle Bob's (trimmed and
+downscaled from `uncle-bobs.png`, 240×240, palette PNG ~15 KB). Used by the
+info@unclebobs.co.nz signature, served at
+`https://www.hungryworms.nz/logos/uncle-bobs-email-signature.png`.
