@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8" />
+<title>Scenic Hotel Group story — share posts (1080 × 1350)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="lib/slides.css" />
+<style>
+  .mark { display: block; height: 88px; }
+  .mark img { height: 100%; width: auto; display: block; mix-blend-mode: multiply; }
+
+  /* Hotel kitchen → worms → plant food, as three steps on one line. */
+  .loop { display: flex; align-items: stretch; gap: 18px; }
+  .loop .step {
+    flex: 1 1 0; border-radius: 24px; background: var(--white);
+    border: 1px solid rgba(43, 42, 38, 0.07); box-shadow: var(--shadow-card);
+    padding: 26px 24px; font-size: 34px; font-weight: 700; line-height: 1.2; color: var(--green-deep);
+  }
+  .loop .step small { display: block; margin-top: 8px; font-size: 30px; font-weight: 500; color: rgba(43, 42, 38, 0.7); }
+  .loop .arrow { align-self: center; font-size: 44px; color: var(--green-primary); font-weight: 700; }
+
+  .partner { display: flex; align-items: center; gap: 28px; }
+  .partner .logo-tile { width: 360px; height: 150px; padding: 24px 30px; overflow: hidden; }
+  .partner .logo-tile img { mix-blend-mode: multiply; transform: scale(1.85); }
+
+  /* ── Uncle Bob's variant: the shop's own palette, not Hungry Worms' ───── */
+  .ub { background: #FEFBE9; color: #183A1D; }
+  .ub .eyebrow { color: #183A1D; }
+  .ub .headline { color: #183A1D; }
+  .ub .body { color: rgba(24, 58, 29, 0.82); }
+  .ub .source { color: rgba(24, 58, 29, 0.72); }
+  .ub .rule { width: 140px; height: 12px; border-radius: 9999px; background: #F6C453; }
+  .ub .product { display: flex; align-items: flex-end; gap: 36px; }
+  .ub .product > img { height: 420px; width: auto; display: block; border-radius: 24px; box-shadow: var(--shadow-card); }
+  .ub .ub-logo { height: 120px; width: auto; display: block; }
+</style>
+</head>
+<body>
+
+<!-- ══ Hungry Worms (B2B) ═══════════════════════════════════════════════════ -->
+<section class="slide dots" data-id="01-hungry-worms">
+  <div class="eyebrow">In their words</div>
+  <h1 class="headline" style="font-size:76px; margin-top:22px; max-width:940px">
+    Closing the loop at Scenic Hotel Cotswold.
+  </h1>
+  <p class="body" style="font-size:40px; margin-top:28px; max-width:920px">
+    Scenic Hotel Group has written up our partnership &mdash; kitchen scraps collected on site,
+    recycled by our compost worms, and back in the soil as plant food.
+  </p>
+
+  <div class="loop" style="margin-top:44px">
+    <div class="step">Hotel kitchen<small>scraps sorted on site</small></div>
+    <span class="arrow">&rarr;</span>
+    <div class="step">Compost worms<small>Hungry Worms, Christchurch</small></div>
+    <span class="arrow">&rarr;</span>
+    <div class="step">Plant food<small>sold as Uncle Bob&rsquo;s</small></div>
+  </div>
+
+  <div style="flex:1 1 auto; min-height:40px"></div>
+
+  <div class="partner">
+    <div class="logo-tile"><img src="../public/logos/cotswold.svg" alt="Scenic Hotel Cotswold" /></div>
+    <p class="source" style="max-width:520px">Read the full story on scenichotelgroup.co.nz</p>
+  </div>
+
+  <div class="foot" style="margin-top:44px">
+    <span class="mark"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+  </div>
+</section>
+
+
+<!-- ══ Uncle Bob's (shoppers) ═══════════════════════════════════════════════ -->
+<section class="slide ub" data-id="02-uncle-bobs">
+  <div class="eyebrow">Where it comes from</div>
+  <h1 class="headline" style="font-size:88px; margin-top:22px; max-width:940px">
+    From a hotel kitchen to your garden.
+  </h1>
+  <div class="rule" style="margin-top:34px"></div>
+  <p class="body" style="font-size:40px; margin-top:30px; max-width:930px">
+    Kitchen scraps from Scenic Hotel Cotswold in Christchurch are recycled by Hungry Worms&rsquo;
+    compost worms into vermicast &mdash; the base of our Premium All-Purpose Plant Food.
+  </p>
+
+  <div style="flex:1 1 auto; min-height:40px"></div>
+
+  <div class="product">
+    <img src="../public/images/Uncle Bob's Premium All Purpose Plant Food_1litre_front.png" alt="Uncle Bob's Premium All-Purpose Plant Food, 1 litre" />
+    <div style="padding-bottom:12px">
+      <p class="source" style="max-width:480px">Scenic Hotel Group tells the story on scenichotelgroup.co.nz</p>
+      <img class="ub-logo" style="margin-top:34px" src="../public/logos/uncle-bobs.png" alt="Uncle Bob's" />
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
