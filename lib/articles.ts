@@ -31,6 +31,15 @@ export type LibraryArticle = {
 const ARTICLES: LibraryArticle[] = [
   // ── New Zealand ──────────────────────────────────────────────────────────
   {
+    title: "From food waste to local impact: how a Christchurch hotel is closing the loop",
+    source: "Scenic Hotel Group",
+    url: "https://www.scenichotelgroup.co.nz/about-us/sustainability/hungry-worms/",
+    date: "2026-08-07",
+    region: "NZ",
+    summary:
+      "Scenic Hotel Group's own account of working with us at Scenic Hotel Cotswold: kitchen scraps collected on site, turned into worm castings and liquid fertiliser, and sold as Uncle Bob's plant food — with the hotel's first-month results in its own words.",
+  },
+  {
     title: "Inside Aotearoa's regenerative farming festival",
     source: "RNZ Country Life",
     url: "https://www.rnz.co.nz/news/country/588891/country-life-inside-aotearoa-s-regenerative-farming-festival",

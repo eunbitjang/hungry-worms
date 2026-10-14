@@ -128,8 +128,8 @@ export default function AboutPage() {
                 We partner with local businesses to minimise their food waste and lower their carbon
                 footprint. By combining industrial composting with vermiculture (compost worms), we achieve
                 the highest possible diversion rate from landfill — and create eco-friendly garden products
-                that return value to the community. We keep the Google Sheet, the worm farm, and the
-                ESG report in the same story.
+                that return value to the community. Every pickup is weighed and logged, so the numbers
+                in your impact report trace straight back to what we collected.
               </p>
               <p className="mt-4 text-white/80 leading-relaxed max-w-3xl">
                 Curious about the bigger picture? Our Library gathers news and research on
@@ -215,7 +215,7 @@ export default function AboutPage() {
           </h2>
           <p className="mt-4 text-white/75 leading-relaxed">
             The finished output of our recycling process becomes Uncle Bob&apos;s premium, 100% natural,
-            NZ-made, 100% natural fertiliser. Available online and in selected retailers nationwide.
+            NZ-made fertiliser. Available online and in selected retailers nationwide.
           </p>
           <a
             href="https://www.unclebobs.co.nz/"

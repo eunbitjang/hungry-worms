@@ -196,7 +196,7 @@ export default async function HomePage() {
           </div>
           <p className="mt-4 flex items-center gap-2 text-xs text-white/40">
             <span className="size-1.5 rounded-full bg-green-leaf/60" />
-            Live company-wide totals — synced daily from our Master Log.
+            Live company-wide totals from weighed pickups, updated daily. CO₂e = kg diverted × 2.5 (UN FAO, 2013); cars = CO₂e ÷ 4,600 kg.
           </p>
         </div>
       </section>
@@ -247,6 +247,17 @@ export default async function HomePage() {
               )
             )}
           </div>
+          <p className="mt-10 text-center text-sm text-soil/60">
+            In their words: Scenic Hotel Group on how Scenic Hotel Cotswold is closing the loop with us.{" "}
+            <a
+              href="https://www.scenichotelgroup.co.nz/about-us/sustainability/hungry-worms/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-green-primary underline decoration-green-primary/30 underline-offset-4 hover:decoration-green-primary"
+            >
+              Read their story ↗
+            </a>
+          </p>
         </div>
       </section>
 

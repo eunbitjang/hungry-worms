@@ -90,7 +90,7 @@ const FAQ: Section[] = [
       },
       {
         q: "How is my impact calculated?",
-        a: "We base our figures on recognised methodology: more than 2.5 kg of CO₂e is avoided for every kilogram of food waste diverted from landfill. Your totals are calculated from the actual weight we collect.",
+        a: "Your totals start from the actual weight we collect at every pickup. Greenhouse gas avoided is that weight × 2.5 kg CO₂e per kg of food waste kept out of landfill (UN FAO, 2013), and the car equivalent divides that by 4,600 kg — the typical annual emissions of one passenger car.",
       },
     ],
   },

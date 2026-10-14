@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import StaffHub from "./StaffHub";
 
 export const metadata: Metadata = {
-  title: "Staff Portal | Hungry Worms",
+  title: "Staff Portal",
 };
 
 export default async function StaffPortalPage() {

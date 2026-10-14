@@ -6,7 +6,7 @@ const SITE_URL = "https://www.hungryworms.nz";
 // `new Date()`) keeps the <lastmod> signal trustworthy — a value that changes
 // on every crawl makes Google ignore it. Bump this when page content is
 // meaningfully revised.
-const LAST_MODIFIED = new Date("2026-06-24");
+const LAST_MODIFIED = new Date("2026-10-15");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
