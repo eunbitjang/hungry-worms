@@ -84,3 +84,24 @@ export const PICKUP_CLIENTS: Record<string, PickupClientConfig> = {
 };
 
 export const PICKUP_CLIENT_NAMES = Object.keys(PICKUP_CLIENTS);
+
+/** What a saved row may be changed to, per client — used when fixing a pickup. */
+export type EditOptions = { waste: string[]; location: string[]; bin: string[] };
+
+const uniq = (xs: (string | undefined)[]) => [...new Set(xs.filter((x): x is string => !!x))];
+
+/**
+ * Keyed by the client name as it is STORED in the sheet (`store ?? label`), since
+ * that is what an existing row carries. Merges every box's options, because a
+ * saved row no longer knows which box it came from.
+ */
+export const EDIT_OPTIONS: Record<string, EditOptions> = Object.fromEntries(
+  Object.entries(PICKUP_CLIENTS).map(([label, cfg]) => [
+    cfg.store ?? label,
+    {
+      waste: uniq(cfg.boxes.flatMap((b) => [b.waste, ...(b.wasteOptions ?? [])])),
+      location: uniq(cfg.boxes.flatMap((b) => b.locationOptions ?? [])),
+      bin: uniq(cfg.boxes.flatMap((b) => b.capacityOptions ?? [])),
+    },
+  ])
+);

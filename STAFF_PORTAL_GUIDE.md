@@ -13,7 +13,7 @@ client visit on **one screen** instead of submitting the form once per bin.
 2. You'll see a login screen. Tap **"Sign in with a password"**.
 3. Enter:
    - **Email:** info@hungryworms.nz
-   - **Password:** HungryWorms2026!
+   - **Password:** sent to you separately (never written in this guide — the code repo is public)
 4. Tap **Sign In**.
 
 That's it — your device now stays signed in, so next time it opens straight to the portal (no
@@ -23,10 +23,11 @@ login needed).
 
 ## 2. The Staff Portal
 
-After signing in you'll see two tools:
+After signing in you'll see three tools:
 
 - **📊 All-clients dashboard** — the impact numbers for every client in one place.
 - **🚛 Log a pickup** — record a collection visit. *(This is the one you'll use most.)*
+- **🔧 Fix a pickup** — correct or delete a pickup you've already logged.
 
 Tap either card to open it.
 
@@ -52,7 +53,26 @@ Tap either card to open it.
 
 ---
 
-## 4. The all-clients dashboard
+## 4. Fixing a mistake
+
+Typed 45 instead of 4.5, picked the wrong client, or saved the same visit twice? Fix it yourself:
+
+1. Open **Fix a pickup** (or tap **"Fix it here"** on the "Pickup logged" screen).
+2. Your recent pickups are listed newest first, one card per visit. Use the **Client** menu to
+   narrow the list.
+3. Tap **Edit** on the wrong line, change the weight, date, client, waste type, location, bin
+   size or note, and tap **Save changes**.
+4. Logged something that never happened (or twice)? Tap **Delete** and confirm.
+
+The Google Sheet changes straight away and the website totals catch up about a minute later.
+This screen needs you to be signed in, because it can change saved data.
+
+> Only pickups logged with the app show up here. Entries from the old Google Form are still
+> fixed directly in the Google Sheet.
+
+---
+
+## 5. The all-clients dashboard
 
 Open it any time to see:
 - Total waste diverted, CO₂e avoided, cars off the road, and how many clients are active.
@@ -61,7 +81,7 @@ Open it any time to see:
 
 ---
 
-## 5. Make it one tap (recommended)
+## 6. Make it one tap (recommended)
 
 So you don't have to type the link each time, add the portal to your phone's home screen:
 - **iPhone (Safari):** tap **Share** → **Add to Home Screen**
@@ -75,8 +95,7 @@ most — the portal, the pickup form, or the dashboard.)
 ## Good to know
 
 - **One screen, all bins** — no more submitting once per bin.
-- **You can't break anything.** If a weight is wrong, just fix the row in the Google Sheet later,
-  or log a correction.
+- **You can't break anything.** If a weight is wrong, fix it under **Fix a pickup**.
 - **You stay signed in** on your device, so it's quick every time.
 
 Any questions or anything that feels off, just flag it. 🌱

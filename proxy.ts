@@ -39,8 +39,12 @@ export async function proxy(request: NextRequest) {
   // all-clients dashboard (`/portal/staff/dashboard`) stays protected because
   // it exposes every client's data.
   const path = request.nextUrl.pathname;
+  // `/portal/staff/pickups` (fixing saved pickups) is protected too — it can
+  // rewrite or delete logged data.
   const needsAuth =
-    path.startsWith("/portal/dashboard") || path.startsWith("/portal/staff/dashboard");
+    path.startsWith("/portal/dashboard") ||
+    path.startsWith("/portal/staff/dashboard") ||
+    path.startsWith("/portal/staff/pickups");
   if (needsAuth && !user) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/portal";

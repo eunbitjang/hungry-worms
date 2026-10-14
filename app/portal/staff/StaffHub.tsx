@@ -19,6 +19,12 @@ const TOOLS: { href: string; icon: IconName; title: string; body: string }[] = [
     title: "Log a pickup",
     body: "Record a client visit — all bins on one screen. Writes straight to the Master Log, no Google Form needed.",
   },
+  {
+    href: "/portal/staff/pickups",
+    icon: "wrench",
+    title: "Fix a pickup",
+    body: "Typed a wrong weight, date or client? Edit or delete a pickup you logged — the website totals follow. Needs sign-in.",
+  },
 ];
 
 export default function StaffHub({ staffEmail }: { staffEmail: string }) {

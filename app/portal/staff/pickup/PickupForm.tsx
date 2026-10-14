@@ -214,8 +214,11 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
               </table>
             </div>
             <p className="px-5 py-3 text-xs text-soil/45">
-              Saved to the Master Log. Need to fix something? Edit the row directly in the Google
-              Sheet, or log a correction.
+              Saved to the Master Log. Typed something wrong?{" "}
+              <Link href="/portal/staff/pickups" className="font-semibold text-green-primary hover:underline">
+                Fix it here
+              </Link>
+              .
             </p>
           </div>
 
