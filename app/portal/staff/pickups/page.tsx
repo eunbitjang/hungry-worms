@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import PickupFixer from "./PickupFixer";
 
 export const metadata: Metadata = {
-  title: "Fix a Pickup | Hungry Worms Staff",
+  title: "Fix a Pickup · Staff",
 };
 
 export default async function FixPickupsPage() {

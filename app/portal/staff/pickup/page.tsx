@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import PickupForm from "./PickupForm";
 
 export const metadata: Metadata = {
-  title: "Log a Pickup | Hungry Worms Staff",
+  title: "Log a Pickup · Staff",
 };
 
 export default async function StaffPickupPage() {

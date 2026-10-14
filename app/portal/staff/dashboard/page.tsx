@@ -3,7 +3,7 @@ import StaffOverview from "../StaffOverview";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "All Clients · Impact Overview | Hungry Worms Staff",
+  title: "All Clients · Impact Overview · Staff",
 };
 
 export default async function StaffDashboardPage() {
