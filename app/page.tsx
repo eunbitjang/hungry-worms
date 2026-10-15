@@ -74,6 +74,15 @@ const WHY_US: { icon: IconName; title: string; body: string; stat?: { value: str
   },
 ];
 
+/* ─── Food waste hierarchy (most → least preferred) ─────────────────────── */
+const HIERARCHY: { label: string; sub?: string; note: string; tone: string; ours?: boolean }[] = [
+  { label: "PREVENT", sub: "waste less food at the source", tone: "bg-green-deep", note: "Order, store and portion well so less food is wasted in the first place." },
+  { label: "RESCUE", sub: "surplus food to people in need", tone: "bg-[#2C6E3F]", note: "Edible surplus goes to food rescue organisations to feed people." },
+  { label: "RECYCLE", sub: "worms turn it into fertiliser", tone: "bg-green-primary", ours: true, note: "We collect the scraps that are left. Our worms turn them into natural fertiliser that goes back to Canterbury soil, and every collection is weighed and reported." },
+  { label: "RECOVER", sub: "energy from waste", tone: "bg-[#9AA79E]", note: "Energy recovery, such as anaerobic digestion, returns some value but not the nutrients to soil." },
+  { label: "LANDFILL", tone: "bg-[#6E7A72]", note: "The last resort. Rotting food in landfill releases methane, a potent greenhouse gas." },
+];
+
 /* ─── Uncle Bob's product teasers ───────────────────────────────────────── */
 const UNCLEBOBS_PRODUCTS: { name: string; image: string; href: string }[] = [
   { name: "Premium Composting Worms", image: MEDIA.products.worms, href: UNCLE_BOBS.products.worms },
@@ -327,6 +336,63 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* ── 3c. WHERE WE FIT — FOOD WASTE HIERARCHY ───────────────────────── */}
+      <section className="relative overflow-hidden bg-white py-20 lg:py-24">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal className="text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-primary">The food waste hierarchy</span>
+            <h2 className="mt-3 font-display text-3xl font-extrabold text-soil sm:text-4xl">
+              Where Hungry Worms fits
+            </h2>
+            <p className="mt-3 text-soil/55 max-w-2xl mx-auto">
+              Prevent waste first and rescue good food for people. Whatever is left, we recycle into
+              natural fertiliser, so it never goes to landfill.
+            </p>
+          </Reveal>
+          <div className="mt-14 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            {/* Inverted pyramid: each tier is a trapezoid cut with clip-path, narrowing to a point. */}
+            <Reveal>
+              <div className="mx-auto flex w-full max-w-xl flex-col gap-1.5" role="img" aria-label="Food waste hierarchy, from most to least preferred: prevent, rescue, recycle, recover, landfill">
+                {HIERARCHY.map(({ label, sub, tone }, i) => {
+                  const top = i * 10;
+                  const bottom = i === HIERARCHY.length - 1 ? 50 : (i + 1) * 10;
+                  return (
+                    <div
+                      key={label}
+                      className={`flex h-16 flex-col items-center justify-center text-center text-white sm:h-20 ${tone}`}
+                      style={{ clipPath: `polygon(${top}% 0, ${100 - top}% 0, ${100 - bottom}% 100%, ${bottom}% 100%)` }}
+                    >
+                      <span className={`font-display font-extrabold tracking-wider ${i === 4 ? "-mt-5 text-[10px] sm:-mt-7 sm:text-xs" : i === 3 ? "text-sm sm:text-base" : "text-lg sm:text-2xl"}`}>
+                        {label}
+                      </span>
+                      {sub && <span className="hidden text-xs text-white/85 sm:block sm:text-sm">{sub}</span>}
+                    </div>
+                  );
+                })}
+              </div>
+            </Reveal>
+            <div className="flex flex-col gap-3">
+              {HIERARCHY.map(({ label, note, ours }, i) => (
+                <Reveal key={label} delay={i * 80}>
+                  <div
+                    className={
+                      ours
+                        ? "rounded-2xl border-l-4 border-green-primary bg-white p-5 shadow-[var(--shadow-card)]"
+                        : "border-l-2 border-soil/10 px-5 py-2"
+                    }
+                  >
+                    <h3 className={`font-display font-bold ${ours ? "text-lg text-green-primary" : "text-green-deep"}`}>
+                      {ours ? "Recycle with Hungry Worms" : label.charAt(0) + label.slice(1).toLowerCase()}
+                    </h3>
+                    <p className={`mt-1 text-sm leading-relaxed ${ours ? "text-soil/80" : "text-soil/60"}`}>{note}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── 4. WILLOWBANK CLOSED-LOOP CASE STUDY ───────────────────────────── */}
       <section className="relative overflow-hidden bg-green-deep text-white py-20 lg:py-24 bg-grain">
