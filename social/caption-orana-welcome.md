@@ -32,6 +32,6 @@
 >
 > #HungryWorms #FoodWasteRecycling #Christchurch #Canterbury #CircularEconomy #Vermicomposting
 
-**Before posting, check the handle:** confirm @oranawildlifepark on Instagram, and tag Orana's Facebook page.
+**Posted 15 Oct 2026** on HW Facebook + Instagram. The Instagram caption went out without the @ tag; the handle @oranawildlifepark is confirmed, so add it by editing the caption in the Instagram app.
 
 **Don't mention Willowbank in this post.** Orana and Willowbank are competitors (Mido, 15 Oct 2026).
