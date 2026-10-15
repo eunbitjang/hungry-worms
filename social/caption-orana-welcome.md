@@ -12,7 +12,7 @@
 >
 > Orana's food waste is now collected by Hungry Worms. Our compost worms turn it into vermicast, and it goes back into the soil as natural fertiliser instead of going to landfill.
 >
-> Orana already works hard to reduce waste across the park. We're proud to help close the loop on their organic waste, alongside our friends at Willowbank Wildlife Reserve and businesses right across Canterbury. 💚
+> Orana already works hard to reduce waste across the park, and we're proud to help close the loop on their organic waste. 💚
 >
 > Learn more about Orana's sustainability work 👉 https://www.oranawildlifepark.co.nz/conservation/sustainable-use-of-resources/
 >
@@ -26,10 +26,12 @@
 >
 > Orana's food waste is now collected by Hungry Worms. Our compost worms turn it into vermicast, and it goes back into the soil as natural fertiliser instead of going to landfill.
 >
-> Proud to help close the loop alongside @willowbankwildlifereserve and businesses across Canterbury. 💚
+> Proud to help Orana close the loop on their organic waste. 💚
 >
 > Want the same loop for your site? Try us for a month, with no long-term commitment. Link in bio.
 >
 > #HungryWorms #FoodWasteRecycling #Christchurch #Canterbury #CircularEconomy #Vermicomposting
 
-**Before posting, check the handles:** confirm @oranawildlifepark and @willowbankwildlifereserve on Instagram, and tag Orana's Facebook page.
+**Before posting, check the handle:** confirm @oranawildlifepark on Instagram, and tag Orana's Facebook page.
+
+**Don't mention Willowbank in this post.** Orana and Willowbank are competitors (Mido, 15 Oct 2026).
