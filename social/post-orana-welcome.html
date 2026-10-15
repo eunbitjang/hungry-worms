@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8" />
+<title>Welcome Orana Wildlife Park — share post (1080 × 1350)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="lib/slides.css" />
+<style>
+  /* Hungry Worms signature green — sampled from the recycle logo (#308C3D). */
+  .slide.orana { padding: 0; background: var(--paper); }
+
+  /* Header: full-bleed signature green carrying the headline and Orana's mark. */
+  .hero {
+    background: #308C3D; color: #fff;
+    padding: 76px var(--pad) 64px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .hero .eyebrow { color: #EAF6E6; letter-spacing: .2em; }
+  .hero .headline { color: #fff; font-size: 84px; line-height: 1.02; margin-top: 18px; }
+  .hero .partner-tile {
+    margin-top: 44px; background: #fff; border-radius: 28px;
+    height: 250px; display: grid; place-items: center; padding: 26px 40px;
+    box-shadow: 0 10px 34px rgba(0, 0, 0, .18);
+  }
+  .hero .partner-tile img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+
+  .content { padding: 52px var(--pad) 0; display: flex; flex-direction: column; flex: 1 1 auto; }
+  .content .body { font-size: 38px; line-height: 1.38; color: rgba(43, 42, 38, .82); }
+
+  /* Park → worms → soil, as three steps on one line. */
+  .loop { display: flex; align-items: stretch; gap: 16px; margin-top: 36px; }
+  .loop .step {
+    flex: 1 1 0; border-radius: 22px; background: var(--white);
+    border: 1px solid rgba(43, 42, 38, 0.07); box-shadow: var(--shadow-card);
+    padding: 22px 20px; font-size: 30px; font-weight: 700; line-height: 1.2; color: var(--green-deep);
+  }
+  .loop .step small { display: block; margin-top: 6px; font-size: 25px; font-weight: 500; color: rgba(43, 42, 38, 0.7); }
+  .loop .arrow { align-self: center; font-size: 40px; color: #308C3D; font-weight: 700; }
+
+  .bottom { margin-top: auto; padding: 0 var(--pad) 56px; display: flex; align-items: center; gap: 30px; }
+  .bottom img { height: 170px; width: auto; display: block; }
+  .bottom p { font-size: 30px; line-height: 1.35; color: rgba(43, 42, 38, .75); max-width: 640px; }
+</style>
+</head>
+<body>
+
+<section class="slide orana" data-id="01-hungry-worms">
+  <header class="hero">
+    <div class="eyebrow">Welcome aboard</div>
+    <h1 class="headline">Welcome, Orana Wildlife Park.</h1>
+    <div class="partner-tile"><img src="../public/logos/orana.png" alt="Orana Wildlife Park" /></div>
+  </header>
+
+  <div class="content">
+    <p class="body">
+      Orana&rsquo;s food waste is now collected by Hungry Worms, recycled by our compost worms
+      and returned to the soil &mdash; not sent to landfill.
+    </p>
+    <div class="loop">
+      <div class="step">Orana Wildlife Park<small>food waste collected on site</small></div>
+      <span class="arrow">&rarr;</span>
+      <div class="step">Compost worms<small>Hungry Worms, Christchurch</small></div>
+      <span class="arrow">&rarr;</span>
+      <div class="step">Back to the soil<small>as natural fertiliser</small></div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <img src="../public/logos/hungry-worms.png" alt="Hungry Worms" />
+    <p>Joining Willowbank Wildlife Reserve and Canterbury businesses closing the loop on food waste.</p>
+  </div>
+</section>
+
+</body>
+</html>

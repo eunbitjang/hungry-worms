@@ -15,8 +15,8 @@ export const PARTNERS: Partner[] = [
   { name: "Sudima Hotels", logo: "/logos/sudima.png", url: "https://www.sudimahotels.com/en/about-us/environment-social-governance/" },
   { name: "Mitre 10", logo: "/logos/mitre10.jpg", url: "https://www.mitre10.co.nz/sustainability" },
   { name: "Willowbank Wildlife Reserve", logo: "/logos/willowbank.jpg", url: "https://www.willowbank.co.nz/" },
-  { name: "Orana Wildlife Park", logo: "/logos/orana.png", url: "https://www.oranawildlifepark.co.nz/conservation/sustainable-use-of-resources/" },
   { name: "Ballantynes", logo: "/logos/ballantynes.png", url: "https://www.ballantynes.co.nz/" },
   { name: "Cotswold Scenic Circle", logo: "/logos/cotswold.svg", url: "https://www.scenichotelgroup.co.nz/christchurch/scenic-hotel-cotswold/" },
   { name: "The Russley Village", logo: "/logos/russley.jpeg", scale: 1.7, url: "https://www.russleyvillage.co.nz/about/sustainability" },
+  { name: "Orana Wildlife Park", logo: "/logos/orana.png", url: "https://www.oranawildlifepark.co.nz/conservation/sustainable-use-of-resources/" },
 ];

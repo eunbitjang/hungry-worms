@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8" />
+<title>Food waste hierarchy — share post (1080 × 1350)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="lib/slides.css" />
+<style>
+  .headline { font-size: 78px; line-height: 1.03; margin-top: 18px; }
+  .body { font-size: 34px; line-height: 1.38; margin-top: 22px; max-width: 900px; }
+
+  /* Inverted pyramid: five trapezoids cut with clip-path, narrowing to a point. */
+  .pyr { margin: 44px auto 0; width: 820px; display: flex; flex-direction: column; gap: 8px; }
+  .tier { height: 118px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; }
+  .tier b { font-family: "Plus Jakarta Sans", Inter, sans-serif; font-weight: 800; font-size: 42px; letter-spacing: .06em; }
+  .tier span { font-size: 25px; opacity: .9; margin-top: 2px; }
+  .tier.ours { position: relative; }
+  .tag {
+    position: absolute; right: -6px; top: 50%; transform: translate(100%, -50%);
+    background: #fff; color: var(--green-primary); border: 3px solid var(--green-primary);
+    border-radius: 9999px; padding: 8px 18px; font-size: 22px; font-weight: 700; white-space: nowrap;
+  }
+  .mark { display: block; height: 120px; }
+  .mark img { height: 100%; width: auto; display: block; mix-blend-mode: multiply; }
+  .scale { font-size: 22px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(43, 42, 38, .55); display: flex; justify-content: space-between; width: 820px; margin: 14px auto 0; }
+</style>
+</head>
+<body>
+
+<section class="slide dots" data-id="01-hungry-worms">
+  <div class="eyebrow">The food waste hierarchy</div>
+  <h1 class="headline">Where does your food waste go?</h1>
+  <p class="body">Prevent waste first and rescue good food for people. Whatever&rsquo;s left, Hungry Worms recycles into natural fertiliser, so it never goes to landfill.</p>
+
+  <div class="pyr">
+    <div class="tier" style="background:#0F5132; clip-path:polygon(0 0,100% 0,90% 100%,10% 100%)"><b>PREVENT</b><span>waste less at the source</span></div>
+    <div class="tier" style="background:#2C6E3F; clip-path:polygon(10% 0,90% 0,80% 100%,20% 100%)"><b>RESCUE</b><span>surplus food to people</span></div>
+    <div class="tier ours" style="background:#1f8a4c; clip-path:polygon(20% 0,80% 0,70% 100%,30% 100%)"><b>RECYCLE</b><span>worms make fertiliser</span></div>
+    <div class="tier" style="background:#9AA79E; clip-path:polygon(30% 0,70% 0,60% 100%,40% 100%)"><b style="font-size:30px">RECOVER</b><span style="font-size:20px">energy only</span></div>
+    <div class="tier" style="background:#6E7A72; clip-path:polygon(40% 0,60% 0,50% 100%)"><b style="font-size:19px; margin-top:-46px">LANDFILL</b></div>
+  </div>
+
+  <div style="flex:1 1 auto; min-height:20px"></div>
+
+  <div class="foot" style="display:flex; align-items:center; justify-content:space-between">
+    <span class="mark"><img src="../public/logos/hungry-worms.png" alt="Hungry Worms" /></span>
+    <p class="source" style="max-width:640px; text-align:right; font-size:28px">We work at the <b style="color:var(--green-primary)">Recycle</b> level, turning Canterbury&rsquo;s food scraps into natural fertiliser.</p>
+  </div>
+</section>
+
+</body>
+</html>
