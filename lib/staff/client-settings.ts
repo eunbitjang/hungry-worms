@@ -4,15 +4,23 @@ import { createAdminClient } from "@/lib/supabase/server";
 import { DEFAULT_CLIENT_SETTINGS, type ClientSetting, type ClientSettings } from "./pickup-config";
 
 /**
- * Where the staff-edited client settings live: one JSON file in a private
+ * Where the staff-edited client settings live: JSON files in a private
  * Supabase Storage bucket. No table or migration needed — the bucket is created
  * on the first save, and until then everyone gets DEFAULT_CLIENT_SETTINGS.
+ *
+ * Every save writes a NEW file (`settings/v-<ms>-<rand>.json`) and reads take
+ * the newest one from a folder listing. Storage's CDN keeps serving an
+ * overwritten file for 10–30 s (a cache nonce doesn't bypass it), whereas a
+ * listing isn't cached and a brand-new file name has never been cached — so a
+ * save shows up on the very next read. Older versions stay as a change history.
  *
  * Local testing: set PICKUP_SETTINGS_FILE=tmp/client-settings.json (gitignored)
  * to read/write a local file instead of touching the live bucket.
  */
 const BUCKET = "staff-config";
-const OBJECT = "client-settings.json";
+const FOLDER = "settings";
+/** The single overwritten file used before versioning; read only until the first versioned save. */
+const LEGACY_OBJECT = "client-settings.json";
 const LOCAL_FILE = process.env.PICKUP_SETTINGS_FILE;
 
 export class SettingsChangedError extends Error {
@@ -39,7 +47,10 @@ async function readRaw(): Promise<ClientSettings | null> {
       return null;
     }
   }
-  const { data, error } = await createAdminClient().storage.from(BUCKET).download(OBJECT);
+  const bucket = createAdminClient().storage.from(BUCKET);
+  const { data: files } = await bucket.list(FOLDER, { limit: 1, sortBy: { column: "name", order: "desc" } });
+  const newest = files?.find((f) => f.name.endsWith(".json"));
+  const { data, error } = await bucket.download(newest ? `${FOLDER}/${newest.name}` : LEGACY_OBJECT);
   if (error || !data) return null; // no bucket / no file yet → defaults
   return parse(await data.text());
 }
@@ -63,8 +74,9 @@ async function writeRaw(settings: ClientSettings): Promise<void> {
     return;
   }
   const storage = createAdminClient().storage;
-  const upload = () =>
-    storage.from(BUCKET).upload(OBJECT, body, { upsert: true, contentType: "application/json", cacheControl: "0" });
+  // 13-digit ms timestamps sort correctly by name; the suffix avoids same-ms clashes.
+  const name = `${FOLDER}/v-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.json`;
+  const upload = () => storage.from(BUCKET).upload(name, body, { contentType: "application/json" });
   let { error } = await upload();
   if (error && /bucket not found|not found/i.test(error.message)) {
     const created = await storage.createBucket(BUCKET, { public: false });
