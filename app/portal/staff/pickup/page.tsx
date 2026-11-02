@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getClientSettings } from "@/lib/staff/client-settings";
 import type { Metadata } from "next";
 import PickupForm from "./PickupForm";
 
@@ -15,5 +16,7 @@ export default async function StaffPickupPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return <PickupForm staffEmail={user?.email ?? ""} />;
+  const { clients } = await getClientSettings();
+
+  return <PickupForm staffEmail={user?.email ?? ""} clients={clients.filter((c) => c.active)} />;
 }

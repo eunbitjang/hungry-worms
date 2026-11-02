@@ -1,6 +1,6 @@
 import { NextResponse, after } from "next/server";
 import { revalidatePath } from "next/cache";
-import { PICKUP_CLIENTS } from "@/lib/staff/pickup-config";
+import { getClientSettings } from "@/lib/staff/client-settings";
 import {
   appendPickupRows,
   MissingSheetsCredentialsError,
@@ -51,34 +51,38 @@ type Entry = {
 export async function POST(req: Request) {
   // ── Open write path — no login required ───────────────────────────────────
   // Pickups can be logged by anyone so field staff don't have to sign in.
-  // Input is still validated server-side against the canonical PICKUP_CLIENTS
-  // config below (only known clients/boxes/waste-types are accepted), and the
+  // Input is still validated server-side against the staff-edited client
+  // settings (only known clients/boxes/waste-types are accepted), and the
   // sheet write uses the server's own service account, never the caller's.
 
   // ── Parse + validate payload against the canonical config ─────────────────
-  let body: { client?: string; pickupDate?: unknown; notes?: unknown; entries?: Entry[] };
+  let body: { clientId?: string; pickupDate?: unknown; notes?: unknown; entries?: Entry[] };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const cfg = body.client ? PICKUP_CLIENTS[body.client] : undefined;
-  if (!cfg) return NextResponse.json({ error: "Unknown client" }, { status: 400 });
+  const { clients } = await getClientSettings();
+  const cfg = clients.find((c) => c.id === body.clientId && c.active);
+  if (!cfg) return NextResponse.json({ error: "Unknown client. Reload the page and pick it again." }, { status: 400 });
   if (!Array.isArray(body.entries) || body.entries.length === 0) {
     return NextResponse.json({ error: "No pickup entries provided" }, { status: 400 });
   }
 
   const timestamp = nzTimestamp();
   const pickupDate = resolvePickupDate(body.pickupDate);
-  const storeName = cfg.store ?? body.client!;
+  const storeName = cfg.store;
   const notes = typeof body.notes === "string" ? body.notes.trim() : "";
 
   const rows: CanonicalRow[] = [];
   for (const e of body.entries) {
     const box = typeof e.boxIndex === "number" ? cfg.boxes[e.boxIndex] : undefined;
     const kg = Number(e.kg);
-    if (!box || !Number.isFinite(kg) || kg <= 0 || kg > 1000) continue;
+    if (Number.isFinite(kg) && kg > 1000) {
+      return NextResponse.json({ error: "A single bin can't be over 1000 kg. Check the weights." }, { status: 400 });
+    }
+    if (!box || !Number.isFinite(kg) || kg <= 0) continue;
 
     let wasteType = box.waste ?? "";
     let location = "";
@@ -112,6 +116,14 @@ export async function POST(req: Request) {
 
   if (rows.length === 0) {
     return NextResponse.json({ error: "No valid weights to save" }, { status: 400 });
+  }
+  // Every filled box must still match the client's bins. If staff changed the
+  // bins while this form was open, save nothing rather than drop a weight.
+  if (rows.length !== body.entries.length) {
+    return NextResponse.json(
+      { error: "This client's bins were changed since the page opened. Reload the page and enter the weights again." },
+      { status: 409 }
+    );
   }
 
   // ── Write to the sheet ────────────────────────────────────────────────────

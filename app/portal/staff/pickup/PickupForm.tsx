@@ -3,11 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  PICKUP_CLIENTS,
-  PICKUP_CLIENT_NAMES,
-  type PickupBox,
-} from "@/lib/staff/pickup-config";
+import type { ClientSetting, PickupBox } from "@/lib/staff/pickup-config";
 
 /* ── helpers ──────────────────────────────────────────────────────────────── */
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -48,8 +44,8 @@ const fieldLabel = "block text-xs font-semibold text-soil/60 mb-1.5";
 const inputBase =
   "w-full rounded-lg border border-soil/20 bg-white px-3 py-2.5 text-[15px] text-soil focus:border-green-primary focus:outline-none focus:ring-2 focus:ring-green-primary/20";
 
-export default function PickupForm({ staffEmail }: { staffEmail: string }) {
-  const [client, setClient] = useState("");
+export default function PickupForm({ staffEmail, clients }: { staffEmail: string; clients: ClientSetting[] }) {
+  const [client, setClient] = useState(""); // client id
   const [manualOn, setManualOn] = useState(false);
   const [manualDate, setManualDate] = useState(todayISO());
   const [boxes, setBoxes] = useState<BoxState[]>([]);
@@ -59,7 +55,7 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
   const [error, setError] = useState("");
   const [result, setResult] = useState<Result | null>(null);
 
-  const cfg = client ? PICKUP_CLIENTS[client] : undefined;
+  const cfg = client ? clients.find((c) => c.id === client) : undefined;
 
   // Live device clock
   useEffect(() => {
@@ -130,7 +126,7 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
       const res = await fetch("/api/staff/pickup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ client, pickupDate, notes, entries }),
+        body: JSON.stringify({ clientId: client, pickupDate, notes, entries }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -140,7 +136,7 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
       }
 
       // Build the saved-rows summary for confirmation
-      const storeName = cfg.store ?? client;
+      const storeName = cfg.store;
       const rows: SavedRow[] = [];
       boxes.forEach((b, i) => {
         const v = parseFloat(b.kg);
@@ -285,9 +281,9 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
             className={`${inputBase} text-base`}
           >
             <option value="">— Select a client —</option>
-            {PICKUP_CLIENT_NAMES.map((name) => (
-              <option key={name} value={name}>
-                {name}
+            {clients.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.label}
               </option>
             ))}
           </select>
@@ -360,6 +356,12 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
                   {Math.round(total * 10) / 10} kg
                 </span>
               </div>
+              <p className="mt-2 text-xs text-soil/45">
+                Wrong number of bins or waste types for this client?{" "}
+                <Link href={`/portal/staff/clients?client=${encodeURIComponent(cfg.id)}`} className="font-semibold text-green-primary hover:underline">
+                  Change them in Clients &amp; bins
+                </Link>
+              </p>
             </>
           )}
         </div>
@@ -408,7 +410,7 @@ export default function PickupForm({ staffEmail }: { staffEmail: string }) {
 function Header() {
   return (
     <header className="bg-green-deep text-white">
-      <div className="mx-auto max-w-2xl px-4 h-16 flex items-center gap-3">
+      <div className="mx-auto max-w-2xl px-4 h-16 flex items-center justify-between gap-3">
         <Link href="/portal/staff" className="flex items-center gap-2.5">
           <span className="flex size-9 items-center justify-center rounded-lg bg-white shadow-sm">
             <Image src="/logos/hungry-worms.png" alt="Hungry Worms" width={28} height={28} className="size-7 object-contain" />
@@ -417,6 +419,9 @@ function Header() {
             <span className="block font-display font-bold text-sm">Log a Pickup</span>
             <span className="block text-white/45 text-xs">Staff Portal</span>
           </span>
+        </Link>
+        <Link href="/portal/staff/pickups" className="rounded-full bg-white/10 border border-white/20 px-3 py-1.5 text-xs font-semibold hover:bg-white/20 transition-colors">
+          Fix a pickup
         </Link>
       </div>
     </header>

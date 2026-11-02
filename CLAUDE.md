@@ -88,10 +88,15 @@ Per-client data isolation is enforced two ways: always filter queries by `client
 
 ### Config as shared source of truth
 
-`lib/staff/pickup-config.ts` (`PICKUP_CLIENTS`) defines, per client, the pickup-form fields (boxes,
-waste-type/location/capacity options). It is imported by **both** the client form (`PickupForm.tsx`,
-for rendering) **and** the API route (for validation), so the canonical waste-type/location strings
-written to the sheet can't be spoofed from the browser. Each filled "box" = exactly one sheet row.
+Per-client pickup-form fields (boxes, waste-type/location/capacity options, form note, report logo,
+hidden flag) are **edited by staff** on `/portal/staff/clients` and stored as one JSON file in the
+private Supabase Storage bucket `staff-config` (`lib/staff/client-settings.ts`; the bucket is created
+on first save). Until the first save, `DEFAULT_CLIENT_SETTINGS` from `lib/staff/pickup-config.ts`
+(built from `PICKUP_CLIENTS`) is used. The pages load the settings server-side and the API routes
+validate against them, so the canonical strings written to the sheet can't be spoofed from the
+browser. Each filled "box" = exactly one sheet row. Saves are optimistic-locked on `updatedAt`.
+`GET /api/client-logos` (public, CORS `*`) feeds staff-set logos to the Impact Report Generator.
+Local testing without touching the live bucket: `PICKUP_SETTINGS_FILE=tmp/client-settings.json`.
 
 ### Other integrations
 

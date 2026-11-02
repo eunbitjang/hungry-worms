@@ -1,7 +1,8 @@
 import { NextResponse, after } from "next/server";
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
-import { EDIT_OPTIONS } from "@/lib/staff/pickup-config";
+import { buildEditOptions } from "@/lib/staff/pickup-config";
+import { getClientSettings } from "@/lib/staff/client-settings";
+import { requireStaff } from "@/lib/staff/require-staff";
 import {
   listAppPickups,
   updateAppPickupRow,
@@ -20,16 +21,6 @@ export const runtime = "nodejs";
  * changing or removing saved data needs a signed-in staff account — otherwise
  * anyone with the URL could rewrite a client's impact history.
  */
-async function requireStaff(): Promise<NextResponse | null> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "Please sign in to fix a pickup." }, { status: 401 });
-  const { data: profile } = await supabase.from("profiles").select("is_staff").eq("id", user.id).single();
-  if (!profile?.is_staff) return NextResponse.json({ error: "Staff access only." }, { status: 403 });
-  return null;
-}
 
 function sheetError(err: unknown) {
   if (err instanceof RowChangedError) return NextResponse.json({ error: err.message }, { status: 409 });
@@ -61,7 +52,7 @@ function isExpected(x: unknown): x is string[] {
 }
 
 export async function GET() {
-  const denied = await requireStaff();
+  const { denied } = await requireStaff("fix a pickup");
   if (denied) return denied;
   try {
     return NextResponse.json({ rows: await listAppPickups() });
@@ -71,7 +62,7 @@ export async function GET() {
 }
 
 export async function PATCH(req: Request) {
-  const denied = await requireStaff();
+  const { denied } = await requireStaff("fix a pickup");
   if (denied) return denied;
 
   let body: Record<string, unknown>;
@@ -90,7 +81,7 @@ export async function PATCH(req: Request) {
   const [, , oldClient, oldLocation, oldWaste, oldBin] = expected;
   const str = (v: unknown) => (typeof v === "string" ? v.trim() : "");
   const client = str(body.client);
-  const opts = EDIT_OPTIONS[client];
+  const opts = buildEditOptions((await getClientSettings()).clients)[client];
   if (!opts && client !== oldClient) return NextResponse.json({ error: "Unknown client" }, { status: 400 });
 
   const pick = (value: string, allowed: string[] | undefined, old: string, required: boolean) => {
@@ -140,7 +131,7 @@ export async function PATCH(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const denied = await requireStaff();
+  const { denied } = await requireStaff("fix a pickup");
   if (denied) return denied;
 
   let body: Record<string, unknown>;

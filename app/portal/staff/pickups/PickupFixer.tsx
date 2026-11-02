@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { EDIT_OPTIONS } from "@/lib/staff/pickup-config";
+import type { EditOptions } from "@/lib/staff/pickup-config";
 
 /* Columns of an `App Pickups` row (formatted, as the API returns them). */
 const C = { stamp: 0, date: 1, client: 2, location: 3, waste: 4, bin: 5, kg: 6, notes: 7 } as const;
@@ -20,7 +20,6 @@ type Draft = {
 };
 
 const PAGE = 40;
-const CLIENTS = Object.keys(EDIT_OPTIONS);
 
 const toISO = (nz: string) => {
   const m = nz.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
@@ -50,7 +49,14 @@ const fieldLabel = "block text-xs font-semibold text-soil/60 mb-1";
 const inputBase =
   "w-full rounded-lg border border-soil/20 bg-white px-3 py-2 text-[15px] text-soil focus:border-green-primary focus:outline-none focus:ring-2 focus:ring-green-primary/20";
 
-export default function PickupFixer({ staffEmail }: { staffEmail: string }) {
+export default function PickupFixer({
+  staffEmail,
+  editOptions: EDIT_OPTIONS,
+}: {
+  staffEmail: string;
+  editOptions: Record<string, EditOptions>;
+}) {
+  const CLIENTS = Object.keys(EDIT_OPTIONS);
   const [rows, setRows] = useState<Row[] | null>(null);
   const [loadError, setLoadError] = useState("");
   const [filter, setFilter] = useState("");
@@ -355,7 +361,12 @@ export default function PickupFixer({ staffEmail }: { staffEmail: string }) {
 
         <p className="mt-8 text-xs text-soil/45 leading-relaxed">
           Only pickups logged with this app appear here. Older entries from the Google Form or the
-          historical records are still fixed in the Google Sheet.
+          historical records are still fixed in the Google Sheet. Need a waste type, location or bin
+          size that isn&apos;t in the list?{" "}
+          <Link href="/portal/staff/clients" className="font-semibold text-green-primary hover:underline">
+            Add it in Clients &amp; bins
+          </Link>
+          .
         </p>
       </main>
     </div>

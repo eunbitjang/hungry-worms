@@ -23,11 +23,12 @@ login needed).
 
 ## 2. The Staff Portal
 
-After signing in you'll see three tools:
+After signing in you'll see four tools:
 
 - **📊 All-clients dashboard** — the impact numbers for every client in one place.
 - **🚛 Log a pickup** — record a collection visit. *(This is the one you'll use most.)*
 - **🔧 Fix a pickup** — correct or delete a pickup you've already logged.
+- **🗑️ Clients & bins** — add a client or change what the pickup form shows for one.
 
 Tap either card to open it.
 
@@ -72,7 +73,29 @@ This screen needs you to be signed in, because it can change saved data.
 
 ---
 
-## 5. The all-clients dashboard
+## 5. Changing a client's bins (Clients & bins)
+
+New client, an extra bin, a new waste type, or a client that stopped? Change it yourself:
+
+1. Open **Clients & bins** (or tap **"Change them in Clients & bins"** under the bins on the
+   pickup form).
+2. Tap **Edit** next to the client, or **+ Add a client**.
+3. Change what you need:
+   - **Bins** — one row per bin you weigh. **+ Add a bin** copies the last one; **Remove** drops one.
+   - **Waste type** — type one (e.g. `Food waste`), or several separated by commas
+     (e.g. `Food waste, Yard / green waste`) to get a choice on the form.
+   - **Also ask for** — a **Location** or **Bin size** choice, with the options separated by commas.
+   - **Note** — a short reminder shown above the bins.
+   - **Logo for the impact report** — paste a link to the client's logo image.
+   - **Show this client in Log a pickup** — untick to hide a client who has stopped.
+4. Tap **Save changes**. The pickup form uses it straight away.
+
+Pickups you already logged are not changed. The **name saved in the sheet** is fixed once a
+client is added, so all of their pickups stay together in the reports.
+
+---
+
+## 6. The all-clients dashboard
 
 Open it any time to see:
 - Total waste diverted, CO₂e avoided, cars off the road, and how many clients are active.
@@ -81,7 +104,7 @@ Open it any time to see:
 
 ---
 
-## 6. Make it one tap (recommended)
+## 7. Make it one tap (recommended)
 
 So you don't have to type the link each time, add the portal to your phone's home screen:
 - **iPhone (Safari):** tap **Share** → **Add to Home Screen**

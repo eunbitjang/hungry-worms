@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
+import { buildEditOptions } from "@/lib/staff/pickup-config";
+import { getClientSettings } from "@/lib/staff/client-settings";
 import PickupFixer from "./PickupFixer";
 
 export const metadata: Metadata = {
@@ -17,5 +19,7 @@ export default async function FixPickupsPage() {
   const { data: profile } = await supabase.from("profiles").select("is_staff").eq("id", user.id).single();
   if (!profile?.is_staff) redirect("/portal/dashboard");
 
-  return <PickupFixer staffEmail={user.email ?? ""} />;
+  const { clients } = await getClientSettings();
+
+  return <PickupFixer staffEmail={user.email ?? ""} editOptions={buildEditOptions(clients)} />;
 }

@@ -25,6 +25,12 @@ const TOOLS: { href: string; icon: IconName; title: string; body: string }[] = [
     title: "Fix a pickup",
     body: "Typed a wrong weight, date or client? Edit or delete a pickup you logged — the website totals follow. Needs sign-in.",
   },
+  {
+    href: "/portal/staff/clients",
+    icon: "bin",
+    title: "Clients & bins",
+    body: "Add a client, change how many bins they have, their waste types, locations or bin sizes, the note on the form, and their report logo. Needs sign-in.",
+  },
 ];
 
 export default function StaffHub({ staffEmail }: { staffEmail: string }) {
