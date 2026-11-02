@@ -81,6 +81,12 @@ export const PICKUP_CLIENTS: Record<string, PickupClientConfig> = {
     note: "Not yet active · same layout as Willowbank",
     boxes: repeat(4, () => ({ wasteOptions: WASTE_GREEN })),
   },
+  // Office pickup, Durham St North. Bin count not confirmed yet, so this uses
+  // the smallest existing layout; leave unused boxes empty.
+  "BCN Architects": {
+    note: "New client · bin count to confirm",
+    boxes: repeat(3, () => ({ waste: "Food waste" })),
+  },
 };
 
 export const PICKUP_CLIENT_NAMES = Object.keys(PICKUP_CLIENTS);

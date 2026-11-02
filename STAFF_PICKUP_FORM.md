@@ -48,6 +48,7 @@ All store exactly as written **except Cotswold**:
 - Mitre 10 MEGA Papanui
 - **"Scenic Hotel Cotswold" (display) → store `Cotswold Scenic Circle Hotel`** (matches all historical data)
 - Orana Wildlife Park (new)
+- BCN Architects (new, Nov 2026 — 3 × Food waste boxes until the bin count is confirmed)
 
 ## Per-client form configuration
 Build this as a **data-driven config object** (one entry per client) so fields are easy to edit later
